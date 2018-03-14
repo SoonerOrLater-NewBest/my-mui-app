@@ -352,10 +352,7 @@ document.body.appendChild(new_element);
 			}
 		});
 	}
-	
-	
-	
-	
+				
 	//获取分类第一级
 	w.ajax_get_first_category = function(options) {
 		startLoad();
