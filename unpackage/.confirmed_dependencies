@@ -1,21 +1,23 @@
 {
-  "models/index/index.html": {
-    "refer": [
-      "models/news/detail.html",
-      "models/master/master.html",
-      "models/news/outlink.html",
-      "models/mine/mine.html",
-      "models/news/listview.html",
-      "models/index/imageviewer-native.html",
-      "models/question/question.html"
-    ],
-    "resources": [
-      "models/news/listview.html"
-    ]
-  },
-  "models/question/question.html": {
-    "refer": [
-      "models/question/question_tw.html"
-    ]
-  }
+	"models/index/index.html": {
+		"refer": [
+			"models/news/detail.html",
+			"models/master/master.html",
+			"models/news/outlink.html",
+			"models/mine/mine.html",
+			"models/news/listview.html",
+			"models/index/imageviewer-native.html",
+			"models/question/question.html",
+			"models/word/word.html"
+		],
+		"resources": [
+			"models/news/listview.html"
+		]
+	},
+	"models/question/question.html": {
+		"refer": [
+			"models/question/question_tw.html",
+			"models/question/question_xq.html"
+		]
+	}
 }

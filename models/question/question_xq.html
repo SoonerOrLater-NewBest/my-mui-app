@@ -1,180 +1,242 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title></title>
-		<link rel="stylesheet" type="text/css" href="../../common/mui.min.css"/>
-		<link rel="stylesheet" type="text/css" href="../../common/common.css"/>
-		<link rel="stylesheet" type="text/css" href="question.css"/>
-		<script src="../../common/jquery-2.1.0.js"></script>		
-		<script src="../../common/mui.min.js"></script>
-		<script src="../../common/common.js"></script>
-		<script>
-			(function (doc, win) { 
-				var docEl = doc.documentElement, resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
-				recalc = function () { 
-					var clientWidth = docEl.clientWidth; 
-					if (!clientWidth) return; 
-					if(clientWidth>=640){ 
-						docEl.style.fontSize = '100px'; 
-					}else{ 
-						docEl.style.fontSize = 100 * (clientWidth / 640) + 'px'; 
-					}
-				};
-					if (!doc.addEventListener) return; 
-					win.addEventListener(resizeEvt, recalc, false); 
-					doc.addEventListener('DOMContentLoaded', recalc, false); })(document, window);
-		</script>
-	</head>
-	<body style="background: #fff;" class="neiye">		
-	<div class="pinglun">
-		<ul>
-			<li>
-				<div class='touxiang'><img src='../../images/touxiang.jpg'></div>
-				<div class="neirong">
-					<div class="neitit">
-					
-						<div class="ming"><span>顾一琳</span><i>一个月前</i></div>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../common/mui.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../common/common.css" />
+	<link rel="stylesheet" type="text/css" href="question.css" />
+
+</head>
+
+<body style="background: #fff;height: 100vh;">
+	<div id="home">
+		<div class="pinglun" id="article_id" :new-id="guid">
+			<ul>
+				<li>
+					<div class='touxiang'>
+						<img :src="user_avatar">
 					</div>
-					<a href="#" class="pinwen">
-						<p>要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。</p>
-					</a>
-					<div class="xuanpic">
-						<a href="#"><i class="iconfont icon-xiaoxi"></i><b>6</b></a>
-						<span><i class="iconfont icon-hua"></i><b>6</b></span>
-						<span><i class="iconfont icon-jiaoya"></i><b>6</b></span>
+					<div class="neirong">
+						<div class="neitit">
+
+							<div class="ming">
+								<span>{{user_name}}</span>
+								<i>{{time}}</i>
+							</div>
+						</div>
+						<a href="#" class="pinwen">
+							<p>{{content}}</p>
+						</a>
+						<div class="xuanpic">
+							<a href="#">
+								<i class="iconfont icon-xiaoxi"></i>
+								<b>{{comments}}</b>
+							</a>
+							<span>
+								<i class="iconfont icon-hua"></i>
+								<b>{{zan}}</b>
+							</span>
+							<span>
+								<i class="iconfont icon-jiaoya"></i>
+								<b>{{cai}}</b>
+							</span>
+						</div>
 					</div>
-				</div>
-				<div class="clear"></div>
-				
-			</li>
-			
-		</ul>
-	</div>								
-	<div class="pinlunxq">
-		<span class="pltit">6条评论</span>
+					<div class="clear"></div>
+
+				</li>
+
+			</ul>
+
+		</div>
+		<div class="pinlunxq">
+			<span class="pltit">{{comments}}条评论</span>
+		</div>
+
+		<div class="pinglun pinglun2">
+			<ul>
+				<li v-for="item in list">
+					<div class='touxiang'>
+						<img :src="item.user_avatar">
+					</div>
+					<div class="neirong">
+						<div class="neitit">
+							<div class="ming">
+								<span>{{item.user_name}}</span>
+							</div>
+						</div>
+						<a href="#" class="pinwen">
+							<p>{{item.content}}</p>
+						</a>
+						<div class="xuanpic">
+							<p>{{item.add_time}}</p>
+							<span>
+								<b>{{item.zan}}</b>
+								<i class="iconfont">&#xe60d;</i>
+							</span>
+							<span>
+								<b>{{item.cai}}</b>
+								<i class="iconfont">&#xe635;</i>
+							</span>
+						</div>
+					</div>
+					<div class="clear"></div>
+
+				</li>
+
+			</ul>
+		</div>
+		<div class="shuru">
+			<input type="text" id="content" placeholder="请输入评论" />
+			<input type="submit" class="con" value='发布' disabled="disabled"/>
+		</div>
 	</div>
+	<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../common/jquery-2.1.0.js"></script>
+	<script src="../../common/mui.min.js"></script>
+	<script src="../../common/common.js"></script>
+	<script src="../../common/ajax.js"></script>
+	<script src="question.js"></script>
 	
-	<div class="pinglun pinglun2">
-		<ul>
-			<li>
-				<div class='touxiang'><img src='../../images/touxiang.jpg'></div>
-				<div class="neirong">
-					<div class="neitit">
-						<div class="ming"><span>顾一琳</span></div>
-					</div>
-					<a href="#" class="pinwen">
-						<p>要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。</p>
-					</a>
-					<div class="xuanpic">
-						<p>08:50</p>
-						<span><b>6</b><i class="iconfont">&#xe60d;</i></span>
-						<span><b>6</b><i class="iconfont">&#xe635;</i></span>
-					</div>
-				</div>
-				<div class="clear"></div>
-				
-			</li>
-			<li>
-				<div class='touxiang'><img src='../../images/touxiang.jpg'></div>
-				<div class="neirong">
-					<div class="neitit">
-						<div class="ming"><span>顾一琳</span></div>
-					</div>
-					<a href="#" class="pinwen">
-						<p>要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。</p>
-					</a>
-					<div class="xuanpic">
-						<p>08:50</p>
-						<span><b>6</b><i class="iconfont">&#xe60d;</i></span>
-						<span><b>6</b><i class="iconfont">&#xe635;</i></span>
-					</div>
-				</div>
-				<div class="clear"></div>
-				
-			</li>
+	<script type="text/javascript">
+		mui.init({
+			swipeBack: true,
+			beforeback: function() {
+				var list = plus.webview.currentWebview().opener();
+				//触发父页面的自定义事件(refresh),从而进行刷新
+				mui.fire(list, 'shuaxin');
+				//返回true,继续页面关闭逻辑
+				return true;
+  		 	},
+		});
+
+		function getDefaultData() {
+			return {
+				user_avatar: '',
+				content: '',
+				comments: '',
+				zan: '',
+				cai: '',
+				time: '',
+				guid:'',
+				user_name: '',
+				list: []
+			}
+		}
+
+		var vm = new Vue({
+			el: '#home',
+			data: getDefaultData(),
+			methods: {
+				resetData: function () { //重置数据
+					Object.assign(this.$data, getDefaultData());
+				}
+			}
+		});
+
+		//监听自定义事件，获取评论详情
+		mui.plusReady(function () {
+			var self = plus.webview.currentWebview();
+			var guid = self.guid;
+
+			if (!guid) {
+				return;
+			}
+			//前页传入的数据，直接渲染，无需等待ajax请求详情后
+			vm.user_avatar = self.user_avatar;
+			vm.content = self.content;
+			vm.zan = self.zan;
+			vm.cai = self.cai;
+			vm.guid=self.guid;
+			vm.comments = self.comments;
+
+
+			vm.time = self.time;
+			vm.user_name = self.user_name;
+			// alert(vm.user_name);		
+			//向服务端请求文章详情内容
+			mui.ajax(httpUrl+'action=feedbackdetail_list&guid=' + guid, {
+				type: 'GET',
+				dataType: 'json',
+				timeout: 15000,
+				success: function (rsp) {
+					var str = JSON.parse(rsp.list);
+					vm.list = str;
+
+
+				},
+				error: function (xhr, type, errorThrown) {
+					mui.toast('获取文章内容失败');
+				}
+			});
+		});
+
+		//重写返回逻辑(不是预加载页面无需重置)
+//		mui.back = function () {
+//			plus.webview.currentWebview().hide("auto", 300);
+//			setTimeout(function () {
+//				window.scrollTo(0, 0);
+//				vm.resetData();
+//			}, 300);
+//		}
+	</script>
+
+
+	<script>
+		$(".con").on("tap", function () {
+
+			//判断是否已经登录成功
+			if (!localStorage.getItem('id')) {
+				mui.toast("请先登录！");
+				return false;
+			}
+			 var guid = document.getElementById("article_id").getAttribute('new-id');
+			var contentlist = document.getElementById("content").value;
+			var nick_name=localStorage.getItem('nick_name');
+			var avatar=localStorage.getItem('avatar');
+
+
+	    ajax_post_xqcontent({
+	          	guid:guid,
+   	    	    content:contentlist,
+				for_user:nick_name,
+				avatar:avatar
+			});	
 			
-			<li>
-				<div class='touxiang'><img src='../../images/touxiang.jpg'></div>
-				<div class="neirong">
-					<div class="neitit">
-						<div class="ming"><span>顾一琳</span></div>
-					</div>
-					<a href="#" class="pinwen">
-						<p>要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。</p>
-					</a>
-					<div class="xuanpic">
-						<p>08:50</p>
-						<span><b>6</b><i class="iconfont">&#xe60d;</i></span>
-						<span><b>6</b><i class="iconfont">&#xe635;</i></span>
-					</div>
-				</div>
-				<div class="clear"></div>
-				
-			</li>
-			<li>
-				<div class='touxiang'><img src='../../images/touxiang.jpg'></div>
-				<div class="neirong">
-					<div class="neitit">
-						<div class="ming"><span>顾一琳</span></div>
-					</div>
-					<a href="#" class="pinwen">
-						<p>要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。</p>
-					</a>
-					<div class="xuanpic">
-						<p>08:50</p>
-						<span><b>6</b><i class="iconfont">&#xe60d;</i></span>
-						<span><b>6</b><i class="iconfont">&#xe635;</i></span>
-					</div>
-				</div>
-				<div class="clear"></div>
-				
-			</li>
+		});
+	
+	//获提交文章评论成功的回调函数
+	function PostXqcontentSuccess(data){
+		
+
+		if(data.status=="y")
+		
+		{
 			
-			<li>
-				<div class='touxiang'><img src='../../images/touxiang.jpg'></div>
-				<div class="neirong">
-					<div class="neitit">
-						<div class="ming"><span>顾一琳</span></div>
-					</div>
-					<a href="#" class="pinwen">
-						<p>要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。</p>
-					</a>
-					<div class="xuanpic">
-						<p>08:50</p>
-						<span><b>6</b><i class="iconfont">&#xe60d;</i></span>
-						<span><b>6</b><i class="iconfont">&#xe635;</i></span>
-					</div>
-				</div>
-				<div class="clear"></div>
-				
-			</li>
-			<li>
-				<div class='touxiang'><img src='../../images/touxiang.jpg'></div>
-				<div class="neirong">
-					<div class="neitit">
-						<div class="ming"><span>顾一琳</span></div>
-					</div>
-					<a href="#" class="pinwen">
-						<p>要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。要说广告和自然内容的相似度，我只服知乎。</p>
-					</a>
-					<div class="xuanpic">
-						<p>08:50</p>
-						<span><b>6</b><i class="iconfont">&#xe60d;</i></span>
-						<span><b>6</b><i class="iconfont">&#xe635;</i></span>
-					</div>
-				</div>
-				<div class="clear"></div>
-				
-			</li>
+		mui.toast('提交成功');
+		
+		setTimeout(function(){
+			mui.back();		
+		},200)
+		
+		
+		
+		}
+		
+		else if(data.status=="n")
+		{
 			
-		</ul>
-	</div>	
-	<div class="shuru">
-		<input type="text" placeholder="请输入评论"/>
-		<input type="submit" value='发布'/>
-	</div>
-	<script id="question" src="question.js"></script>
-	</body>
+			mui.toast('提交失败,请重新提交！');
+		}
+	
+	
+
+	}
+	</script>
+
+</body>
+
 </html>

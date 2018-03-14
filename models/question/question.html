@@ -9,28 +9,49 @@
 	<link rel="stylesheet" type="text/css" href="../../common/common.css" />
 	<link rel="stylesheet" type="text/css" href="question.css" />
 
-	<script>
-		(function (doc, win) {
-			var docEl = doc.documentElement,
-				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
-			recalc = function () {
-				var clientWidth = docEl.clientWidth;
-				if (!clientWidth) return;
-				if (clientWidth >= 640) {
-					docEl.style.fontSize = '100px';
-				} else {
-					docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
-				}
-			};
-			if (!doc.addEventListener) return;
-			win.addEventListener(resizeEvt, recalc, false);
-			doc.addEventListener('DOMContentLoaded', recalc, false);
-		})(document, window);
-	</script>
+<style>
+	   .mui-pull-caption {
+                background-image: url(../../audio.jpg);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                width: 144px;
+                height: 31px;
+                font-size: 0px;
+            }
+            /*下拉刷新圆形进度条的大小和样式*/
+
+            .mui-spinner {
+                width: 32px;
+                height: 32px;
+            }
+            .mui-spinner:after {
+                background-image: url(../../images/jump.gif);
+            }
+            /*下拉刷新的箭头颜色*/
+
+            .mui-icon-pulldown {
+                color: #FF058B;
+            }
+</style>
+
 </head>
 
 <body style="background: #fff;">
+
 	<div class="pinglun" id="home">
+		<div v-for="load in loades" v-if="!loading" class="timeline-item">
+		    <div class="animated-background">
+			    <div class="background-masker header-top"></div>
+			    <div class="background-masker header-left"></div>
+			    <div class="background-masker header-right"></div>
+			    <div class="background-masker header-bottom"></div>
+			    <div class="background-masker subheader-top"></div>
+			    <div class="background-masker subheader-left"></div>
+			    <div class="background-masker subheader-right"></div>
+			    <div class="background-masker subheader-bottom"></div>
+			</div>
+	 	</div>
 		<ul>
 			<li v-for="item in list">
 				<div class='touxiang'>
@@ -38,7 +59,7 @@
 				</div>
 				<div class="neirong">
 					<div class="neitit">
-						<a href="#">
+						<a>
 							<i class="iconfont">&#xe637;</i>
 						</a>
 						<div class="ming">
@@ -46,13 +67,13 @@
 							<i>{{item.add_time}}</i>
 						</div>
 					</div>
-					<a href="question_xq.html" class="pinwen">
+					<a class="pinwen" :new-id="item.id" :new-username="item.user_name" :new-addtime="item.add_time" :new-comment="item.comment" :new-zan="item.zan" :new-cai="item.cai" :src="item.user_avatar" @tap="openDetail($event)">
 						<p>{{item.content}}</p>
 					</a>
 					<div class="xuanpic">
 						<a href="#">
 							<i class="iconfont">&#xe681;</i>
-							<b>6</b>
+							<b>{{item.comment}}</b>
 						</a>
 						<span>
 							<i class="iconfont">&#xe60d;</i>
@@ -66,21 +87,14 @@
 				</div>
 			</li>
 
-		
+
 		</ul>
+		<a @tap="openMsgDetail($event)" class="tianxie">
+			<i class="iconfont">&#xe66b;</i>
+		</a>
 	</div>
 
-	<a href="javascript:void(0)" onclick="tiejiao()" class="tianxie">
-		<i class="iconfont">&#xe66b;</i>
-	</a>
-
-
-
-
-
-
-
-
+	
 </body>
 
 </html>
@@ -90,13 +104,29 @@
 <script src="../../common/common.js"></script>
 <script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../common/ajax.js"></script>
-<!-- <script id="question" src="question.js"></script> -->
 
+
+<script type="text/javascript">
+	mui.init();
+		/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh() {
+			setTimeout(function() {
+				location.reload();
+			}, 1500);
+		}
+		
+	 //返回刷新页面
+	 window.addEventListener('shuaxin', function (e) { //执行刷新
+	 	location.reload();
+
+	 });
+</script>
 
 <script type="text/javascript">
 	// window.onload = function(){
 	// //获取留言列表数据
-
 
 	var homes = new Vue({
 		el: '#home',
@@ -106,76 +136,77 @@
 			loades: 10
 		},
 		methods: {
-			// openDetail : function (event) {
-			// 	var el = event.currentTarget;
-			// 	var guid = el.getAttribute('new-id');
-			// 	var link_url = el.getAttribute('link_url');	
-			// 	var content = el.getAttribute('content');								
-			// 	var title = el.querySelector(".new-title").innerHTML.trim();
-			// 	var author = el.querySelector(".author span").innerHTML;
-			// 	var time = el.querySelector(".time span").innerHTML;
-			// 	var cover = el.querySelector(".cover").getAttribute("src");
-			// 	if(link_url===''){
-			// 		open_detail(guid, title,author,time,cover,content);
-			// 	}else{
-			// 		titleNView1.titleText = title;
-			// 		mui.openWindow({
-			// 			url: '../news/outlink.html',
-			// 			id: 'outlink',
-			// 			extras:{
-			// 				link_url:link_url
-			// 			},
-			// 			styles: {
-			// 				"bounce": "vertical",
-			// 				"bounceBackground": "#efeff4",
-			// 				"titleNView": titleNView1
-			// 			}
-			// 		})
-			// 	}
-			// },
-			// openNewWebview : function(){
-			// 	titleNView1.titleText = '寺院景致';
-			// 	mui.openWindow({
-			// 		url : 'imageviewer-native.html',
-			// 		id : 'imgview',
-			// 		styles: {
-			// 			"bounce": "vertical",
-			// 			"bounceBackground": "#efeff4",
-			// 			"titleNView": titleNView1
-			// 		}
-			// 	})
-			// },
-			openPages: function (event) {
+			openDetail: function (event) {
+				var el = event.currentTarget;
+				var guid = el.getAttribute('new-id');
+				var user_avatar = el.getAttribute('src')
+				var content = el.querySelector("p").innerHTML.trim();
+				var comments = el.getAttribute('new-comment');
+				var zan = el.getAttribute('new-zan');
+				var cai = el.getAttribute('new-cai');
+				var time = el.getAttribute('new-add_time');
+				var user_name = el.getAttribute('new-username');
 
+
+				titleNView1.titleText = "详情";
+				mui.openWindow({
+					url: '../question/question_xq.html',
+					id: 'outlink',
+					extras: {
+						guid: guid,
+						user_avatar: user_avatar,
+						content: content,
+						comments: comments,
+						zan: zan,
+						cai: cai,
+						time: time,
+						user_name: user_name
+					},
+					styles: {
+						"titleNView": titleNView1
+					}
+				})
+				// }
+			},
+
+			openMsgDetail: function (event) {
+				titleNView1.titleText = "我的感悟";
+				mui.openWindow({
+					url: '../question/question_tw.html',
+					id: 'question_tw',
+					waiting: {
+						autoShow: false, //自动显示等待框，默认为true
+					},
+					show: {
+						"aniShow": "zoom-fade-out"
+					},
+					styles: {
+						"bounce": "vertical",
+						"bounceBackground": "#efeff4",
+						"titleNView": titleNView1
+					}
+				})
 			}
 		},
-		mounted: function () {
+		mounted: function () {			
+			$(".pinglun").on('tap', '.xuanpic span', function () {
+				if ($(this).hasClass('yijing')) {
+					var zhi = parseInt($(this).find("b").text());
+					zhi--;
+					$(this).find("b").text(zhi);
+					$(this).removeClass('yijing');
+				} else {
+					var zhi = parseInt($(this).find("b").text());
+					zhi++;
+					$(this).find("b").text(zhi);
+					$(this).addClass('yijing');
+				}
 
-				$(".pinglun").on('tap','.xuanpic span',function () {
-					if ($(this).hasClass('yijing')) {
-						var zhi = parseInt($(this).find("b").text());
-						zhi--;
-						$(this).find("b").text(zhi);
-						$(this).removeClass('yijing');
-					} else {
-						var zhi = parseInt($(this).find("b").text());
-						zhi++;
-						$(this).find("b").text(zhi);
-						$(this).addClass('yijing');
-					}
-
-				})
-				$(window).scroll(function () {
-					var zhi = $(".pinlunxq").scrollTop();
-
-				})
+			})
 
 		}
 
 	});
-
-
-
 
 
 	ajax_feedback_list({
@@ -184,39 +215,8 @@
 
 
 
-		function tiejiao() {
-			var titleNView1 = {
-			backgroundColor: '#F8F8FF',
-			titleText: '写想法', 
-			titleColor: '#000000', 
-			type: 'default',
-			autoBackButton: true, 
 
-		}
-
-
-
-	mui.openWindow({
-							url: '../question/question_tw.html',
-							id: 'outlink',
-							// extras:{
-							// 	link_url:link_url
-							// },
-							waiting:{
-     						autoShow:false,//自动显示等待框，默认为true
-							},
-							show:{"aniShow":"zoom-fade-out"},
-							styles: {
-								"bounce": "vertical",
-								"bounceBackground": "#efeff4",
-								"titleNView": titleNView1
-							}
-						})
 	
-}
-
-
-
 
 
 
@@ -225,8 +225,7 @@
 		homes.list = JSON.parse(data.list);
 		for (var i = 0; i < homes.list.length; i++) {
 			homes.list[i].add_time = getDateDiff(homes.list[i].add_time);
-
 		};
-		isLoadIcon = false;
+		homes.loading=true;
 	}
 </script>

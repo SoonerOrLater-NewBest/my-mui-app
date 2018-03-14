@@ -3,24 +3,40 @@
     max-width: 28px;
     height: 28px;
 }
+.mui-table-view:after {
+    height: 0px;
+}
+.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
+    font-size: 13px;
+}
+.mui-grid-view.mui-grid-9 .mui-media .mui-icon {
+    font-size: 1.8em;
+    position: relative;
+}
+.touming{padding: 6px;background: url(../../images/transparent.png);border-radius: 50%;overflow: hidden;}
 .list-title{
 	line-height: 28px;
     height: 28px;
     display: inline-block;
 }
 .mui-table-view{
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 }
+#mine_info.mui-active{background-color: #ff4500!important;}
 /*头像*/
-.mui-table-view .mui-media-object.touxiang{
+.touxiang{
 	line-height: 66px;
-    max-width: 66px;
+    width: 66px;
     height: 66px;
-    border: 1px solid #B6B6B6;
-    border-radius: 4px;
+    border-radius: 50%;
+    display: block;
 }
-.mui-media-body{
-	padding: 12px 5px;
+#mine_info .mui-media-body{
+	padding: 10px 12px;
+}
+#mine_info .mui-ellipsis{
+	color: #fff;
+	font-size: 16px;
 }
 .code{
 	width: 20px;
@@ -34,6 +50,15 @@
 	width: 100%;
 	height: 100%;
 }
-.mui-ellipsis{
-	color: #000000;
+#mine_info .biaoqian{font-size: 12px;}
+#mine_info .biaoqian span{margin: 0 5px;}
+.renzheng{position: relative; display: inline-block;padding: 0 6px 0 15px;font-size: 12px;background-color: #fff;border-radius: 4px;color: #000;line-height: 18px;vertical-align: top;margin: 3px 0 0 5px;}
+.renzheng .iconfont{font-size: 12px;position: absolute;top: 0;left: 2px;}
+.icon-QQ{color: #68a5e1;}
+.icon-weixin-copy{color: #5de466;}
+.icon-xinlangweibo{color: #e4d35d;}
+@media only screen and (min-width: 100px) and (max-width: 320px) {
+	.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
+   		font-size: 12px;
+	}
 }

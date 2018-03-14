@@ -197,7 +197,7 @@
 						}, {
 							"tag": "font",
 							"id": "contactText",
-							"text": "功德",
+							"text": "佛化生活",
 							"position": {
 								"top": "24px",
 								"left": "55%",
@@ -402,14 +402,16 @@
 					"models/news/outlink.html",
 					"models/mine/mine.html",
 					"models/index/imageviewer-native.html",
-					"models/question/question.html"
+					"models/question/question.html",
+					"models/word/word.html"
 				],
 				"priority": 0
 			},
 			"models/question/question.html": {
 				"resources": [],
 				"refer": [
-					"models/question/question_tw.html"
+					"models/question/question_tw.html",
+					"models/question/question_xq.html"
 				],
 				"priority": 0
 			}
@@ -420,8 +422,6 @@
 				"models/login/login.html",
 				"models/setting/setting.css",
 				"models/mine/setting.png",
-				"models/question/question_xq.html",
-				"models/word/word.html",
 				"models/player/img/2.png",
 				"js/scroll.js",
 				"models/word/word_child5.html",

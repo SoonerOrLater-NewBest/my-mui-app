@@ -1,3 +1,4 @@
+	
 var webviewGroup = function(id, options) {
 	this.id = id;
 	this.options = options;
@@ -282,3 +283,4 @@ _proto._initWebview = function() {
 		}.bind(this));
 	}
 };
+

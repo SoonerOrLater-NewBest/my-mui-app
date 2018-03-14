@@ -10,19 +10,63 @@
 	<link rel="stylesheet" type="text/css" href="master.css"/>	
 </head>
 <body>
+	<script type="text/javascript">
+		(function (doc, win) {
+		    var docEl = doc.documentElement,
+		        resizeEvt = 'onorientationchange' in window ? 'onorientationchange' : 'resize',
+		        recalc = function () {
+		            var clientWidth = docEl.clientWidth;
+		            if (!clientWidth) return;
+		            if(clientWidth>=768){
+		                docEl.style.fontSize = '80px';
+		            }else{
+		                docEl.style.fontSize = 100 * (clientWidth / 768) + 'px';
+		            }
+		        };
+		
+		    if (!doc.addEventListener) return;
+		    win.addEventListener(resizeEvt, recalc, false);
+		    doc.addEventListener('DOMContentLoaded', recalc, false);
+		})(document, window);
+	</script>
 	<div id="vue">
+		<div class="bg"></div>
 	<div class="swiper-container" id="master">
 	    <div class="swiper-wrapper">
-	        <div class="swiper-slide" v-for="load in loades">
-	        	<img src="../mine/touxiang.jpg" alt="" />
+	        <div class="swiper-slide" v-for="item in items" @tap="liandong">
+	        	<img :src="item.img_url" alt="" />
 	        </div>
 	    </div>		    		    
 	</div>
+	<div class="biaoti"> 
+		弘扬佛法  普度众生
+	</div>
 	<div class="swiper-container" id="brief">
 	    <div class="swiper-wrapper">
-	        <div class="swiper-slide" v-for="load in loades">
-	        	<div class="brief-info">
-	        		{{load}}
+	        <div class="swiper-slide" v-for="item in items" :class="{'brief-tap' : isFlip}">
+	        	<div class="brief-avatar">
+	        		<img :src="item.img_url" alt="" />
+	        		<h4 class="mui-ellipsis">{{item.title}}</h4>
+	        		<p class="zhaiyao">{{item.zhaiyao}}</p>
+	        		<div class="icon-group">
+	        			<div class="icon-item">
+	        				<p>13</p>
+	        				<p><i class="iconfont icon-maikefeng" style="color:#5d61ff;"></i></p>
+	        			</div>
+	        			<div class="icon-item">
+	        				<p>13</p>
+	        				<p><i class="iconfont icon-shipin" style="color:#5dc0ff;"></i></p>
+	        			</div>
+	        			<div class="icon-item">
+	        				<p>13</p>
+	        				<p><i class="iconfont icon-hua" style="color:#ff5d5e;"></i></p>
+	        			</div>	        			
+	        		</div>
+	        		<button class="learn-more" @tap="isFlip=!isFlip">
+	        			阅读更多
+	        		</button>
+	        	</div>
+	        	<div class="brief-info bianjiqi" v-html="item.content" @tap="isFlip=!isFlip">
 	        	</div>
 	        </div>
 	    </div>		    		    
@@ -31,38 +75,52 @@
 	<script src="../../common/mui.min.js"></script>
 	<script src="../../js/swiper-3.4.2.min.js"></script>		
 	<script src="../../js/vue.min.js"></script>
-	<script src="../../common/common.js"></script>
+	<script src="../../common/ajax.js"></script>
 	<script type="text/javascript">
-		mui.init({
-			swipeBack: true,
-		});
+		var mySwiper2,mySwiper1;
+		mui.init({});
 		var master = new Vue({
 			el: '#vue',
 			data: {
 				items: [],
-				loading: false,
+				isFlip: false,
 	   			loades: 6
 			},
 			methods:{
-												
+				liandong : function(){
+					mySwiper2.slideTo(mySwiper1.activeIndex, 1000, false);
+				}
 			},
 			mounted : function (){
-				var mySwiper1 = new Swiper ('#master', {
+				ajax_getArticleList({
+					channel_id:53,
+					channel_name:"simiao",
+				});
+				mySwiper1 = new Swiper ('#master', {
 					slidesPerView :5,
+					initialSlide :2,
 					spaceBetween : 20,
+					centeredSlides : true,
+					slideToClickedSlide:true,
+					freeMode : true,
 				    observer:true,
 					observeParents:true,
 				});
-				var mySwiper2 = new Swiper ('#brief', {
+				mySwiper2 = new Swiper ('#brief', {
 					effect : 'coverflow',
 					slidesPerView: 1.6,
+					initialSlide :2,
 					centeredSlides: true,
 				    observer:true,
 					observeParents:true,
 				});
+				mySwiper2.params.control = mySwiper1;
 			}
 			
 		});
+		function articleListSuccess(data){
+			master.items=JSON.parse(data.list);				
+		}
 	</script>
 </body>
 </html>

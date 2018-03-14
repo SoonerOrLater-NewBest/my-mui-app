@@ -1,15 +1,112 @@
-<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title></title>
-		<link rel="stylesheet" type="text/css" href="../../common/mui.min.css"/>
-		<link rel="stylesheet" type="text/css" href="../../common/fonts/iconfont.css"/>
-		<link rel="stylesheet" type="text/css" href="word.css"/>
-		<script src="../../common/mui.min.js"></script>
-	</head>
-	<body>
-	55555
-	</body>
+
+  <head>
+    <meta charset="utf-8">
+    <title>瀑布流</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" href="../../common/mui.min.css">
+    <link rel="stylesheet" href="../../common/common.css">    
+    <!--App自定义的css-->
+    <style type="text/css">
+    ul,li{list-style: none;margin: 0;padding: 0;}
+    p{margin: 0;}
+    .twoRankedBox{margin: 0.2rem;padding-bottom: 0.2rem;}
+.twoRankedBox ul{ 
+		width:49%; 
+		float: left; 
+} 
+.twoRankedBox ul:last-child{ 
+    margin-left:2%; 
+} 
+.twoRankedBox ul li{ 
+    padding:0.16rem; 
+    margin-bottom:0.16rem; 
+    background-color: #FFFFFF;
+    box-shadow: 0 0 4px #ccc;
+} 
+.product_picture{position:relative;}
+.product_picture img{ 
+    display: block; 
+    width:100%; 
+} 
+
+
+.product_ie{ 
+	line-height: 1;
+    font-size:0.28rem; 
+    color:#777;
+    padding-top: 0.16rem;
+}
+.icon-shoucang{float: right;font-size: 0.28rem;color: #666;font-weight: bolder;}
+.shoucang{color: #880000!important;}
+    </style>
+
+  </head>
+
+  <body>
+    <div class="mui-content">
+      <div class="twoRankedBox mui-clearfix">
+        	<ul class="BoxLeft"> 
+ 
+	        </ul> 
+	 
+	        <ul class="BoxRight"> 
+	 
+	        </ul> 
+        
+      </div>
+    </div>
+  </body>
+  <script src="../../common/mui.min.js"></script>
+  <script src="../../common/jquery-2.1.0.js"></script>
+	<script src="../../common/ajax.js"></script>
+	<script src="../../common/common.js"></script>
+	
+  <script type="text/javascript">
+	  mui.init();
+		
+		ajax_waterfalls({
+			channel_name : 'fengjing'
+		});
+    
+    function waterfallsSuccess(data){
+    	var data=JSON.parse(data.list);
+
+				for(var i=0;i<data.length;i++){ 
+				    var chtml = '<li><p class="product_picture"><img src="'+data[i].img_url+'"></p>' 
+				            +'<p class="product_ie mui-ellipsis"><span class="iconfont icon-shoucang"></span>'+data[i].title+'</p></li>' 
+				 
+				    if($('.BoxLeft').height() <= $('.BoxRight').height()){ 
+				        $('.BoxLeft').append(chtml); 
+				    }else{ 
+				        $('.BoxRight').append(chtml); 
+				    }
+				}
+				
+				mui.plusReady(function() {					      
+			      var images = [].slice.call(document.querySelectorAll('.twoRankedBox img'));
+			      var urls = [];
+			      images.forEach(function(item) {
+			        urls.push(item.src);
+			      });
+			      mui('.twoRankedBox').on('tap', 'img', function() {
+			        var index = images.indexOf(this);
+			        plus.nativeUI.previewImage(urls, {
+			          current: index,
+			          loop: true,
+			          indicator: 'number'
+			        });
+			      });
+			    });
+			    mui('.twoRankedBox').on('tap', '.icon-shoucang', function() {
+			        $(this).toggleClass('shoucang');
+			      });
+			    
+
+    }
+  </script>
+
 </html>

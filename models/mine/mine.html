@@ -7,44 +7,287 @@
 		<link rel="stylesheet" type="text/css" href="../../common/mui.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../../common/common.css"/>
 		<link rel="stylesheet" type="text/css" href="mine.css"/>
-		<script src="../../common/jquery-2.1.0.js"></script>		
-		<script src="../../common/mui.min.js"></script>
-		<script src="../../common/common.js"></script>
+		
 	</head>
-	<body class="">
-	    <ul class="mui-table-view" style="background-color: #f7f7f7;">
+	<body>
+		<div id="mine">
+					
+	    <ul class="mui-table-view" style="background-color: #ff4500;padding-bottom: 0.18rem;" v-for="item in mineInfo">
 	        <li class="mui-table-view-cell mui-media">
-	            <a href="javascript:;" class="mui-navigate-right selfmsg" id="mine_info" title="个人信息">
-	                <img class = "mui-media-object mui-pull-left touxiang" src = "touxiang.jpg" >
+	            <a href="javascript:;" class="mui-navigate-right" id="mine_info" title="个人信息">
+	                <div class="touming mui-pull-left">
+	                	<div class="touming">
+	                		<img class = "touxiang" :src="item.avatar" >
+	                	</div>	                	
+	                </div>
 					<div class = "mui-media-body">
-						<p class = "mui-ellipsis">寺院帐号:</p>
+						<p class = "mui-ellipsis">{{item.user_name}}<span class="renzheng"><i class="iconfont" :class="classObject"></i>认证</span></p>
+						<p class = "mui-ellipsis biaoqian"><span>积分</span><b>{{item.point}}</b></p>
 					</div>
 					<div class = "code" >
 					<img src = "code.png" / ></div>
 	            </a>
 	        </li>
 	    </ul>
-	    <ul class="mui-table-view mine_pages">
-	        <li class="mui-table-view-cell">
-	            <a class="mui-navigate-right" id="juan" title="捐赠记录">
-	            	<img class="mui-media-object mui-pull-left" src="wallet.png">
-	              	<span class="list-title">捐赠记录</span>
-	            </a>
-	        </li>
-	        	
-	    </ul>
+	    <ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #fff;margin-bottom: 15px;">
+            <li class="mui-table-view-cell mui-media mui-col-sm-3">
+            	<a id="audio" title="我的录音">
+                    <span class="icon-luyinji iconfont mui-icon" style="color: #333;"></span>
+                    <div class="mui-media-body">我的录音</div>
+            	</a>
+            </li>
+            <li class="mui-table-view-cell mui-media mui-col-sm-3">
+            	<a id="mine_xxx" title="我的视频">
+                    <span class="mui-icon icon-shipin1 iconfont" style="color: #5d65ff;"><span class="mui-badge">5</span></span>
+                    <div class="mui-media-body">我的视频</div>
+            	</a>
+            </li>
+            <li class="mui-table-view-cell mui-media mui-col-sm-3">
+            	<a id="mine_xxx" title="我的放生">
+                    <span class="mui-icon icon-yu iconfont" style="color: #ef9b6c;"></span>
+                    <div class="mui-media-body">我的放生</div>
+            	</a>
+            </li>
+            <li class="mui-table-view-cell mui-media mui-col-sm-3">
+            	<a id="mine_x" title="我的排行">
+                    <span class="mui-icon icon-tubiao- iconfont" style="color: #5dff70;"></span>
+                    <div class="mui-media-body">我的排行</div>
+            	</a>
+            </li>
+            <li class="mui-table-view-cell mui-media mui-col-sm-3">
+            	<a id="mine_x" title="我的捐赠">
+                    <span class="mui-icon icon-juanxianpaixing iconfont" style="color: #ff5d5e;"></span>
+                    <div class="mui-media-body">我的捐赠</div>
+            	</a>
+            </li>
+            <li class="mui-table-view-cell mui-media mui-col-sm-3">
+            	<a id="mine_x" title="我的客服">
+                    <span class="mui-icon iconfont icon-dianhua" style="color: #04fabe;"></span>
+                    <div class="mui-media-body">我的客服</div>
+            	</a>
+            </li>
+            <li class="mui-table-view-cell mui-media mui-col-sm-3">
+            	<a id="mine_x" title="来寺参观">
+                    <span class="mui-icon iconfont icon-youxuanluxian" style="color: #5D77FF;"></span>
+                    <div class="mui-media-body">来寺参观</div>
+            	</a>
+            </li>
+           
+        </ul> 
+
 	    	    
 	    	    
-	    <ul class="mui-table-view mine_pages">
+	    <!--<ul class="mui-table-view mine_pages">
 	        <li class="mui-table-view-cell">
 	            <a class="mui-navigate-right" id="setting" title="设置">
 	            	<img class="mui-media-object mui-pull-left" src="setting.png">
 	              	<span class="list-title">设置</span>
 	            </a>
 	        </li>	
-	    </ul>
+	    </ul>-->
+	    </div>
+	<script src="../../common/mui.min.js"></script>
+	<script src="../../js/vue.min.js"></script>
+	<script src="../../common/ajax.js"></script>	
+	<script src="../../common/common.js"></script>
+	<script>
+mui.plusReady(function(){
+	var _self = plus.webview.currentWebview();
+	var tView = plus.nativeObj.View.getViewById('title');
+	_self.addEventListener('show',function(){	
+		tView.draw([{
+			tag: 'font',
+			id: 'setting',
+			text: '\ue638', //此为字体图标Unicode码'\e600'转换为'\ue600'
+			position: {
+				top: '22px',
+				right: '15px',
+				width: '40px',
+				height: '40px'
+			},
+			textStyles: {
+				fontSrc: '_www/fonts/iconfont.ttf',
+				align: 'center',
+				color: '#fff',
+				size: '17px'
+			}
+		}]);
+	})
+	_self.addEventListener('hide',function(){
+		var tView = plus.nativeObj.View.getViewById('title');
+		tView.draw([{
+			tag: 'font',
+			id: 'setting',
+			text: '', //此为字体图标Unicode码'\e600'转换为'\ue600'
+			position: {
+				top: '22px',
+				right: '15px',
+				width: '40px',
+				height: '40px'
+			},
+			textStyles: {
+				fontSrc: '_www/fonts/iconfont.ttf',
+				align: 'center',
+				color: '#fff',
+				size: '17px'
+			}
+		}]);
+	})
+	tView.addEventListener('click', function(e) {
+		var clientX = e.clientX;
+		if(clientX > parseInt(window.innerWidth - 55) && clientX <= parseInt(window.innerWidth)) {
+			if (!localStorage.getItem('id')) {
+				plus.webview.getWebviewById('../login/login.html').show("slide-in-bottom");
+				return;
+			}
+			titleNView1.titleText = "设置";
+			mui.openWindow({
+				url:'../setting/setting.html',
+				id:'../setting/setting.html',
+				styles:{
+					titleNView:titleNView1,
+				}
+			})								
 	    
+		}
+	});
+})			
+		var mine = new Vue({
+			el: '#mine',
+			data: {
+				mineInfo: [],
+				classObject: {
+				    'icon-QQ': false,
+				    'icon-weixin-copy': false,
+				    'icon-xinlangweibo':false
+				}
+			},
+			methods:{
+				
+			},
+			mounted : function (){
+				mui('body').on('tap', 'a', function(e) {
+					if (!localStorage.getItem('id')) {
+						plus.webview.getWebviewById('../login/login.html').show("slide-in-bottom");
+						return;
+					}			
+						var id = this.getAttribute('id');
+						var title_name = this.getAttribute('title');
+						var mine_pages_url="../"+id+"/"+id+".html";		
+						titleNView1.titleText = title_name;
+						mui.openWindow({
+							url:mine_pages_url,
+							id:mine_pages_url,
+							styles:{
+								titleNView:titleNView1,
+								'popGesture':'none'
+							}
+						})
+				})
+			}
+			
+		})
+		
+		
+		initControl();
+		
+		
 
-	<script src="mine.js" ></script>
+		
+		//方法初始化
+		 function initControl() {
+
+		    var user=localStorage.getItem('id');
+		    
+		  
+			if(user == "undefined"|| user==null) {
+				mine.mineInfo = [{
+					openid: "",
+					user_name: "未登陆",
+					avatar: "../../images/touxiang.jpeg",
+					mobile: "",
+					address: "",
+					point: 0
+				}];
+			
+			} else {
+			//读取缓存
+			
+				var id = user;
+				ajax_userinfo({
+					id: id
+				});
+			
+			}
+			
+			}
+		 
+		 
+		 
+		 //请求成功后事件
+	function UserinfoSuccess(data) {
+		
+
+		if(data.status=="y")
+		
+		{
+			
+			
+			
+			mine.mineInfo = JSON.parse(data.list);
+			
+
+				//id
+				localStorage.setItem('id', mine.mineInfo["0"].id);
+				//openid
+				localStorage.setItem('openid', mine.mineInfo["0"].openid);
+				//nick_name
+				localStorage.setItem('nick_name', mine.mineInfo["0"].user_name);
+				//avatar
+				localStorage.setItem('avatar', mine.mineInfo["0"].avatar);
+				//mobile
+				localStorage.setItem('mobile', mine.mineInfo["0"].mobile);
+				//address
+				localStorage.setItem('address', mine.mineInfo["0"].address);
+            
+			for (var i = 0; i < mine.mineInfo.length; i++) {
+			 var type=	mine.mineInfo[i].type;
+			 if(type=="weixin")
+			 
+			 {
+			 	mine.classObject['icon-weixin-copy'] = true
+				
+			 	
+			 }
+			 
+			 else if(type=="qq")
+			 {
+			 	mine.classObject['icon-QQ'] = true
+			 }
+			 else
+			 {
+			 	mine.classObject['icon-xinlangweibo'] = true
+			 	
+			 }
+			
+		};
+			
+		}
+		
+		else
+		{
+			
+			mui.toast('获取信息失败');
+		}
+	
+	
+	
+	
+
+	}
+	document.addEventListener('loginSuccess',function(){		
+		location.reload();
+	})
+	</script>
 	</body>
 </html>

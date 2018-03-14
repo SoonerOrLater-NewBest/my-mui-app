@@ -9,6 +9,7 @@ document.body.appendChild(new_element);
 
 
 
+
 //**************************************设置data安全性**********************************************
 	var httpUrl = "http://gns.yaohua1314.cn/appapi/main.ashx?";
 	var app_key = "9e304d4e8df1b74cfa009913198428ab";
@@ -66,7 +67,7 @@ document.body.appendChild(new_element);
 (function(w){
 	//获取sessionKey
 	w.ajax_get_SessionKey = function(){
-		mui.ajax('http://192.168.1.106:32417/test/appserver/sessionkey',{
+		mui.ajax('http://192.168.1.114:16976/test/appserver/sessionkey',{
 			dataType:'json',//服务器返回json格式数据
 			type:'get',//HTTP请求类型
 			timeout:10000,//超时时间设置为10秒；
@@ -115,6 +116,23 @@ document.body.appendChild(new_element);
 			},
 			error:function(xhr,type,errorThrown){
 				
+			}
+		});
+	}
+//	快捷登录
+	w.ajax_login_quick = function(options){
+		var data = getdata(options,"action=useauth_up");
+		mui.ajax(httpUrl+"action=useauth_up",{
+			data:data,
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){
+				logData(data);
+				loginSuccessQuick(data);
+			},
+			error:function(xhr,type,errorThrown){
+				mui.toast('授权请求失败');
 			}
 		});
 	}
@@ -251,6 +269,93 @@ document.body.appendChild(new_element);
 			}
 		});
 	}
+		//获取留言
+	w.ajax_post_content = function(options) {
+		var data = getdata(options,'action=feedback_add');
+		mui.ajax(httpUrl+"action=feedback_add",{
+			data:data,
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){				
+				logData(data);
+				setTimeout(function(){
+					PostFeedbackSuccess(data);
+				},500);
+			},
+			error:function(xhr,type,errorThrown){
+				
+			alert("22");
+			}
+		});
+	}
+	
+	//提交评论
+	w.ajax_post_xqcontent = function(options) {
+		var data = getdata(options,'action=comment_add');
+		mui.ajax(httpUrl+"action=comment_add",{
+			data:data,
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){				
+				logData(data);
+				setTimeout(function(){
+					PostXqcontentSuccess(data);
+				},500);
+			},
+			error:function(xhr,type,errorThrown){
+				
+			alert("22");
+			}
+		});
+	}
+	
+		//提交评论
+	w.ajax_userinfo = function(options) {
+		var data = getdata(options,'action=get_user_info');
+		mui.ajax(httpUrl+"action=get_user_info",{
+			data:data,
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){				
+				logData(data);
+				setTimeout(function(){
+					UserinfoSuccess(data);
+				},500);
+			},
+			error:function(xhr,type,errorThrown){
+				
+			alert("请求失败");
+			}
+		});
+	}
+	
+	//修改信息
+	w.ajax_post_useredit = function(options) {
+		var data = getdata(options,'action=edit_user_info');
+		mui.ajax(httpUrl+"action=edit_user_info",{
+			data:data,
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){				
+				logData(data);
+				setTimeout(function(){
+					EditUserinfoSuccess(data);
+				},500);
+			},
+			error:function(xhr,type,errorThrown){
+				
+			alert("修改请求失败");
+			}
+		});
+	}
+	
+	
+	
+	
 	//获取分类第一级
 	w.ajax_get_first_category = function(options) {
 		startLoad();

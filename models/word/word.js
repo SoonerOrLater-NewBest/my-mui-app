@@ -1,6 +1,7 @@
 mui.init();
-var viewgroup=plus.webview.currentWebview().id;
+
 mui.plusReady(function() {
+	var viewgroup=plus.webview.currentWebview().id;	
 	var group = new webviewGroup(viewgroup, {
 		items: [{
 			id: "word_child1.html",
@@ -35,9 +36,8 @@ mui.plusReady(function() {
 		var wid = this.getAttribute("data-wid");
 		group.switchTab(wid);
 	});
-
+	mui.back = function() {
+		var _self = plus.webview.currentWebview();
+		_self.close("auto");
+	}
 });
-mui.back = function() {
-	var _self = plus.webview.currentWebview();
-	_self.close("auto");
-}

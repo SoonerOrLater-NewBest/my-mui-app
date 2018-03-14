@@ -1,10 +1,10 @@
 
 var util = {
 	options: {
-		ACTIVE_COLOR: "#007aff",
+		ACTIVE_COLOR: "#FF4500",
 		NORMAL_COLOR: "#aaa",
-		subpages: ["../news/listview.html", "../question/question.html","../mine/mine.html"],
-		subpagesName:["寺院动态","日行一善","个人中心"]
+		subpages: ["../news/listview.html", "../word/word.html","../mine/mine.html"],
+		subpagesName:["寺院动态","佛化生活","个人中心"]
 	},
 	/**
 	 *  简单封装了绘制原生view控件的方法
@@ -22,22 +22,21 @@ var util = {
 		var subpage_style = {
 				top: 0,
 				bottom: 50,
-				bounce:"vertical",
-//				titleNView:titleNView_index,
 			},
 			subpages = util.options.subpages,
 			self = plus.webview.currentWebview(),			
 			subpagesName = util.options.subpagesName,			
 			temp = {};
-						
+			self.name="首页";	
 		//兼容安卓上添加titleNView 和 设置沉浸式模式会遮盖子webview内容
 		if(mui.os.android) {
-			if(plus.navigator.isImmersedStatusbar()) {
-				subpage_style.top += plus.navigator.getStatusbarHeight();
-			}
-			if(self.getTitleNView()) {
-				subpage_style.top += 40;
-			}
+//			if(plus.navigator.isImmersedStatusbar()) {
+//				subpage_style.top += plus.navigator.getStatusbarHeight();
+//			}
+//			if(self.getTitleNView()) {
+//				subpage_style.top += 40;
+//			}
+			subpage_style.top += 64;
 			
 		}
 
@@ -49,9 +48,9 @@ var util = {
 
 		for(var i = 0, len = subpages.length; i < len; i++) {
 
-			if(!plus.webview.getWebviewById(subpages[i])) {
-//				subpage_style.titleNView.titleText = subpagesName[i];
+			if(!plus.webview.getWebviewById(subpages[i])) {				
 				var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+				sub.name = subpagesName[i];				
 				//初始化隐藏
 				sub.hide();
 				// append到当前父webview
@@ -63,6 +62,20 @@ var util = {
 	 * 点击切换tab窗口 
 	 */
 	changeSubpage: function(targetPage, activePage, aniShow) {
+		plus.nativeObj.View.getViewById('title').draw([{
+			tag: 'font',
+			id: 'titleInfo',
+			text: targetPage.name,
+			position: {
+				left: '88px',
+				right:'88px',
+				top:'20px',
+				height: '44px'
+			},
+			textStyles: {
+				color: '#ffffff',
+			}
+		}])
 		//若为iOS平台或非首次显示，则直接显示
 		if(mui.os.ios || aniShow[targetPage]) {
 			plus.webview.show(targetPage);
@@ -106,9 +119,8 @@ var util = {
 	updateSubNView: function(currIndex, color) {
 		var self = plus.webview.currentWebview(),
 			nviewEvent = plus.nativeObj.View.getViewById("tabBar"), // 获取nview控件对象
-			nviewObj = self.getStyle().subNViews[0], // 获取nview对象的属性
+			nviewObj = self.getStyle().subNViews[0], // 获取nview对象的属性			
 			currTag = nviewObj.tags[currIndex]; // 获取当前需重绘的tag
-
 		nviewEvent.drawText(currTag.text, currTag.position, util.changeColor(currTag.textStyles, color), currTag.id);
 	}
 };
