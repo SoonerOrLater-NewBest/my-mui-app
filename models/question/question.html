@@ -75,12 +75,12 @@
 							<i class="iconfont">&#xe681;</i>
 							<b>{{item.comment}}</b>
 						</a>
-						<span>
-							<i class="iconfont">&#xe60d;</i>
+						<span :new-id="item.id" @tap="Zan($event)">
+							<i class="iconfont" >&#xe60d;</i>
 							<b>{{item.zan}}</b>
 						</span>
-						<span>
-							<i class="iconfont">&#xe635;</i>
+						<span :new-id="item.id" @tap="Cai($event)">
+							<i class="iconfont" >&#xe635;</i>
 							<b>{{item.cai}}</b>
 						</span>
 					</div>
@@ -167,6 +167,43 @@
 					}
 				})
 				// }
+			},
+           //点赞
+			Zan: function (event) 
+			{
+				var el = event.currentTarget;
+				var guid = el.getAttribute('new-id');
+               
+			
+			mui.ajax(httpUrl+'action=zan_cai_article&article_id=' + guid+ '&type=zan', {
+				type: 'GET',
+				success: function (rsp) {
+				
+
+				},
+				error: function (xhr, type, errorThrown) {
+					mui.toast('操作失败！，请稍后再试！');
+				}
+			});
+			},
+			 //踩
+			 Cai: function (event) 
+			{
+				var el = event.currentTarget;
+				var guid = el.getAttribute('new-id');
+              
+			
+			mui.ajax(httpUrl+'action=zan_cai_article&article_id=' + guid+ '&type=cai', {
+				type: 'GET',
+				success: function (rsp) {
+				
+
+
+				},
+				error: function (xhr, type, errorThrown) {
+					mui.toast('操作失败！，请稍后再试！');
+				}
+			});
 			},
 
 			openMsgDetail: function (event) {
