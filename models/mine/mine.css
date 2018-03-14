@@ -1,0 +1,39 @@
+.mui-table-view .mui-media-object {
+    line-height: 28px;
+    max-width: 28px;
+    height: 28px;
+}
+.list-title{
+	line-height: 28px;
+    height: 28px;
+    display: inline-block;
+}
+.mui-table-view{
+	margin-bottom: 25px;
+}
+/*头像*/
+.mui-table-view .mui-media-object.touxiang{
+	line-height: 66px;
+    max-width: 66px;
+    height: 66px;
+    border: 1px solid #B6B6B6;
+    border-radius: 4px;
+}
+.mui-media-body{
+	padding: 12px 5px;
+}
+.code{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 40px;
+}
+.code img{
+	width: 100%;
+	height: 100%;
+}
+.mui-ellipsis{
+	color: #000000;
+}

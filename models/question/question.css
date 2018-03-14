@@ -1,0 +1,228 @@
+h1,h2,h3{font-weight: normal;font-size: 100%;}
+h1{font-size: 14px;color: #000;padding: 5px;margin: 5px 0 0;}
+
+
+.iconfont{
+  -webkit-text-stroke-width: 0.2px;
+}
+
+.pinglun{
+	
+}
+.pinglun ul{
+	padding:0;
+	margin:0;
+}
+.pinglun ul li{
+	display: block;
+	list-style: none;
+	padding:10px 20px 16px 10px;
+	border-bottom:1px solid #d4d4d4;
+	clear:both;
+}
+.pinglun ul li:after{
+	content:'';
+	display: block;
+	clear:both;
+}
+.pinglun ul li .touxiang{
+	width:.6rem;
+	height:.6rem;
+	border-radius:50%;
+	float: left;
+	position: relative;
+	overflow: hidden;
+}
+.pinglun ul li .touxiang img{
+	position: absolute;
+	margin:auto;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	max-width:100%;
+	max-height:100%;
+}
+.pinglun ul li .neirong{
+	width:calc(100% - .8rem);
+	float: right;
+}
+.neitit {
+	position: relative;
+}
+.neitit .ming{
+	padding-right:.5rem;
+}
+.neitit span{
+	display: block;
+	color:#000;
+	font-size:.24rem;
+	line-height: 1.4;
+	font-family: '黑体';
+}
+.neitit i{
+	font-style:normal;
+	color:#9c9c9c;
+	font-size:.18rem;
+	line-height: 1;
+}
+.neitit a {
+	position: absolute;
+	right:0;
+	top:0;
+}
+.neitit a i{
+	color:#929292;
+	font-size: .25rem;
+  line-height: .7rem;
+}
+.pinwen {
+	display: block;
+	margin-top:.1rem;
+}
+.pinwen p{
+	font-size:.22rem;
+	color:#000;
+	line-height: 1.5;
+	height:1rem;
+	overflow: hidden;
+	text-align: justify;
+}
+
+.xuanpic a,.xuanpic span{
+	color:#595959;
+	font-size:.22rem;
+	vertical-align: middle;
+	margin-right:.4rem;
+}
+.xuanpic span.yijing{
+	color:#ff0000;
+}
+.xuanpic i{
+	margin-right:.1rem;
+	font-size:.24rem;
+}
+
+.tianxie{
+	width:0.8rem;
+	height:.8rem;
+	background: #0484f6;
+	position: fixed;
+	right:.3rem;
+	bottom:.5rem;
+	border-radius:50%;
+	text-align: center;
+	line-height:.8rem;
+	box-shadow: 0 3px 6px #ccc;
+}
+
+.tianxie i{
+	display: block;
+	font-size:.3rem;
+	color:#fff;
+}
+
+.liuyan{
+	position: fixed;
+	width:100%;
+	height:100%;
+	background: #fff;
+	top:0;
+	left:0;
+	/* padding:10px; */
+
+}
+.liuyan textarea{
+	font-size:.3rem;
+	line-height: 1.8;
+	height:80vh;
+
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px
+	
+}
+
+
+.pinlunxq{
+	border-top:.1rem solid #ebebeb;
+}
+.clear{
+	clear:both;
+	
+}
+
+.pinlunxq{
+	padding: 0 20px 0 10px;
+}
+
+.pltit{
+	display: block;
+	font-size:.3rem;
+	font-family: '黑体';
+	line-height: 3;
+}
+
+.pinglun2 ul li{
+	border-top: 1px solid #d4d4d4;
+	border-bottom: 0;
+}
+.pinglun2 ul li .xuanpic {
+	text-align: right;
+}
+.xuanpic p{
+	float: left;
+}
+.pinglun2 .xuanpic span{
+	margin: 0;
+}
+
+.neiye .pinwen p{
+	height:auto;
+}
+
+.xuanpic b{
+	display: inline-block;
+	width:.6rem;
+}
+
+.pinglun2 .xuanpic i {
+    margin: 0 .1rem;
+    font-size: .24rem;
+}
+
+.shuru{
+	position: fixed;
+	border-top:1px solid #ccc;
+	padding:.18rem 10px;
+	width:100%;
+	bottom:0;
+	background: #fff;
+}
+
+.shuru input[type='text']{
+	display: block;
+  float: left;
+	width:82%;
+	font-size:.3rem;
+	line-height: 2;
+	background: #f6f6f6;
+	padding:5px;
+	margin:0;
+	border-color:#f4f4f4;
+}
+.shuru input[type='submit']{
+	display: block;
+  float: right;
+	width:16%;
+	font-size:.3rem;
+	line-height: 2;
+	margin-left:2%;
+	color:#ccc;
+	background: transparent;
+	border-color:#fff;
+	padding:0;
+}
+
+body.neiye{
+	padding-bottom:.78rem;
+}

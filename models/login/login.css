@@ -1,0 +1,115 @@
+.mui-content-padded{
+	margin: 20px 15px;
+}
+.mui-input-group .mui-input-row {
+    height: 50px;
+}
+.mui-input-row input{
+	height: 50px;
+	margin-left: 5%;
+}
+.mui-input-group .mui-input-row:after{
+	left: 30px;
+	right: 30px;
+}
+.mui-input-row .mui-input-clear~.mui-icon-clear, .mui-input-row .mui-input-password~.mui-icon-eye, .mui-input-row .mui-input-speech~.mui-icon-speech{
+	right: 30px;top: 15px;
+}
+.mui-btn-green.mui-active:enabled, .mui-btn-green:enabled:active, .mui-btn-positive.mui-active:enabled, .mui-btn-positive:enabled:active, .mui-btn-success.mui-active:enabled, .mui-btn-success:enabled:active {
+    opacity: 0.6;
+    border-color: #4cd9d1; 
+    background-color: #14b9c7;
+}
+.mui-btn-block{
+	padding: 10px 0;
+	margin: 40px auto 0;
+	width: 90%;
+	border: 1px solid #4cd9d1;
+    background-color: #14b9c7;
+}
+
+body{
+	background-color: #FFFFFF;
+}
+
+.mui-input-group:before,.mui-input-group:after{
+	height: 0;
+}
+
+.mui-input-row label{
+	font-weight: 700;
+}
+input::-webkit-input-placeholder {
+         color: #aab2bd;
+        font-size: 16px;
+     }
+input::-moz-placeholder {
+         color: #aab2bd;
+        font-size: 16px;
+     }
+ input::-ms-input-placeholder {
+     color: #aab2bd;
+    font-size: 16px;
+ }
+.login_img{width: 100%;height: 100px;overflow: hidden;position: relative;}
+.login_img img{margin:auto;max-height: 100%;display: block;}
+
+/*注册页面*/
+.remarks{font-size: 13px;text-align: center;position: absolute;bottom: 20px;width: 100%;left: 0;color: #bbb;}
+.remarks span{color: orangered;opacity: 0.5;}
+.register_title{padding: 20px;background: #fff;}
+.register_btn{margin-top: 20px;}
+.mui-content{background: #fff;}
+
+/*社交帐号登录*/
+.more-sign{
+	margin-top:50px;
+}
+.more-sign h6 {text-align: center;position: relative;margin: 0 0 20px;font-size: 14px;color: #b5b5b5;}
+.more-sign h6:before {
+    left: 40px;
+}
+.more-sign h6:after {
+    right: 40px;
+}
+.more-sign h6:after,.more-sign h6:before {content: "";border-top: 1px solid #b5b5b5;display: block;position: absolute;width: 70px;top: 5px;}
+.more-sign ul{
+	width: 100%;	
+} 
+.more-sign ul li {
+    display: inline-block;
+	width: 20%;	
+}
+       
+
+.more-sign ul a {
+    width: 40px;
+    height: 40px;
+    background-color: hsla(0,0%,71%,.2);
+    border-radius: 50%;
+    line-height: 40px;
+    display: block;
+    text-align:center; 
+}    
+    
+    
+.more-sign .xiaomi {
+    background-color: #ffac38;
+    display: none;
+}
+
+.more-sign .qq {
+    background-color: #498ad5;
+    /*display: none;*/
+}
+.more-sign .sinaweibo {
+    background-color: #e05244;
+    /*display: none;*/
+}
+.more-sign .weixin  {
+    background-color: #00bb29;
+    /*display: none;*/
+}
+i{
+    color:#FFFFFF;
+}

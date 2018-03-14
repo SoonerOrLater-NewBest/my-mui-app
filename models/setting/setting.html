@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../common/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../common/common.css"/>
+		<link rel="stylesheet" type="text/css" href="setting.css"/>
+	</head>
+
+	<body>
+		
+		
+	<div class="mui-content">
+		<ul class="mui-table-view">
+	        <li class="mui-table-view-cell">
+	            <a class="mui-navigate-right">
+	           	     帐号与安全
+	            </a>
+	        </li>
+	    </ul>
+	    	    
+	    
+	    <ul class="mui-table-view">
+	        <li class="mui-table-view-cell">
+	            <a class="mui-navigate-right">
+	           		  帮助与反馈
+	            </a>
+	        </li>
+	        <li class="mui-table-view-cell">
+	            <a class="mui-navigate-right">
+	           		关于我们
+	            </a>
+	        </li>
+	    </ul>
+	    
+	    <ul class="mui-table-view">
+	        <li class="mui-table-view-cell">
+	            <a href="#sheet" class="mui-navigate-right" id="openSheet">
+	           		  退出登录
+	            </a>
+	        </li>
+	    </ul>
+	
+	<div id="sheet" class="mui-popover mui-popover-bottom mui-popover-action ">
+	    <!-- 可选择菜单 -->
+	    <ul class="mui-table-view">
+	      <li class="mui-table-view-cell">
+	  	     <span>退出登录后不会删除任何历史数据，下次登录依然可以使用本帐号。</span>
+	      </li>
+	      <li class="mui-table-view-cell">
+	        <a href="#" id="login-out">退出登录</a>
+	      </li>
+	    </ul>
+	    <!-- 取消菜单 -->
+	    <ul class="mui-table-view cancel-box">
+	      <li class="mui-table-view-cell">
+	        <a href="#sheet1" id="cancel">取消</a>
+	      </li>
+	    </ul>
+	</div>
+	
+	</div>		
+		<script src="../../common/mui.min.js"></script>
+		<script src="setting.js"></script>
+	</body>
+
+</html>

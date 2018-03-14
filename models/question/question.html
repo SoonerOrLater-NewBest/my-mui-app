@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../common/mui.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../common/common.css" />
+	<link rel="stylesheet" type="text/css" href="question.css" />
+
+	<script>
+		(function (doc, win) {
+			var docEl = doc.documentElement,
+				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+			recalc = function () {
+				var clientWidth = docEl.clientWidth;
+				if (!clientWidth) return;
+				if (clientWidth >= 640) {
+					docEl.style.fontSize = '100px';
+				} else {
+					docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+				}
+			};
+			if (!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+			doc.addEventListener('DOMContentLoaded', recalc, false);
+		})(document, window);
+	</script>
+</head>
+
+<body style="background: #fff;">
+	<div class="pinglun" id="home">
+		<ul>
+			<li v-for="item in list">
+				<div class='touxiang'>
+					<img :src="item.user_avatar">
+				</div>
+				<div class="neirong">
+					<div class="neitit">
+						<a href="#">
+							<i class="iconfont">&#xe637;</i>
+						</a>
+						<div class="ming">
+							<span>{{item.user_name}}</span>
+							<i>{{item.add_time}}</i>
+						</div>
+					</div>
+					<a href="question_xq.html" class="pinwen">
+						<p>{{item.content}}</p>
+					</a>
+					<div class="xuanpic">
+						<a href="#">
+							<i class="iconfont">&#xe681;</i>
+							<b>6</b>
+						</a>
+						<span>
+							<i class="iconfont">&#xe60d;</i>
+							<b>{{item.zan}}</b>
+						</span>
+						<span>
+							<i class="iconfont">&#xe635;</i>
+							<b>{{item.cai}}</b>
+						</span>
+					</div>
+				</div>
+			</li>
+
+		
+		</ul>
+	</div>
+
+	<a href="javascript:void(0)" onclick="tiejiao()" class="tianxie">
+		<i class="iconfont">&#xe66b;</i>
+	</a>
+
+
+
+
+
+
+
+
+</body>
+
+</html>
+
+<script src="../../common/jquery-2.1.0.js"></script>
+<script src="../../common/mui.min.js"></script>
+<script src="../../common/common.js"></script>
+<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../common/ajax.js"></script>
+<!-- <script id="question" src="question.js"></script> -->
+
+
+<script type="text/javascript">
+	// window.onload = function(){
+	// //获取留言列表数据
+
+
+	var homes = new Vue({
+		el: '#home',
+		data: {
+			list: [],
+			loading: false,
+			loades: 10
+		},
+		methods: {
+			// openDetail : function (event) {
+			// 	var el = event.currentTarget;
+			// 	var guid = el.getAttribute('new-id');
+			// 	var link_url = el.getAttribute('link_url');	
+			// 	var content = el.getAttribute('content');								
+			// 	var title = el.querySelector(".new-title").innerHTML.trim();
+			// 	var author = el.querySelector(".author span").innerHTML;
+			// 	var time = el.querySelector(".time span").innerHTML;
+			// 	var cover = el.querySelector(".cover").getAttribute("src");
+			// 	if(link_url===''){
+			// 		open_detail(guid, title,author,time,cover,content);
+			// 	}else{
+			// 		titleNView1.titleText = title;
+			// 		mui.openWindow({
+			// 			url: '../news/outlink.html',
+			// 			id: 'outlink',
+			// 			extras:{
+			// 				link_url:link_url
+			// 			},
+			// 			styles: {
+			// 				"bounce": "vertical",
+			// 				"bounceBackground": "#efeff4",
+			// 				"titleNView": titleNView1
+			// 			}
+			// 		})
+			// 	}
+			// },
+			// openNewWebview : function(){
+			// 	titleNView1.titleText = '寺院景致';
+			// 	mui.openWindow({
+			// 		url : 'imageviewer-native.html',
+			// 		id : 'imgview',
+			// 		styles: {
+			// 			"bounce": "vertical",
+			// 			"bounceBackground": "#efeff4",
+			// 			"titleNView": titleNView1
+			// 		}
+			// 	})
+			// },
+			openPages: function (event) {
+
+			}
+		},
+		mounted: function () {
+
+				$(".pinglun").on('tap','.xuanpic span',function () {
+					if ($(this).hasClass('yijing')) {
+						var zhi = parseInt($(this).find("b").text());
+						zhi--;
+						$(this).find("b").text(zhi);
+						$(this).removeClass('yijing');
+					} else {
+						var zhi = parseInt($(this).find("b").text());
+						zhi++;
+						$(this).find("b").text(zhi);
+						$(this).addClass('yijing');
+					}
+
+				})
+				$(window).scroll(function () {
+					var zhi = $(".pinlunxq").scrollTop();
+
+				})
+
+		}
+
+	});
+
+
+
+
+
+	ajax_feedback_list({
+		top: 10
+	});
+
+
+
+		function tiejiao() {
+			var titleNView1 = {
+			backgroundColor: '#F8F8FF',
+			titleText: '写想法', 
+			titleColor: '#000000', 
+			type: 'default',
+			autoBackButton: true, 
+
+		}
+
+
+
+	mui.openWindow({
+							url: '../question/question_tw.html',
+							id: 'outlink',
+							// extras:{
+							// 	link_url:link_url
+							// },
+							waiting:{
+     						autoShow:false,//自动显示等待框，默认为true
+							},
+							show:{"aniShow":"zoom-fade-out"},
+							styles: {
+								"bounce": "vertical",
+								"bounceBackground": "#efeff4",
+								"titleNView": titleNView1
+							}
+						})
+	
+}
+
+
+
+
+
+
+	//请求成功后事件
+	function FeedbacklistSuccess(data) {
+		homes.list = JSON.parse(data.list);
+		for (var i = 0; i < homes.list.length; i++) {
+			homes.list[i].add_time = getDateDiff(homes.list[i].add_time);
+
+		};
+		isLoadIcon = false;
+	}
+</script>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../common/mui.min.css"/>
+	<link rel="stylesheet" type="text/css" href="login.css"/>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	
+</head>
+<body>
+	<div class="mui-content" style="padding-top:60px;">		
+	<div class="login_img">
+		<img src="login_img.png"/>
+	</div>
+	
+	<form class="mui-input-group" name="myform" style="margin: 15px 0;">
+	    <div class="mui-input-row">
+	        <input type="text" class="mui-input-clear" name="username" placeholder="手机号" value="">
+	    </div>
+	    <div class="mui-input-row">
+	        <input type="password" class="mui-input-password" name="password" placeholder="密码" value="">
+	    </div>
+		
+	</form>
+		<div id="dcontent" class="dcontent"></div>
+	
+	
+	<div class="mui-content-padded">
+		<button type="button" id="login" class="mui-btn mui-btn-green mui-btn-block">登录</button>
+	</div>
+	<div class="more-sign">
+	<h6>社交帐号登录</h6>
+	<ul id="oauth">
+		
+	</ul>
+	</div>
+	<div class="mui-text-center mui-h5">
+		<a id="toregister">没有账号？立即注册</a>
+	</div>
+	</div>
+
+<script src="../../common/mui.min.js"></script>	
+<script src="../../common/common.js"></script>
+<script src="../../common/ajax.js"></script>
+<script src="login.js" ></script>
+</body>
+</html>

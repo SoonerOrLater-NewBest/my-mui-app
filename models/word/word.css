@@ -1,0 +1,16 @@
+.mui-segmented-control.mui-scroll-wrapper .mui-scroll{
+	width: 100%;background-color: #f7f7f7;
+}
+.mui-segmented-control.mui-scroll-wrapper .mui-control-item{
+	width: 20%;
+    padding: 0px;
+    display: block;
+    float: left;
+    position: relative;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{color: orangered;}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+	display: block;content: '';width: 36px;height: 2px;position: absolute;bottom: 4px;
+	background-color: orangered;left: 50%;transform: translateX(-50%);
+}
+h1,h2,h3{font-weight: normal;font-size: 100%;}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../common/mui.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../common/common.css" />
+	<link rel="stylesheet" type="text/css" href="question.css" />
+	<script src="../../common/jquery-2.1.0.js"></script>
+	<script src="../../common/mui.min.js"></script>
+	<script src="../../common/common.js"></script>
+	<script>
+		(function (doc, win) {
+			var docEl = doc.documentElement,
+				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+			recalc = function () {
+				var clientWidth = docEl.clientWidth;
+				if (!clientWidth) return;
+				if (clientWidth >= 640) {
+					docEl.style.fontSize = '100px';
+				} else {
+					docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+				}
+			};
+			if (!doc.addEventListener) return;
+			win.addEventListener(resizeEvt, recalc, false);
+			doc.addEventListener('DOMContentLoaded', recalc, false);
+		})(document, window);
+	</script>
+</head>
+
+<body style="background: #fff;" class="neiye">
+	<div class="liuyan" >
+		<textarea id="content"></textarea>
+	</div>
+
+</body>
+
+<script>
+	mui.init({});
+	_self = plus.webview.currentWebview();
+
+	var titleView = _self.getTitleNView();
+
+	titleView.drawText("发表", {
+		top: "2px",
+		right: "15px",
+		width:"40px",
+		height:"40px",
+	}, {
+		color:"#0000ff",
+		size:'16px',
+		align: 'center',
+	},"fabiao");
+
+	titleView.addEventListener('click', function(e) {
+		
+		var a=document.getElementById("content").innerText;
+
+		//判断是否已经登录成功
+		if (!localStorage.getItem('user')) {
+			mui.toast("请先登录！");
+			return false;
+		}
+
+			
+		mui.toast(a);
+
+				});
+</script>
+
+</html>

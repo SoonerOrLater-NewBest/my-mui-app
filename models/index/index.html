@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+	
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>首页</title>
+	<link href="../../common/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../../css/swiper-3.4.2.min.css" />
+	<link href="../../common/common.css" rel="stylesheet" />
+	<link href="home.css" rel="stylesheet" />	
+
+</head>
+
+<body>
+	<div id="home">
+		<div v-for="load in loades" v-if="!loading" class="timeline-item">
+		    <div class="animated-background">
+			    <div class="background-masker header-top"></div>
+			    <div class="background-masker header-left"></div>
+			    <div class="background-masker header-right"></div>
+			    <div class="background-masker header-bottom"></div>
+			    <div class="background-masker subheader-top"></div>
+			    <div class="background-masker subheader-left"></div>
+			    <div class="background-masker subheader-right"></div>
+			    <div class="background-masker subheader-bottom"></div>
+			</div>
+	 	</div>
+		<div class="swiper-container swiper-container1">
+		    <div class="swiper-wrapper">
+		        <div class="swiper-slide" v-for="item in banner">
+		        	<img :src="item.img_url" alt="" />
+		        </div>
+		    </div>		    		    
+		</div>
+		<div class="topicon mui-row" id="icon">
+			<a class="topherf" :data-id="item.id" v-for="item in items">
+				<img :src="item.img_url"/>
+				<p>{{item.title}}</p>
+			</a>			       	
+		</div>
+		
+		<h1 class="h_title"><span class="iconfont icon-xinwen"></span>推荐文章</h1>
+		<div class="home-news" id="news">			
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media" v-for="item in news">
+					<a :link_url="item.link_url" :new-id="item.id" :content="item.content" v-on:tap="openDetail($event)">
+						<img class="mui-media-object mui-pull-left cover" :src="item.img_url">
+						<div class="mui-media-body">
+							<div class="mui-ellipsis new-title font-normal">{{item.title}}</div>
+						</div>
+						<div class="mui-media-body font-smaller" style="margin-top: 0.12rem;">
+							<div class="tags"><span v-for="tag in item.tags">{{tag}}</span></div>
+							<div class="read-num tags"><span>阅读{{item.click}}</span></div>
+						</div>
+						<div class="meta-info font-small mui-media-body">
+							<div class="author"><i class="icon-renwu iconfont"></i><span>{{item.author}}</span></div>
+							<div class="time"><i class="icon-techreport- iconfont"></i><span>{{item.add_time}}</span></div>
+						</div>
+						
+					</a>
+				</li>
+			</ul>
+		</div>
+									
+		<h1 class="h_title"><span class="iconfont icon-xinwen"></span>寺院景致<span @tap="openNewWebview" class="read-more font-normal">更多<i class="iconfont icon-gengduo"></i></span></h1>	
+		
+		<div class="swiper-container swiper-container2 myblock" id="scenery">
+		    <div class="swiper-wrapper">
+		        <div class="swiper-slide" v-for="item in scenery" :style="{backgroundImage:'url('+item.img_url+')',backgroundSize:'cover'}">
+		        </div>
+		    </div>		    		    
+		</div>
+		
+		<h1 class="h_title">高僧解惑</h1>
+		<div class="home-puzzled myblock">
+			
+			<ul class="mui-table-view home-jiehuo">			
+	 
+			  
+			</ul>
+		</div>
+		<footer class="tem_footer">
+		<section class="tem_inner">
+			<div class="tem_footer_text">
+			<p style="padding-top:4%;margin-bottom:4%;text-align:left;">感谢国宁寺的诸位善信，此平台募捐所有善款将进入国宁寺对公账户，不会进入任何第三方平台及个人账户，并且会定期公示所有款项，将应用于寺庙建设，欢迎监督。</p>
+	
+			<p class="support">技术支持：苏商商务</p>
+			</div>
+		</section>
+		</footer>
+	</div>
+	
+	<script src="../../common/mui.min.js"></script>
+	<script src="../../js/swiper-3.4.2.min.js"></script>	
+	<script src="../../common/common.js"></script>
+	<script src="util.js"></script>		
+	<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../common/ajax.js"></script>
+	<script type="text/javascript">
+		var isLoadIcon = false;
+		var isLoadArticleList = false;
+		var webview_detail = null;		
+			mui.init({
+//				swipeBack: true
+			});
+			mui.plusReady(function() {
+				
+				var self = plus.webview.currentWebview(),
+					leftPos = Math.ceil((window.innerWidth - 60) / 2); // 设置凸起大图标为水平居中	
+
+				/**	
+				 * drawNativeIcon 绘制带边框的半圆，
+				 * 实现原理：
+				 *   id为bg的tag 创建带边框的圆
+				 *   id为bg2的tag 创建白色矩形遮住圆下半部分，只显示凸起带边框部分
+				 * 	 id为iconBg的红色背景图
+				 *   id为icon的字体图标
+				 *   注意创建先后顺序，创建越晚的层级越高
+				 */
+				var drawNativeIcon = util.drawNative('icon', {
+					bottom: '5px',
+					left: leftPos + 'px',
+					width: '60px',
+					height: '60px'
+				}, [{
+					tag: 'rect',
+					id: 'bg',
+					position: {
+						top: '1px',
+						left: '0px',
+						width: '100%',
+						height: '100%'
+					},
+					rectStyles: {
+						color: '#fff',
+						radius: '50%',
+						borderColor: '#ccc',
+						borderWidth: '1px'
+					}
+				}, {
+					tag: 'rect',
+					id: 'bg2',
+					position: {
+						bottom: '-0.5px',
+						left: '0px',
+						width: '100%',
+						height: '45px'
+					},
+					rectStyles: {
+						color: '#fff'
+					}
+				}, {
+					tag: 'rect',
+					id: 'iconBg',
+					position: {
+						top: '5px',
+						left: '5px',
+						width: '50px',
+						height: '50px'
+					},
+					rectStyles: {
+						color: '#d74b28',
+						radius: '50%'
+					}
+				}, {
+					tag: 'font',
+					id: 'icon',
+					text: '\ue605', //此为字体图标Unicode码'\e600'转换为'\ue600'
+					position: {
+						top: '0px',
+						left: '5px',
+						width: '50px',
+						height: '100%'
+					},
+					textStyles: {
+						fontSrc: '_www/fonts/iconfont.ttf',
+						align: 'center',
+						color: '#fff',
+						size: '30px'
+					}
+				}]);
+				// append 到父webview中
+				self.append(drawNativeIcon);
+
+				//自定义监听图标点击事件
+				var active_color = '#fff';
+				drawNativeIcon.addEventListener('click', function(e) {
+					var titleNView = titleNView1;
+					titleNView.titleText='佛化生活';
+					titleNView.backgroundColor='#ff5d5e';
+					titleNView.titleColor='#ffffff';					
+					mui.openWindow({
+						url:"../master/master.html",
+						id:"../master/master.html",
+						styles:{
+							titleNView:titleNView
+						}
+					})
+					// 重绘字体颜色
+//						if(active_color == '#fff') {
+//							drawNativeIcon.drawText('\ue605', {}, {
+//								fontSrc: '_www/fonts/iconfont.ttf',
+//								align: 'center',
+//								color: '#000',
+//								size: '30px'
+//							}, 'icon');
+//							active_color = '#000';
+//						} else {
+//							drawNativeIcon.drawText('\ue605', {}, {
+//								fontSrc: '_www/fonts/iconfont.ttf',
+//								align: 'center',
+//								color: '#fff',
+//								size: '30px'
+//							}, 'icon');
+//							active_color = '#fff';
+//						}
+
+				});
+				// 中间凸起图标绘制及监听点击完毕
+				// 创建子webview窗口 并初始化
+				var aniShow = {};
+				util.initSubpage(aniShow);
+				
+				var nview = plus.nativeObj.View.getViewById('tabBar'),
+					activePage = plus.webview.currentWebview(),
+					targetPage,
+					subpages = util.options.subpages,
+					pageW = window.innerWidth,
+					currIndex = 0;
+				
+					
+				/**
+				 * 根据判断view控件点击位置判断切换的tab
+				 */
+				nview.addEventListener('click', function(e) {
+					var clientX = e.clientX;
+					if(clientX > 0 && clientX <= parseInt(pageW * 0.25)) {
+						currIndex = 0;
+					} else if(clientX > parseInt(pageW * 0.25) && clientX <= parseInt(pageW * 0.45)) {
+						currIndex = 1;
+					} else if(clientX > parseInt(pageW * 0.45) && clientX <= parseInt(pageW * 0.8)) {
+						currIndex = 2;
+					} else {
+						currIndex = 3;
+					}
+					// 匹配对应tab窗口	
+					if(currIndex > 0) {
+						targetPage = plus.webview.getWebviewById(subpages[currIndex - 1]);
+					} else {
+						targetPage = plus.webview.currentWebview();
+					}
+
+					if(targetPage == activePage) {
+						return;
+					}
+						//底部选项卡切换
+						util.toggleNview(currIndex);
+						// 子页面切换
+						util.changeSubpage(targetPage, activePage, aniShow);
+						//更新当前活跃的页面
+						activePage = targetPage;
+				});								
+			});
+			
+		judgelogin();	
+		
+		var homes = new Vue({
+			el: '#home',
+			data: {
+				items: [],
+				news: [],
+				banner:[],
+				scenery:[],
+				loading: false,
+	   			loades: 10
+			},
+			methods:{
+				openDetail : function (event) {
+					var el = event.currentTarget;
+					var guid = el.getAttribute('new-id');
+					var link_url = el.getAttribute('link_url');	
+					var content = el.getAttribute('content');								
+					var title = el.querySelector(".new-title").innerHTML.trim();
+					var author = el.querySelector(".author span").innerHTML;
+					var time = el.querySelector(".time span").innerHTML;
+					var cover = el.querySelector(".cover").getAttribute("src");
+					if(link_url===''){
+						open_detail(guid, title,author,time,cover,content);
+					}else{
+						titleNView1.titleText = title;
+						mui.openWindow({
+							url: '../news/outlink.html',
+							id: 'outlink',
+							extras:{
+								link_url:link_url
+							},
+							styles: {
+								"bounce": "vertical",
+								"bounceBackground": "#efeff4",
+								"titleNView": titleNView1
+							}
+						})
+					}
+				},
+				openNewWebview : function(){
+					titleNView1.titleText = '寺院景致';
+					mui.openWindow({
+						url : 'imageviewer-native.html',
+						id : 'imgview',
+						styles: {
+							"bounce": "vertical",
+							"bounceBackground": "#efeff4",
+							"titleNView": titleNView1
+						}
+					})
+				},
+				openPages : function (event) {
+					
+				}
+			},
+			mounted : function (){
+				this.$nextTick(function () {
+					
+			    })
+			}
+			
+		});
+		pasueLink();
+		//监听show事件请求数据
+		self.addEventListener('show',function(){
+			pasueLink();
+		},false);
+		
+		mui.plusReady(function() {
+				//预加载详情页
+				webview_detail = mui.preload({
+					url: '../news/detail.html',
+					id: 'news_detail',
+					styles: {
+						"render": "always",
+						"popGesture": "hide",
+						"bounce": "vertical",
+						"bounceBackground": "#efeff4",
+						"titleNView": titleNView
+					}
+				});
+			});
+			
+
+//判断是否已经登陆
+	function judgelogin(){
+		//判断是否已经登录成功
+		if (!localStorage.getItem('user')) {
+			mui.preload({
+				url:'../login/login.html',
+				id:'../login/login.html',
+				styles:{
+					top:'0px',
+					bottom:'0px',
+					popGesture: 'none',
+					titleNView:titleNView
+				}
+			});
+		}
+	}
+//与服务器通信
+	function pasueLink(){
+//		startLoad();
+		if (!isLoadIcon) {
+			//开始请求
+			isLoadIcon  = true;
+			ajax_get_indexIcon({
+				channel_id:0,
+				channel_name:"simiao"
+			});	
+		};
+		if (!isLoadArticleList) {
+			isLoadArticleList = true;
+			ajax_getArticleList({
+				channel_id:62,
+				channel_name:"simiao",
+				top: 3
+			});
+		};
+
+	}
+//获取第一级分类成功的回调函数
+	function indexIconSuccess(data){
+		homes.items=JSON.parse(data.list);
+		homes.banner=JSON.parse(data.banner);
+		homes.scenery=JSON.parse(data.fengjing);
+		isLoadIcon  = false;
+	}
+//获取文章列表成功的回调函数
+	function articleListSuccess(data){
+		homes.news=JSON.parse(data.list);
+		for(var i=0;i<homes.news.length;i++){			
+			homes.news[i].add_time=getDateDiff(homes.news[i].add_time);
+			if(homes.news[i].tags == ''){
+				var defaultTag=['推荐']
+				homes.news[i].tags = defaultTag;
+			}else{
+				homes.news[i].tags = homes.news[i].tags.split('|');
+			}
+		};
+		console.log(homes.news);
+		setTimeout(function () {
+			homes.loading = true;
+			isLoadArticleList = false;
+			var mySwiper1 = new Swiper ('.swiper-container1', {
+			    loop: true,
+			    autoplay: 2000,
+			    observer:true,
+				observeParents:true,
+			});
+			var mySwiper2 = new Swiper ('.swiper-container2', {
+				freeMode : true,
+				slidesPerView :2.5,
+				spaceBetween : 20,
+				observer:true, //修改swiper自己或子元素时，自动初始化swiper
+   				observeParents:true,//修改swiper的父元素时，自动初始化swiper
+			});
+		},300);
+
+	}
+	</script>
+</body>
+</html>

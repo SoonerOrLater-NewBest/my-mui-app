@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../common/mui.min.css"/>
+	<link rel="stylesheet" href="../../css/swiper-3.4.2.min.css" />	
+	<link rel="stylesheet" type="text/css" href="../../common/common.css"/>
+	<link rel="stylesheet" type="text/css" href="master.css"/>	
+</head>
+<body>
+	<div id="vue">
+	<div class="swiper-container" id="master">
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide" v-for="load in loades">
+	        	<img src="../mine/touxiang.jpg" alt="" />
+	        </div>
+	    </div>		    		    
+	</div>
+	<div class="swiper-container" id="brief">
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide" v-for="load in loades">
+	        	<div class="brief-info">
+	        		{{load}}
+	        	</div>
+	        </div>
+	    </div>		    		    
+	</div>
+	</div>
+	<script src="../../common/mui.min.js"></script>
+	<script src="../../js/swiper-3.4.2.min.js"></script>		
+	<script src="../../js/vue.min.js"></script>
+	<script src="../../common/common.js"></script>
+	<script type="text/javascript">
+		mui.init({
+			swipeBack: true,
+		});
+		var master = new Vue({
+			el: '#vue',
+			data: {
+				items: [],
+				loading: false,
+	   			loades: 6
+			},
+			methods:{
+												
+			},
+			mounted : function (){
+				var mySwiper1 = new Swiper ('#master', {
+					slidesPerView :5,
+					spaceBetween : 20,
+				    observer:true,
+					observeParents:true,
+				});
+				var mySwiper2 = new Swiper ('#brief', {
+					effect : 'coverflow',
+					slidesPerView: 1.6,
+					centeredSlides: true,
+				    observer:true,
+					observeParents:true,
+				});
+			}
+			
+		});
+	</script>
+</body>
+</html>

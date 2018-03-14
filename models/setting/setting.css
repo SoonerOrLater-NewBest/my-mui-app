@@ -1,0 +1,23 @@
+.mui-table-view{
+	margin-bottom: 25px;
+}
+.mui-table-view-cell span{
+	font-size: 12px;
+	color: gray;
+}
+#login-out{
+	color: red;
+}
+.mui-popover.mui-popover-action .mui-table-view{
+	margin:0;
+	border-radius: 0;
+}
+#cancel{
+	color: #000000;
+}
+.cancel-box{
+	margin-top: 5px!important;
+}
+#sheet{
+	background-color: #e8e8ee;
+}
