@@ -141,37 +141,54 @@
 				var guid = el.getAttribute('new-id');
                alert(guid);
 			
-			mui.ajax(httpUrl+'action=re_zan_cai_article&article_id=' + guid+ '&type=zan', {
-				type: 'GET',
-				success: function (rsp) {
-				
-
-				},
-				error: function (xhr, type, errorThrown) {
-					mui.toast('操作失败！，请稍后再试！');
-				}
-			});
+				mui.ajax(httpUrl+'action=re_zan_cai_article&article_id=' + guid+ '&type=zan', {
+					type: 'GET',
+					success: function (rsp) {
+					
+	
+					},
+					error: function (xhr, type, errorThrown) {
+						mui.toast('操作失败！，请稍后再试！');
+					}
+				});
 			},
 			 //踩
 			 Cai: function (event) 
-			{
-				var el = event.currentTarget;
-				var guid = el.getAttribute('new-id');
-              
-			
-			mui.ajax(httpUrl+'action=re_zan_cai_article&article_id=' + guid+ '&type=cai', {
-				type: 'GET',
-				success: function (rsp) {
+				{
+					var el = event.currentTarget;
+					var guid = el.getAttribute('new-id');
+	              
 				
-
-
+					mui.ajax(httpUrl+'action=re_zan_cai_article&article_id=' + guid+ '&type=cai', {
+						type: 'GET',
+						success: function (rsp) {
+						
+		
+		
+						},
+						error: function (xhr, type, errorThrown) {
+							mui.toast('操作失败！，请稍后再试！');
+						}
+					});
 				},
-				error: function (xhr, type, errorThrown) {
-					mui.toast('操作失败！，请稍后再试！');
-				}
-			});
 			},
+			mounted : function(){
+				$(".pinglun").on('tap', '.xuanpic span', function () {
+				if ($(this).hasClass('yijing')) {
+					var zhi = parseInt($(this).find("b").text());
+					zhi--;
+					$(this).find("b").text(zhi);
+					$(this).removeClass('yijing');
+				} else {
+					var zhi = parseInt($(this).find("b").text());
+					zhi++;
+					$(this).find("b").text(zhi);
+					$(this).addClass('yijing');
+				}
+
+			})
 			}
+			
 		});
 
 		//监听自定义事件，获取评论详情
