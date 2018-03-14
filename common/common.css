@@ -13,8 +13,9 @@ min-width: 320px;margin: 0 auto;}
 }
 /*编辑器样式重置*/
 .bianjiqi{width: 100%;overflow: auto!important;}
-.bianjiqi p,.bianjiqi span,.bianjiqi i,.bianjiqi b,.bianjiqi div,.bianjiqi strong,.bianjiqi em{font-size: 0.28rem;}
-.bianjiqi img{max-width: 100%;}
+.bianjiqi p,.bianjiqi span,.bianjiqi i,.bianjiqi b,.bianjiqi div,.bianjiqi strong,.bianjiqi em{
+	font-size: 0.28rem!important;}
+.bianjiqi img{max-width: 100%!important;}
 .read-more{float: right;margin: 0;}
 .read-more i{font-size: 0.28rem;}
 /*按钮*/
