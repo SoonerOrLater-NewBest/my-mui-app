@@ -88,7 +88,7 @@
 	}
 
 	// Switch track
-	var switchTrack = function(i){
+	 switchTrack = function(i){
 		if (i < 0){
 			track = currentTrack = playlist.length - 1;
 		} else if (i >= playlist.length){

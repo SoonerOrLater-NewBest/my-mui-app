@@ -119,8 +119,8 @@
 	<body style="background: #fff;">
 
 		<div id="home">
-		<div class="musiclist"  >
-			<a href="#" class="active" v-for="item in playlist" >
+		<div class="musiclist"   >
+			<a  class="active" v-for="item in playlist" :new-xuhao="item.xuhao"@tap="openDetail($event)" >
 				<span>{{item.title}}</span>
 				<p>{{item.artist}}</p>
 				<audio  :src="item.mp3"></audio>
@@ -185,23 +185,13 @@
 		methods: {
 	
 
-			openMsgDetail: function (event) {
-				titleNView1.titleText = "我的感悟";
-				mui.openWindow({
-					url: '../question/question_tw.html',
-					id: 'question_tw',
-					waiting: {
-						autoShow: false, //自动显示等待框，默认为true
-					},
-					show: {
-						"aniShow": "zoom-fade-out"
-					},
-					styles: {
-						"bounce": "vertical",
-						"bounceBackground": "#efeff4",
-						"titleNView": titleNView1
-					}
-				})
+			openDetail: function (event) {
+				var el = event.currentTarget;
+				var guid = el.getAttribute('new-xuhao');
+				var  newid=guid-1;
+				switchTrack(newid);
+				
+
 			}
 		}
 
@@ -246,3 +236,5 @@
 			window.onload = bgChange;
 
 </script>
+
+
