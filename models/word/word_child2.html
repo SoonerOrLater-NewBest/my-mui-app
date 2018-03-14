@@ -120,7 +120,7 @@
 
 		<div id="home">
 		<div class="musiclist"  >
-			<a href="#" v-for="item in playlist" >
+			<a href="#" class="active" v-for="item in playlist" >
 				<span>{{item.title}}</span>
 				<p>{{item.artist}}</p>
 				<audio  :src="item.mp3"></audio>
