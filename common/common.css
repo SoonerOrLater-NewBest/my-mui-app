@@ -134,3 +134,5 @@ border-radius: 0.06rem;margin-right: 0.1rem;}
     left: 0;
     right: 0;
 }
+.mui-toast-container {top: 50% !important;transform: translateY(-50%);}
+.mui-toast-message {background: url(images/toast.png) no-repeat center 10px #000; opacity: 0.6; color: #fff; width: 180px; padding: 70px 5px 10px 5px;}

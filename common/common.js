@@ -38,7 +38,11 @@ var titleNView1 = {
 	autoBackButton: true, 
 	progress:{color:'#0000ff'}
 }
-
+function Ntoast(icon,msg){
+	icon = icon||"success";
+	msg = msg||"操作成功"
+				plus.nativeUI.toast('<img src="../../images/'+icon+'.png" width="90px" height="90px"></img><br/><font style="font-size:14px">'+msg+'</font>', {type:'richtext',duration:'short',verticalAlign:'center',richTextStyle:{align:'center'}});
+			}
 
 /**
  * 打开新闻详情
