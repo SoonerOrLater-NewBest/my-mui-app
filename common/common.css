@@ -12,7 +12,7 @@ min-width: 320px;margin: 0 auto;}
   display:none;
 }
 /*编辑器样式重置*/
-.bianjiqi{width: 100%;overflow: auto!important;padding: 2%;background-color: #fff;min-height: 100vh;}
+.bianjiqi{width: 100%;overflow: auto!important;}
 .bianjiqi p,.bianjiqi span,.bianjiqi i,.bianjiqi b,.bianjiqi div,.bianjiqi strong,.bianjiqi em{font-size: 0.28rem;}
 .bianjiqi img{max-width: 100%;}
 .read-more{float: right;margin: 0;}
