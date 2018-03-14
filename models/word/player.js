@@ -1,6 +1,6 @@
 (function($){
 	// Settings
-	var isShowNotification = true,
+	var isShowNotification = false,
 		isInitMarquee = true,
 		shuffleArray = [],
 		shuffleIndex,
