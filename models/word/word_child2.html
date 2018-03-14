@@ -1,69 +1,230 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="../../common/mui.min.css" />
-	<link rel="stylesheet" type="text/css" href="../../common/common.css" />
-	<link rel="stylesheet" type="text/css" href="word.css" />	
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../common/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../common/fonts/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="word.css"/>
+		<link rel="stylesheet" href="player.css">
+		
+		<script src="../../common/mui.min.js"></script>
+		<script>
+			(function (doc, win) {
+				var docEl = doc.documentElement,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+				recalc = function () {
+					var clientWidth = docEl.clientWidth;
+					if (!clientWidth) return;
+					if (clientWidth >= 640) {
+						docEl.style.fontSize = '100px';
+					} else {
+						docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+					}
+				};
+				if (!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+				doc.addEventListener('DOMContentLoaded', recalc, false);
+			})(document, window);
+		</script>
+	</head>
+	
+	<style>
+		.musiclist{
+			border-top:1px solid #eeeeee;
+	
+		}
+		.musiclist a{
+			display: block;
+			border-bottom:1px solid #eeeeee;
+			position: relative;
+			padding:.1rem 1.2rem 0 .3rem;
+		}
+		.musiclist a span{
+			display: block;
+			font-size:.28rem;
+			color:#000;
+			line-height: 1.8;
+		}
+		.musiclist a p{
+			font-size:.2rem;
+			color:#808080;
+			line-height: 1.5;
+		}
+		.musiclist a .share{
+			width:1rem;
+			height:100%;
+			position: absolute;
+			right:0;
+			top:0;
+		}
+		.musiclist a .share i{
+			display: block;
+			width:4px;
+			height:4px;
+			background:#aeaeae;
+			position: absolute;
+			margin:auto;
+			top:0;
+			left:0;
+			bottom:0;
+			right:0;
+			border-radius:50%;
+		}
+		.musiclist a .share i:before{
+			content:'';
+			display: block;
+			width:4px;
+			height:4px;
+			border-radius:50%;
+			background:#aeaeae;
+			position: absolute;
+			top:-8px;
+			left:0;
+		}
+		.musiclist a .share i:after{
+			content:'';
+			display: block;
+			width:4px;
+			height:4px;
+			border-radius:50%;
+			background:#aeaeae;
+			position: absolute;
+			bottom:-8px;
+			left:0;
+		}
+		.musiclist a:active{
+			background: #e8e8e8;
+		}
+	</style>
+	<body style="background: #fff;">
 
-<body>
-	<div class="common-sense">
-		<div class="column">
-			<div class="title">佛学起源<a class="icon-jiantouxia iconfont"></a></div>
-			<div class="content">
-				<div class="content-info">									
-			佛教起源于古代印度，自汉代传入我国，历经几千年，已成为中国传统文化的重要组成部分。然而佛教经典数量繁多，义理艰深，语言晦涩，往往令人无从入手。本书整理自台湾著名国学大师周绍贤先生于台湾几所大学讲授佛学课程时的讲义，经几十年而流行海外不衰，框架清晰、内容全面，涵盖佛教概念、思想、历史、人物、典籍等诸多方面，展现中国佛教全貌，是学习佛学经典入门读物和研习佛学必备书籍之一。
-				</div>	
-			</div>
+		<div id="home">
+		<div class="musiclist"  >
+			<a href="#" v-for="item in playlist" >
+				<span>{{item.title}}</span>
+				<p>{{item.artist}}</p>
+				<audio  :src="item.mp3"></audio>
+				<div class="share"><i></i></div>
+			</a>
+	
 		</div>
-		<div class="column">
-			<div class="title">佛教何以有学？<a class="icon-jiantouxia iconfont"></a></div>
-			<div class="content">
-				<div class="content-info">		
-			<p>通常佛典内多称佛法。有人言佛法即哲学，佛法及宗教。有人言佛法非哲学亦非宗教，只能称佛法。今将佛法分为四种，即教理行果是也。教者，即佛现身于世间所说之法，遗留于后世教化有情者。在当时仅有言说，未留文字，故无书籍。其所说之语言，以音声为体。依声之高下长短成为名，集名成为句，名句依于文。多名多句多文之积聚，在佛学上谓之名句文身，此多名句文身，在佛当日以声为主，闻者依佛所教修证，无文字之必要。及至佛说法度人事终，灭度之后，弟子因佛去世，恐后无所宗依，故将大众所闻于佛之教法，就忆持多闻者传诵所闻，由大众证明录成经典，此即佛之遗教。此佛之遗教，与通常之学理学说不同。盖通常之学说，乃依半明半昧之常识推究所成，以所已知者推所未知，如科学方法，在其推究之中，得一番经验加一层知识；若昔言天圆地方，后知地本球形，则说无确定，义时变动。佛之教法与余学来源不同，乃是纯由圣智中所流出之至教。故于教法上言，不能不用信力领受之，此点与信宗教无异。佛法非宗教亦非不是宗教，故欲讲佛法必先信有佛。佛者、乃佛陀之简称，系觉者之义，觉者指已得无上正遍觉之人，此界中已得无上正遍觉者，曾有释迦牟尼佛现身世间，说法度人，因有教法遗传人世。然又不同其余宗教者，则吾人能实行实证到于无上正觉，吾人亦即成佛，故吾人于佛终可平等。惟在未成佛以前，欲求成佛，不可不先信受佛之教法。然此信亦非盲从之信，盖吾人若信有法界诸法之真实理，则觉悟此真理至于圆满者，即是无上正觉。在佛之无上正觉中，无一刹那间不彻上彻下彻内彻外完全明了觉知者，非前念知一后念又知一也。在佛自觉已到圆满地位，更不须学说学理及学习学作之学，故曰无学。然佛证入究竟觉悟境界，如虚空、如大圆镜无不含照，而一切众生未能证入法界万有之真实相，所以迷昧颠倒生出许多烦恼痛苦，佛悲悯之，故施设名句文身之教法使之觉悟。</p><p>佛之教法有两方面。一者符契真理，佛一念中普遍照了法界万有之真实理，时时相应，无有一毫谬误，故所说法皆契真理。一方面又符契根机，闻法者是何等根器，何种机感，即为之方便解说。此之两方似相冲突，以众生心智不与佛齐，随顺众生则不契理。然随机说法乃佛行化之权巧，渐次皆令通到佛之境界，所谓皆令入佛知见，此为无上正遍觉中施设流出之教法。惟此种施设，必系应机而起，佛与佛则不用此也。此所施设流出之教法，依万法唯识言之则有两方面：一、无漏清净之名句文身，自无上正遍觉之佛心中流出，此由众生机感乃自佛心中流出，谓之本质教。二、佛心所流出之名句文身，吾人不能直接亲缘，祗能以有漏心依之为增上缘，在自心中生一种影象，谓之影象教。推此影象归于本质，则佛教中所谓圣教或至教，乃为历千古而不变，推四海而皆准之常法，无学可言。所以佛有学者，则在第二理法。其能诠理之影象教，系以佛说为增上缘，闻法者对于所闻之教法，思惟观察得有了解，乃有佛教学理。凡称为经者，皆是佛所说之法。后来又有依佛教法详细申论推阐者，则称之曰论。在论之成为精密详确之学理者，如大毗婆沙论、瑜伽师地论等是也。推其根源，皆自佛所遗留之教法来者。佛之教法，本由得无上正遍觉而出，故吾人欲知佛教之真理亦必须证得无上正遍觉、如何始可证之。又必讲求修行方法，故第三者须讲行。而行中有三增上学，即戒定慧是也。所谓如何持戒，如何修禅定，如何得大智慧。如此修行，则可得无上正遍觉，即是大菩提果，证知法界诸法实相，此即第四所谓果也。既得以后，亦可以此开示觉悟他人。</p><p>然教理行果亦非截然隔别者，盖思惟观察即是行，因行而理愈明，理解与行同时并进，如行路然，目之与足同时发生作用。且虽少明理解未达究竟果位，然亦己成效果，虽少有效果不以自足，故能终达无上正遍觉也，常人思想知识皆不离我执法执，故所谓各种学理，不免妄情卜度推测，不能认为究竟真理。欲求真理，不能不依佛之教法，或古来大德之学理为研究时之根据。然则佛之学理，一为得圣果三乘有学之学理，半依圣教半依自证而成；一为初学者外内凡之学理，全依圣教闻思而成。佛学一名，大略如是。</p>
-				</div>	
-			</div>
-		</div>
-		<div class="column">
-			<div class="title">释尊略传<a class="icon-jiantouxia iconfont"></a></div>
-			<div class="content">
-				<div class="content-info">		
-			<h5>第一节、释尊出于印度之背景</h5>
-			<p>佛学之真理即为宇宙万有之实相，无始常新。然今此人世所流行之佛学，实由释迦牟尼佛世尊（简称释尊）证明之宣说之而起。释尊之生印度，约在距今二千五百年至二千九百年前。印度天气温暖，生活单易，除俗人耽其欲乐之外，辄多深思玄想之士，故特富于宗教哲学之探索。其先已形成为宗教者，曰婆罗门教。传婆罗门教者，居最上阶级。建国领地各贵族曰刹帝利，虽掌执军政，犹居第二。商贾次之，农工更次之，其下更有佣奴之一级。然修养山林者派生之异学颇多，刹帝利族中智者，先释尊已有耆那教（尼乾子）之创。释尊既不安于俗乐，尤不满于所受之婆罗门学，期一访森野中修士，遂舍其家国而至终成正觉。
-			</p>
-			<h5>第二节、未成正觉前之释尊</h5>
-			<p>
-				“释迦”译能，乃贵族中之一族，“牟尼”译寂，以形容其恬静。释迦牟尼，谓释迦族中之恬寂者。佛陀及世尊等，则世人对之之尊称也。实姓乔答摩（瞿昙），名悉达多（译义成）。生于中印度恒河支流、罗泊提河岸之劫比罗伐钵睹城主家，父名输头陀那，娶同族拘利城主阿?释迦之二女、摩耶与钵罗阇钵底为室，而悉达多则生于摩耶，鞠养于钵罗阇钵底者也。既长娶表妹耶输陀罗，生子曰罗怙罗。然少年放观田野，见农家之劳瘁，深觉贵族生活建筑于民众痛苦上者不宜。由耕土出虫鸟即啄食，更察知全生物界皆以害他利自求生存，尤觉心痛难忍，遂冥索解除生活惨残之道。他日又因睹老者病者死者之状，感杀他活自以生者，苟延残喘，不免终趋灭亡，遂不复能暂安其世俗生活。乃于十九岁弃其家属国财，游访者五年，继以苦行六年。时其父遣戚族憍陈如等五人为侍，其后受乳糜之供，五人疑其退志，舍而他去，遂独至菩提伽耶毕钵罗树下，跏趺端坐而誓成正觉。
-			</p>
-			<h5>第三节、成正觉后之释尊</h5>
-			<p>正觉之成，实为佛学之源海，盖佛学皆流出于正觉之心境者也。其觉悟之境，在明万有缘起。众缘所成，自无实体，无实体故，曰自性空。众缘成故，一一皆互为主伴而得存立，无内无外，无始无终，遂解除害他兼害之残杀死亡，得成利他兼利之美满生活。初受用此自证之乐而不起于座者四七日，详写此正觉心境者有佛华严经等。旋入波罗奈斯城，为五侍者说苦集灭道四谛法，遂度为弟子、数年中闻法之下得成阿罗汉者，若著名之舍利弗、目犍连、大迦叶等，不可胜纪；而在家信徒，若耶舍长者及鹿子母等，皈向尤众。后释迦族中子弟，颇多出家从佛，而印度诸王贵族亦相钦奉，乃常说法于舍卫城、灵鹫山等处。历五十年之久，遂于熙连若跋提河畔之双娑罗树间示寂，是为释尊生平之略史。
-			</p>
-				</div>	
-			</div>
-		</div>
+
 	</div>
+	<div id="QPlayer">
+			<div id="pContent">
+				<div id="player">
+					<span class="cover"></span>
+					<div class="ctrl">
+						<div class="musicTag marquee">
+							<strong>Title</strong>
+							<span> - </span>
+							<span class="artist">Artist</span>
+						</div>
+						<div class="progress">
+							<div class="timer left">0:00</div>
+							<div class="contr">
+								<div class="rewind icon"></div>
+								<div class="playback icon"></div>
+								<div class="fastforward icon"></div>
+							</div>
+							<div class="right">
+								<div class="liebiao icon"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ssBtn">
+					<div class="adf"></div>
+				</div>
+			</div>
+			<ol id="playlist"></ol>
+		</div>
+	</body>
 	
-	
-	<script src="../../common/mui.min.js"></script>
-	<script src="../../common/jquery-2.1.0.js"></script>
-	<script src="../../common/common.js"></script>
-	<script>
-		mui.init();		
-		mui(".common-sense").on('tap','.title a',function(){
-			var trueH = $(this).parents('.column').find('.content-info')[0].offsetHeight;
-			if($(this).hasClass('icon-jiantouxia')){
-				$(this).parents('.column').find('.content').css('height',trueH+'px');
-				$(this).addClass('icon-jiantoushang').removeClass('icon-jiantouxia');
-			}else{
-				$(this).parents('.column').find('.content').css('height','160px');
-				$(this).addClass('icon-jiantouxia').removeClass('icon-jiantoushang');
-			}
-			
-		})
-
-	</script>
-</body>
 </html>
+
+
+<script src="../../common/jquery-2.1.0.js"></script>
+<script src="jquery.marquee.min.js"></script>
+<script src="../../common/mui.min.js"></script>
+<script src="../../common/common.js"></script>
+<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../common/ajax.js"></script>
+
+
+
+<script type="text/javascript">
+
+
+		var homes = new Vue({
+		el: '#home',
+		data: {
+			playlist: [],
+
+		},
+		methods: {
+	
+
+			openMsgDetail: function (event) {
+				titleNView1.titleText = "我的感悟";
+				mui.openWindow({
+					url: '../question/question_tw.html',
+					id: 'question_tw',
+					waiting: {
+						autoShow: false, //自动显示等待框，默认为true
+					},
+					show: {
+						"aniShow": "zoom-fade-out"
+					},
+					styles: {
+						"bounce": "vertical",
+						"bounceBackground": "#efeff4",
+						"titleNView": titleNView1
+					}
+				})
+			}
+		}
+
+	});
+
+
+			initControl();
+
+
+	         
+
+
+
+
+               //初始化
+			function initControl() {
+
+				ajax_getAudio({
+					top: 10
+				});
+
+			}
+
+			//获取文章列表成功的回调函数
+			function audioSuccess(data){
+				homes.playlist=JSON.parse(data.list);
+				playlist=JSON.parse(data.list);
+				 isRotate = true;
+			     autoplay = false;
+				var new_element=document.createElement("script");
+				new_element.setAttribute("type","text/javascript");
+				new_element.setAttribute("src","player.js");// 在这里引入了a.js
+				document.body.appendChild(new_element);
+			
+			}
+
+			function bgChange() {
+				var lis = $('.lib');
+				for(var i = 0; i < lis.length; i += 2)
+					lis[i].style.background = 'rgba(246, 246, 246, 0.5)';
+			}
+			window.onload = bgChange;
+
+</script>
