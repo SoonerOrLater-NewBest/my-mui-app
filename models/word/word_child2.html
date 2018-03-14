@@ -31,72 +31,90 @@
 	</head>
 	
 	<style>
-		.musiclist{
-			border-top:1px solid #eeeeee;
-	
-		}
-		.musiclist a{
-			display: block;
-			border-bottom:1px solid #eeeeee;
-			position: relative;
-			padding:.1rem 1.2rem 0 .3rem;
-		}
-		.musiclist a span{
-			display: block;
-			font-size:.28rem;
-			color:#000;
-			line-height: 1.8;
-		}
-		.musiclist a p{
-			font-size:.2rem;
-			color:#808080;
-			line-height: 1.5;
-		}
-		.musiclist a .share{
-			width:1rem;
-			height:100%;
-			position: absolute;
-			right:0;
-			top:0;
-		}
-		.musiclist a .share i{
-			display: block;
-			width:4px;
-			height:4px;
-			background:#aeaeae;
-			position: absolute;
-			margin:auto;
-			top:0;
-			left:0;
-			bottom:0;
-			right:0;
-			border-radius:50%;
-		}
-		.musiclist a .share i:before{
-			content:'';
-			display: block;
-			width:4px;
-			height:4px;
-			border-radius:50%;
-			background:#aeaeae;
-			position: absolute;
-			top:-8px;
-			left:0;
-		}
-		.musiclist a .share i:after{
-			content:'';
-			display: block;
-			width:4px;
-			height:4px;
-			border-radius:50%;
-			background:#aeaeae;
-			position: absolute;
-			bottom:-8px;
-			left:0;
-		}
-		.musiclist a:active{
-			background: #e8e8e8;
-		}
+	.musiclist{
+		border-top:1px solid #eeeeee;
+
+	}
+	.musiclist a{
+		display: block;
+		border-bottom:1px solid #eeeeee;
+		position: relative;
+		padding:.18rem 1.2rem .15rem .3rem;
+	}
+	.musiclist a span{
+		display: block;
+		font-size:.28rem;
+		color:#000;
+		line-height: 1.5;
+	}
+	.musiclist a p{
+		font-size:.2rem;
+		color:#808080;
+		line-height: 1.7;
+		margin:0;
+	}
+	.musiclist a .share{
+		width:1rem;
+		height:100%;
+		position: absolute;
+		right:0;
+		top:0;
+	}
+	.musiclist a .share i{
+		display: block;
+		width:3px;
+		height:3px;
+		background:#aeaeae;
+		position: absolute;
+		margin:auto;
+		top:0;
+		left:0;
+		bottom:0;
+		right:0;
+		border-radius:50%;
+	}
+	.musiclist a .share i:before{
+		content:'';
+		display: block;
+		width:3px;
+		height:3px;
+		border-radius:50%;
+		background:#aeaeae;
+		position: absolute;
+		top:-6px;
+		left:0;
+	}
+	.musiclist a .share i:after{
+		content:'';
+		display: block;
+		width:3px;
+		height:3px;
+		border-radius:50%;
+		background:#aeaeae;
+		position: absolute;
+		bottom:-6px;
+		left:0;
+	}
+	.musiclist a:active{
+		background: #e8e8e8;
+	}
+	.musiclist a.active span{
+		color:#FF4500;
+	}
+	.musiclist a.active p{
+		color:#FF4500;
+	}
+	.musiclist a.active:after{
+		content:'';
+		width:2px;
+		height:70%;
+		background: #FF4500;
+		position: absolute;
+		margin:auto;
+		top:0;
+		bottom:0;
+		left:0;
+	}
 	</style>
 	<body style="background: #fff;">
 
