@@ -1,0 +1,9 @@
+#video{padding: 2%;}
+.videowrap{width: 100%;position: relative;padding: 2%;background-color: #fff;box-shadow: 0 0 8px #888;margin-bottom: 15px;}
+.videowrap .title{
+	font-weight: bold;padding:0.08rem 0.2rem;margin: 0;
+	position: relative;font-size: 0.32rem;line-height: 1.5;color: #fff;background-color: #333;
+}
+.videowrap img{width: 100%;display: block;}
+.videowrap video{position: absolute;top: 0;z-index: -1;}
+.videowrap p{font-size: 0.28rem;margin: 0;line-height: 2;}

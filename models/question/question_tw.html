@@ -8,67 +8,129 @@
 	<link rel="stylesheet" type="text/css" href="../../common/mui.min.css" />
 	<link rel="stylesheet" type="text/css" href="../../common/common.css" />
 	<link rel="stylesheet" type="text/css" href="question.css" />
-	<script src="../../common/jquery-2.1.0.js"></script>
-	<script src="../../common/mui.min.js"></script>
-	<script src="../../common/common.js"></script>
-	<script>
-		(function (doc, win) {
-			var docEl = doc.documentElement,
-				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
-			recalc = function () {
-				var clientWidth = docEl.clientWidth;
-				if (!clientWidth) return;
-				if (clientWidth >= 640) {
-					docEl.style.fontSize = '100px';
-				} else {
-					docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
-				}
-			};
-			if (!doc.addEventListener) return;
-			win.addEventListener(resizeEvt, recalc, false);
-			doc.addEventListener('DOMContentLoaded', recalc, false);
-		})(document, window);
-	</script>
+	
+
+
+<style>
+	    .textarea-wrapper{width:50%;margin:100px auto;}
+        .textarea-block{position:relative;}
+        .textarea-item{width:100%;font-size:.3rem;line-height: 1.8;height:40vh;border:1px solid #ccc;padding:10px;resize:none;color:#aaa;}
+        .textarea-count{float:right;color:#000;}
+        .textarea-btn{margin-top:10px;}
+</style>
+
 </head>
 
-<body style="background: #fff;" class="neiye">
-	<div class="liuyan" >
-		<textarea id="content"></textarea>
+<body class="neiye">
+	<div style="position: relative;padding: 0.22rem 0.3rem;background-color: transparent;">
+		<textarea autofocus="autofocus" class="textarea-item" name="content" id="content" placeholder="请输入内容，不超过300字。" maxlength="300" style="margin: 0;border-radius: 0.2rem;"></textarea>
+	<div class="textarea-count">
+                <span class="textareaInput">0</span>/<span class="textareaTotal">300</span>
+            </div>
 	</div>
 
 </body>
-
+	<script src="../../common/jquery-2.1.0.js"></script>
+	<script src="../../common/mui.min.js"></script>
+	<script src="../../common/common.js"></script>
 <script>
-	mui.init({});
+	
+	     $(document).ready(function(){
+
+            var lenInput = $('.textarea-item').val().length;
+
+            $(".textarea-item").keyup(function(){
+                lenInput = $(this).val().length;
+                if(lenInput>0 && lenInput<=300){
+                    $('.textareaInput').html(lenInput);
+                    $('.textarea-btn').attr('disabled',false);
+                }else{
+                    $('.textarea-btn').attr('disabled',true);
+                }
+
+            });
+        });
+        
+	mui.init();
+	
+mui.plusReady(function(){
 	_self = plus.webview.currentWebview();
+	var tView = _self.getTitleNView();
 
-	var titleView = _self.getTitleNView();
-
-	titleView.drawText("发表", {
+	tView.drawText("发表", {
 		top: "2px",
 		right: "15px",
 		width:"40px",
 		height:"40px",
 	}, {
-		color:"#0000ff",
+		color:"#ccc",
 		size:'16px',
 		align: 'center',
 	},"fabiao");
 
-	titleView.addEventListener('click', function(e) {
-		
-		var a=document.getElementById("content").innerText;
-
-		//判断是否已经登录成功
-		if (!localStorage.getItem('user')) {
-			mui.toast("请先登录！");
-			return false;
-		}
-
+	tView.addEventListener('click', function(e) {
+		var clientX = e.clientX;
+		if(clientX > parseInt(window.innerWidth - 55) && clientX <= parseInt(window.innerWidth)) {
+			//判断是否已经登录成功
+			if (!localStorage.getItem('id')) {
+				mui.toast("请先登录！");
+				return;
+			}
 			
-		mui.toast(a);
+			var contentlist=document.getElementById("content").value;
+			if(contentlist == ''){
+				mui.toast('请填写内容！');
+				return;
+			}
+			
+			var nick_name=localStorage.getItem('nick_name');
+			var avatar=localStorage.getItem('avatar');
+			
+	    
+	   	    ajax_post_content({
+	   	    	    content:contentlist,
+					for_user:nick_name,
+					avatar:avatar
+			});	
+		}
+	});
+			
 
-				});
+		
+		
+})				
+				
+				
+//获取文章列表成功的回调函数
+	function PostFeedbackSuccess(data){
+		
+
+		if(data.status=="y")
+		
+		{
+			
+		mui.toast('提交成功');
+		
+		setTimeout(function(){
+			var list = plus.webview.currentWebview().opener();
+			//触发父页面的自定义事件(refresh),从而进行刷新
+			mui.fire(list, 'shuaxin');
+			mui.back();						
+		},200)
+		
+		
+		
+		}
+		
+		else if(data.status=="n")
+		{
+			
+			mui.toast('提交失败,请重新提交！');
+		}
+	
+	
+
+	}
 </script>
-
+	<script src="../../common/ajax.js"></script>
 </html>

@@ -14,3 +14,37 @@
 	background-color: orangered;left: 50%;transform: translateX(-50%);
 }
 h1,h2,h3{font-weight: normal;font-size: 100%;}
+.common-sense{padding: 2%;font-family: '楷体';}
+.column{padding: 0 2%;background: #fff;margin-bottom: 5px;}
+.column .title{
+	font-weight: bold;position: relative;padding:0.08rem 0 0.08rem 0.2rem;
+	position: relative;font-size: 0.36rem;line-height: 1.5;
+	border-bottom: 1px solid #e4efe4;color: #000;
+}
+.column .title:before{
+	position: absolute;display: block;
+	content: '';width: 0.08rem;height: 0.32rem;
+	background: #c22423;left: 0.06rem;top: 0.18rem;
+	border-radius: 0.02rem;
+}
+
+.column .title a{
+	position: absolute;right: 0px;top: 0.08rem;
+	color: #ccc;display: block;width: 1rem;
+	text-align: center;
+	font-size: 0.36rem;
+	border-radius: 0.1rem;
+}
+.title a:active{
+	background-color: #ccc;
+}
+.content{	
+	text-align: justify;
+	text-indent: 1em;
+	font-size: 0.28rem;
+	height: 160px;
+	overflow: hidden;
+	transition: height 0.6s ease-in-out;
+}
+.content-info{padding: 2% 0;}
+.content p{font-size: 0.28rem;color: #333;}

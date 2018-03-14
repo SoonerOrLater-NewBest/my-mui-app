@@ -1,0 +1,576 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="HandheldFriendly" content="true"/>
+		<meta name="MobileOptimized" content="320"/>
+		<title>Hello H5+ 2</title>
+		<link rel="stylesheet" type="text/css" href="../../common/mui.min.css"/>
+		<script type="text/javascript" src="../../common/mui.min.js"></script>
+		<script type="text/javascript" src="../../common/common.js"></script>
+		<script type="text/javascript">
+mui.init()
+var gentry=null,hl=null,le=null;
+var er=null,ep=null;
+var bUpdated=false; //用于兼容可能提前注入导致DOM未解析完更新的问题
+// H5 plus事件处理
+function plusReady(){
+	
+	// 获取音频目录对象
+	plus.io.resolveLocalFileSystemURL('_doc/', function(entry){
+		entry.getDirectory('audio', {create:true}, function(dir){
+			gentry = dir;
+			updateHistory();
+		}, function(e){
+			outSet('Get directory "audio" failed: '+e.message);
+		});
+	}, function(e){
+		outSet('Resolve "_doc/" failed: '+e.message);
+	} );
+}
+if(window.plus){
+	plusReady();
+}else{
+	document.addEventListener('plusready', plusReady, false);
+}
+
+	
+
+// DOMContentLoaded事件处理
+document.addEventListener('DOMContentLoaded', function(){
+	// 获取DOM元素对象
+	hl = document.getElementById('history');
+	le = document.getElementById('empty');
+	er = document.getElementById('record');
+	rt = document.getElementById('rtime');
+	ep = document.getElementById('play');
+	pt = document.getElementById('ptime');
+	pp = document.getElementById('progress')
+	ps = document.getElementById('schedule');
+	updateHistory();
+},false);
+// 添加播放项
+function createItem( entry ) {
+	var li = document.createElement('li');
+	 emp=entry;
+	li.className = 'ditem mui-table-view-cell';
+	li.innerHTML = '<div class="mui-slider-right mui-disabled"><a class="mui-btn mui-btn-red">删除</a></div><div class="mui-slider-handle"><span class="iplay"onclick="playAudio(this)" ><font class="aname"></font><br/><font class="ainf"></font></span></div>';
+//	li.innerHTML = '<span class="iplay" ><font class="aname"></font><br/><font class="ainf"></font></span>';
+
+
+//	li.setAttribute('onclick', 'createUpload(this)');
+	hl.insertBefore(li, le.nextSibling);
+	li.querySelector('.aname').innerText = entry.name;
+	li.querySelector('.ainf').innerText = '...';
+	li.entry = entry;
+	updateInformation(li);
+	// 设置空项不可见
+	le.style.display = 'none';
+}
+
+
+
+// 开始录音
+var r=null,t=0,ri=null,rt=null;
+function startRecord(){
+	
+	
+	
+	
+	
+	 var btnArray = ['取消', '确定'];
+                mui.prompt('请输入你的标题：', '', '', btnArray, function(e) {
+                    if (e.index == 1) {
+                    	var names=e.value;
+                    	
+                    	
+                    		console.log('开始录音：');
+	r = plus.audio.getRecorder();
+	if ( r == null ) {
+		console.log('录音对象未获取');
+		return;
+	}
+	
+	
+r.record({filename:'_doc/audio/'+names}, function(p){
+		
+		console.log('录音完成：'+p);
+ 
+		mui.confirm('确认是否上传？', '系统提示', btnArray, function(e) {
+						if (e.index == 1) {
+			plus.io.resolveLocalFileSystemURL(p, function(entry){
+            createUpload(entry);
+			createItem(entry);
+		}, function(e){
+			console.log('读取录音文件错误：'+e.message);
+		});
+							
+						} else {
+							setTimeout(function() {
+								
+			plus.io.resolveLocalFileSystemURL(p, function(entry){
+			entry.remove( function ( entry ) {
+				console.log( "Remove succeeded" );
+			}, function ( e ) {
+					alert( e.message );
+				} );
+		}, function(e){
+		console.log('读取录音文件错误：'+e.message);
+	});
+							
+							}, 0);
+						}
+					});
+
+	}, function(e){
+		console.log('录音失败：'+e.message);
+	} );
+	er.style.display = 'block';
+	t = 0;
+	ri = setInterval(function(){
+		t++;
+		rt.innerText = timeToStr(t);
+	}, 1000);
+                       
+             
+                    } else {
+          
+                	return false
+                    	
+                    	
+//                      info.innerText = '你点了取消按钮';
+                    }
+                })
+
+
+}
+// 格式化时长字符串，格式为"HH:MM:SS"
+function timeToStr(ts){
+	if(isNaN(ts)){
+		return "--:--:--";
+	}
+	var h=parseInt(ts/3600);
+	var m=parseInt((ts%3600)/60);
+	var s=parseInt(ts%60);
+	return (ultZeroize(h)+":"+ultZeroize(m)+":"+ultZeroize(s));
+};
+
+function ultZeroize(v,l){
+	var z="";
+	l=l||2;
+	v=String(v);
+	for(var i=0;i<l-v.length;i++){
+		z+="0";
+	}
+	return z+v;
+};
+// 格式化日期时间字符串，格式为"YYYY-MM-DD HH:MM:SS"
+function dateToStr(d){
+	return (d.getFullYear()+"-"+ultZeroize(d.getMonth()+1)+"-"+ultZeroize(d.getDate())+" "+ultZeroize(d.getHours())+":"+ultZeroize(d.getMinutes())+":"+ultZeroize(d.getSeconds()));
+};
+
+
+
+// 停止录音
+function stopRecord(){
+	er.style.display = 'none';
+	rt.innerText = '00:00:00';
+	clearInterval(ri);
+	ri = null;
+	r.stop();
+	w = null;
+	r = null;
+	t = 0;
+}
+// 清除历史记录
+function cleanHistory(){
+	hl.innerHTML = '<li id="empty" class="ditem-empty">无历史记录</li>';
+	le = document.getElementById('empty');
+	// 删除音频文件
+	console.log('清空录音历史记录：');
+	gentry.removeRecursively(function(){
+		// Success
+		console.log('操作成功！');
+	}, function(e){
+		console.log('操作失败：'+e.message);
+	});
+}
+// 获取录音历史列表
+function updateHistory(){
+	if(bUpdated||!gentry||!document.body){//兼容可能提前注入导致DOM未解析完更新的问题
+		return;
+	}
+  	var reader = gentry.createReader();
+  	reader.readEntries(function(entries){
+  		for(var i in entries){
+  			if(entries[i].isFile){
+  				createItem(entries[i]);
+  			}
+  		}
+  	}, function(e){
+  		console.log('读取录音列表失败：'+e.message);
+  	});
+	bUpdated = true;
+}
+// 获取录音文件信息
+function updateInformation(li){
+	if(!li || !li.entry){
+		return;
+	}
+	var entry = li.entry;
+	entry.getMetadata(function(metadata){
+		li.querySelector('.ainf').innerText = dateToStr(metadata.modificationTime);
+	}, function(e){
+		console.log('获取文件"'+entry.name+'"信息失败：'+e.message);
+	} );
+}
+// 删除音频文件
+function deletes(li){
+	if(!li||!li.entry){
+		ouSet('无效的音频文件');
+		return;
+	}
+	
+	
+	var fileURL = li.entry.toRemoteURL();
+console.log(fileURL);
+	
+	li.entry.remove( function ( entry ) {
+	console.log( "Remove succeeded" );
+
+}, function ( e ) {
+	alert( e.message );
+} );
+	var r = null; 
+	r=plus.webview.currentWebview();
+	r.reload(true)
+
+	
+	
+//	console.log('播放音频文件：'+li.entry.name);
+//	startPlay('_doc/audio/'+li.entry.name);
+}
+
+//// 播放音频文件
+function playAudio(li){
+	
+	  var res= li.parentNode.parentNode.entry
+//	alert("111");
+	if(!res || !res){
+		console.log('无效的音频文件');
+		return;
+	}
+	console.log('播放音频文件：'+res.name);
+	startPlay('_doc/audio/'+res.name);
+}
+
+
+	// 创建上传任务
+//function createUpload(li) {
+//	
+//	var api_url="http://192.168.1.111:16976//appapi/main.ashx?";
+//	var task = plus.uploader.createUpload(api_url+"action=lyin", 
+//		{ method:"POST" },
+//		function (t, status ) {
+//			// 上传完成
+//			if ( status == 200 ) { 
+//				alert( "Upload success: " + t.url );
+//			} else {
+//				alert( "Upload failed: " + status );
+//			}
+//		}
+//	);
+//	console.log("2");
+//	task.addFile( "_doc/audio/"+li.entry.name+"", {key:li.entry.name} );
+//	task.addData( "string_key", "string_value" );
+//	//task.addEventListener( "statechanged", onStateChanged, false );
+//	task.start();
+//}
+function createUpload(li) {
+	
+	var api_url="http://gns.yaohua1314.cn/appapi/main.ashx?";
+	var task = plus.uploader.createUpload(api_url+"action=lyin", 
+		{ method:"POST" },
+		function (t, status ) {
+			// 上传完成
+			if ( status == 200 ) { 
+//				alert( "Upload success: " + t.url );
+			} else {
+//				alert( "Upload failed: " + status );
+			}
+		}
+	);
+	console.log(li.name);
+	task.addFile( "_doc/audio/"+li.name+"", {key: encodeURI(li.name)} );
+	task.addData( "string_key", li.name);
+	//task.addEventListener( "statechanged", onStateChanged, false );
+	task.start();
+}
+
+
+
+	
+
+
+// 播放文件相关对象
+var p=null,pt=null,pp=null,ps=null,pi=null;
+// 开始播放
+function startPlay(url){
+	ep.style.display = 'block';
+	var L = pp.clientWidth;
+	p = plus.audio.createPlayer(url);
+	p.play(function(){
+		console.log('播放完成！');
+		// 播放完成
+		pt.innerText = timeToStr(d)+'/'+timeToStr(d);
+		ps.style.webkitTransition = 'all 0.3s linear';
+		ps.style.width = L+'px';
+		stopPlay();
+	}, function(e){
+		console.log('播放音频文件"'+url+'"失败：'+e.message);
+	});
+	// 获取总时长
+	var d = p.getDuration();
+	if(!d){
+		pt.innerText = '00:00:00/'+timeToStr(d);
+	}
+	pi = setInterval(function(){
+		if(!d){ // 兼容无法及时获取总时长的情况
+			d = p.getDuration();
+		}
+		var c = p.getPosition();
+		if(!c){  // 兼容无法及时获取当前播放位置的情况
+			return;
+		}
+		pt.innerText = timeToStr(c)+'/'+timeToStr(d);
+		var pct = Math.round(L*c/d);
+		if(pct < 8){
+			pct = 8;
+		}
+		ps.style.width = pct+'px';
+	}, 1000);
+}
+// 停止播放
+function stopPlay(){
+	clearInterval(pi);
+	pi=null;
+	setTimeout(resetPlay, 500);
+	// 操作播放对象
+	if(p){
+		p.stop();
+		p=null;
+	}
+}
+// 重置播放页面内容
+function resetPlay(){
+	ep.style.display = 'none';
+	ps.style.width = '8px';
+	ps.style.webkitTransition = 'all 1s linear';
+	pt.innerText = '00:00:00/00:00:00';	
+}
+// 重写关闭
+var _back=function(){
+	mui.back();
+};
+var back=function(){
+	mui.back();
+};
+
+function resetback(){
+	// 停止播放
+	if(ep.style.display == 'block'){
+		stopPlay();
+	}else if(er.style.display == 'block'){
+		
+//		mui.confirm('确认删除该条记录？', '系统提示', btnArray, function(e) {
+//						if (e.index == 0) {
+//							stopRecord();
+//						} else {
+//							setTimeout(function() {
+//							
+//							}, 0);
+//						}
+//					});
+		
+		stopRecord();
+//		
+		
+	}else{
+		_back();
+	}
+}
+window.back=resetback;
+		</script>
+		<link rel="stylesheet" href="common.css" type="text/css" charset="utf-8"/>
+		<style type="text/css">
+.rp {
+	width: 100%;
+	height: 100%;
+	display: none;
+	text-align: center;
+	position: fixed;
+	top: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 9999;
+	overflow: hidden;
+}
+.aname {
+	font-size: 16px;
+}
+.ainf {
+	font-size: 12px;
+}
+.rtime {
+	font-size: 22px;
+	color: #FF0000;
+}
+.ptime {
+	margin-top: 40%;
+	font-size: 22px;
+	color: #FFFFFF;
+}
+.rprogress {
+	background: url(../../images/arecord.png) no-repeat center center;
+	background-size: 32px 32px;
+}
+.rschedule {
+    background-color: rgba(0,0,0,0);
+    border: 5px solid rgba(0,183,229,0.9);
+    opacity: .9;
+    border-left: 5px solid rgba(0,0,0,0);
+    border-right: 5px solid rgba(0,0,0,0);
+    border-radius: 50px;
+    box-shadow: 0 0 15px #2187e7;
+    width: 36px;
+    height: 36px;
+    margin: 0 auto;
+    -webkit-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear;
+}
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.progress {
+  width: 90%;
+  background-color: #666;
+  margin: 0 5%;
+  border: 1px solid #222;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+.schedule {
+  width: 8px;
+  height: 8px;
+  margin: 1px 0;
+  background-color: #FFCC33;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-transition: all 1s linear;
+  transition: all 1s linear;
+}
+.stop {
+	width: 72px;
+	height: 72px;
+	background: url(../../images/astop.png) center center;
+	background-size: 72px 72px;
+	margin: auto;
+	-webkit-border-radius: 72px;
+	border-radius: 72px;
+}
+
+.stop:active{
+  	-webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5) inset;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5) inset;
+}
+.iplay {
+	display: block;
+	background: no-repeat right center url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABYCAYAAAADWlKCAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAKwwAACsMBNCkkqwAAABZ0RVh0Q3JlYXRpb24gVGltZQAwOS8xMi8xM5w+I3MAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAD9UlEQVR4nO2b3XETMRRGDwzvoYOkg5hRAVkqiKmAdIA7wHSQVECoALsC1gXciV0BTge4gvCwgnHk9d/+WF8m97ztxrlXs8fS1Urym6enJxwd3uZugPMcFyKGCxHDhYjhQsRwIWK4EDFciBguRAwXIoYLEcOFiOFCxHAhYrgQMVyIGC5EDBcihgsRw4WI4ULEcCFiuBAx3uVuwDGY2XtgCBTAALjc8tEFMAdKYBJC+HOK9nXBm5dwUM7MCmAEXDcMMQVuQwhlV23qC2khZjYAboGrjkLOgFEIYd5RvM6RrSFmdgs80J0MYqyHGFsSuR4S60TJ9vrwCEziZ+YhhGXy/xdU9aWgqjfnW+IsgEKtvkgJiUPUPfUyZsD42DoQ68+Y+p62AG6UhjAZITt6xopq3L9vGf+Gqh6dJX+S6ilKNaRkU8YCGLSVARBjDGLMdS5jbgkkhMQiWyejSGtEG2KsghopKoU++5AV68ZDcrvXYWTH8Pghdz1R6CHpN3MFDPsc02PsYcy1qy0nJ6uQOANKZz+jfcOUmd3H6W1jYo5RcvsqtikbuXtI+kBmBxbwz8DczMZtksdcsz1tOinZhMRxPF2bGh8R4gz4amZLMxu2aEqa8zq2LQs5e0j6EB8bLv6dAz/NrGwyjMWcj3vadjJyCimS60nLeFfAbzO7bfANT3MXLdvSmJxCBsl12VHcL8AyvpkfSpo7bdvJyCkkfQfocv5/Bnw3s/mBs6Y097aFzd7JPcv6T5dv5GtcAr/2TZN7yt0IGSE908k0+RS8FiEvhhd1yKEFUw5YAVBApoe0XQrZwgL4GEIY7pLRU+5G5OwhC57PZgbAsqPYK6rdxUMXC9Npbro8fzJy9pB0qll0FPcOuDhCRl3ubEvwOYWUyXXb5YoZ1X7GqMHSfZq7bNmWxuQUki5XnDdc+n4EPoUQiiabSzFnejKl7TJOY7IJid/iaXJ7fESIFfCNas+9zQNMc05zHnjIPctKx/mrA9egflCJGLd5eDFXukGWdddQYU+95PlDWVE97GXPeS+oivf6saBZCKHoM+8+cvcQ2NyhOwMmfW4SxdgTNs9oZd0tBAEhsRDfJbcvgbIPKTtOnNzlPnECAkPWP8xsTv3ZrJ1v2UfmuKDqGRt5QgjZ9kDWyd5D1iioP1U4P3KzqZYYY5v0om38rpDpIeCHrUFMCPjPEeSE/COetf3SU/i7EEL2GVUdSjXkGfGBfWDzIFsb/q93dRizU2R7yDr+o09R/GfRzsmRrSGvFRcihgsRw4WI4ULEcCFiuBAxXIgYLkQMFyKGCxHDhYjhQsRwIWK4EDFciBguRAwXIoYLEcOFiOFCxHAhYrgQMf4CVuqCm+17t3sAAAAASUVORK5CYII=);
+	background-size: 50px 44px;
+	-ms-touch-action: auto;
+}
+		</style>
+	</head>
+	<body>
+		
+		<div id="dcontent" class="dcontent">
+			<br/>
+			<div class="button" onclick="startRecord()">开始录音</div>
+			<div style="display: none;" class="button" onclick="startPlay('_www/audio/friendship.mp3')">播放音乐</div>
+			<br/>
+			<!-- History list -->
+			<ul id="history" class="dlist mui-table-view" style="text-align:left;">
+				<li id="empty" class="ditem-empty">无历史记录</li>
+		
+			</ul>
+		
+			
+			
+			<br/>
+			<div class="button button-waring" onclick="cleanHistory()" style="display: none;">清空历史记录</div>
+			<br/>
+		</div>
+		<div id="output" style="color: #aaa;text-align: center;">
+			吾日三省吾身<br />从思想意识、情感态度、言论行动等<br />各个方面去深刻认识自己、剖析自己
+		</div>
+		<div id="play" class="rp">
+			<div id="ptime" class="ptime">00:00:00/00:00:00</div><br/>
+			<div id="progress" class="progress"><div id="schedule" class="schedule"></div></div>
+			<br/>
+			<div class="stop" onclick="stopPlay(),mui.toast('停止播放！')"></div>
+		</div>
+		<div id="record" class="rp">
+			<div style="width:100%;height:20%;"></div>
+			<div class="rprogress"><div class="rschedule"></div></div>
+			<br/>
+			<div id="rtime" class="rtime">00:00:00</div><br/>
+			<div class="stop" onclick="stopRecord()"></div>
+		</div>
+	</body>
+<!--	<script type="text/javascript" src="../js/immersed.js" ></script>-->
+	<script type="text/javascript">
+			mui.init();
+			(function($) {
+				//$.swipeoutOpen(el,direction)//打开指定列的滑动菜单，el:指定列的dom对象，direction：取值left|right，指定打开的是左侧或右侧滑动菜单
+				//$.swipeoutClose(el);//关闭指定列的滑动菜单，el:指定列的dom对象
+				//				setTimeout(function() {
+				//					$.swipeoutOpen(document.getElementById("OA_task_1").querySelector('li:last-child'), 'left');
+				//					setTimeout(function() {
+				//						$.swipeoutClose(document.getElementById("OA_task_1").querySelector('li:last-child'));
+				//					}, 1000);
+				//				}, 1000);
+				//第一个demo，拖拽后显示操作图标，点击操作图标删除元素；
+				$('#history').on('tap', '.mui-btn', function(event) {
+					var elem = this;
+					var li = elem.parentNode.parentNode;
+					mui.confirm('确认删除该条记录？', '系统提示', btnArray, function(e) {
+						if (e.index == 0) {
+						deletes(li);
+						} else {
+							setTimeout(function() {
+								$.swipeoutClose(li);
+							}, 0);
+						}
+					});
+				});
+				var btnArray = ['确认', '取消'];
+			
+			
+			})(mui);
+		
+				
+	</script>
+</html>

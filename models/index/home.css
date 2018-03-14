@@ -1,17 +1,5 @@
 
-.swiper-container1 {
-    width: 100%;
-    height: auto;
-	box-shadow: 0 0px 4px #ccc;
-}
-.swiper-container1 img{
-	width: 100%;
-	height: 100%;
-}
 
-/*.swiper-container2{
-	padding: 0 10px 10px 0px;	
-}*/
 .swiper-container2 .swiper-wrapper{}
 .swiper-container2 .swiper-slide{
 	height: 23vw;
@@ -19,14 +7,13 @@
 	border-radius: 8px;
 }
 
-.h_title{font-size: 0.32rem;color: #ff5d5e;margin:0.3rem 0 0 0;position: relative;background: #fff;padding: 0.22rem 0.3rem;}
-.h_title span{margin-right: 0.1rem;color: #de5fa2;margin-top: 0.02rem;}
+.h_title{font-size: 0.32rem;color: #FF4500;margin:0.2rem 0 0 0;position: relative;background: #fff;padding: 0.22rem 0.3rem;}
+.h_title span{margin-right: 0.1rem;color: #FF4500;margin-top: 0.02rem;}
 /*图标*/
-.topicon{padding: 3%;background-color: #fff;box-shadow: 0 0px 2px #ccc;border-top-left-radius: 50% 0.2rem;
-    border-top-right-radius: 50% 0.2rem;padding-top: 0.32rem;margin-top: -0.4rem;position: relative;z-index: 999;}
+.topicon{padding: 3%;background-color: #fff;box-shadow: 0 0px 2px #ccc;position: relative;z-index: 999;}
 .topherf{display: block;position: relative;padding: 0.06rem 0;float: left;width: 20%;}
-.topherf img{display: block; width: 1rem;height: 1rem;margin: auto;}
-.topherf p{font-size: 0.28rem;margin: 0;text-align: center;color: #282828;line-height: 2;}
+.topherf img{display: block; width: 0.8rem;height: 0.8rem;margin: auto;}
+.topherf p{font-size: 0.22rem;margin: 0;text-align: center;color: #282828;line-height: 2;}
 
 /*新闻列表*/
 
@@ -70,92 +57,3 @@
 .tem_inner{padding:0 0.3rem;}
 .tem_footer_text{ margin-top:0.3rem;border-top:1px solid #999;line-height: 1.414;}
 .tem_footer_text p{font-size:0.24rem;color: #999;}
-/*占位图*/
-.timeline-item {
-   background: #fff;
-   border: 1px solid;
-   border-color: #e5e6e9 #dfe0e4 #d0d1d5;
-   border-radius: 3px;
-   padding: 0px 15px;
-   margin: 0 auto;
-   max-width: 472px;
-}
-
-
-@keyframes placeHolderShimmer{
-    0%{
-        background-position: -468px 0
-    }
-    100%{
-        background-position: 468px 0
-    }
-}
-
-.animated-background {
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-name: placeHolderShimmer;
-    animation-timing-function: linear;
-    background: #f6f7f8;
-    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
-    background-size: 800px 104px;
-    height: 108px;
-    position: relative;
-}
-
-
-.background-masker {
-    background: #fff;
-    position: absolute;
-}
-
-/* Every thing below this is just positioning */
-
-.background-masker.header-top{
-    top: 0;
-    left: 0px;
-    right: 0;
-    height: 11px;
-}
-
-.background-masker.header-left{
-    top: 11px;
-    left: 120px;
-    height: 86px;
-    width: 10px;
-}
-
-.background-masker.header-bottom,
-.background-masker.header-right,
-.background-masker.subheader-left,
-.background-masker.subheader-right {
-    top: 22px;
-    height: 10px;
-    left: 130px;
-    right: 0;
-}
-.background-masker.header-bottom{
-	 top: 43px;
-}
-
-.background-masker.subheader-left{
-	top: 64px;
-}
-
-.background-masker.subheader-right {
-    top: 85px;
-    height: 12px;
-}
-.background-masker.subheader-top{
-	top: 74px;
-	height: 21px;
-	left: 130px;
-	width: 160px;
-}
-.background-masker.subheader-bottom {
-    bottom: 0;
-    height: 11px;
-    left: 0;
-    right: 0;
-}

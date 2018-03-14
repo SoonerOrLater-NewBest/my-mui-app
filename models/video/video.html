@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../../common/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="../../common/common.css"/>
+	<link rel="stylesheet" type="text/css" href="video.css"/>
+</head>
+
+<body>		
+<div class="mui-content" id="video">
+	<div class="videowrap" v-for="(item,index) in items" :key="item.id">
+		<h1 class="title">{{item.title}}</h1>
+		<img src="default.jpg" alt="" @tap="play(item.id,item.video_src)"/>
+		<video width="10px" height="10px" :id="item.id">
+			<source :src="item.video_src" type="video/mp4"></source>
+			<source :src="item.video_src" type="video/ogg"></source>
+			<source :src="item.video_src" type="video/webm"></source>
+			当前浏览器不支持 video直接播放，点击这里下载视频： <a :href="item.video_src">下载视频</a>
+		</video>
+		<p>{{item.zhaiyao}}</p>
+	</div>
+	
+</div>
+
+<script src="../../common/mui.min.js"></script>
+<script src="../../common/ajax.js"></script>
+<script src="../../js/vue.min.js"></script>
+<script src="../../common/jquery-2.1.0.js"></script>
+<script src="../../common/common.js"></script>
+
+<script type="text/javascript">
+	mui.init();
+	var video = new Vue({
+		el: '#video',
+			data: {
+				items: [],
+			},
+			methods:{
+				play:function(index,url){
+					
+					if(mui.os.android) {
+						var Intent = plus.android.importClass("android.content.Intent");
+		                var Uri = plus.android.importClass("android.net.Uri");
+		                var main = plus.android.runtimeMainActivity();
+		                var intent = new Intent(Intent.ACTION_VIEW);
+		                var uri = Uri.parse(url);
+		                intent.setDataAndType(uri, "video/*");
+		                main.startActivity(intent);			
+					}else{
+						document.getElementById(index).play();
+					}
+					
+				}
+			},
+			created : function (){
+				this.$nextTick(function () {
+					ajax_getArticleList({
+						channel_id:68,
+						channel_name:"simiao",
+					});
+			    })
+			}
+
+	})
+	
+
+	function articleListSuccess(data){
+		video.items=JSON.parse(data.list);		
+		console.log(video.items);
+
+	}
+</script>		
+	
+</body>
+
+</html>

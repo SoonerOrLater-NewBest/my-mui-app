@@ -13,7 +13,7 @@
 </head>
 
 <body>
-	<div id="home">
+	<div id="home" style="padding-top: 25vh;">
 		<div v-for="load in loades" v-if="!loading" class="timeline-item">
 		    <div class="animated-background">
 			    <div class="background-masker header-top"></div>
@@ -26,21 +26,15 @@
 			    <div class="background-masker subheader-bottom"></div>
 			</div>
 	 	</div>
-		<div class="swiper-container swiper-container1">
-		    <div class="swiper-wrapper">
-		        <div class="swiper-slide" v-for="item in banner">
-		        	<img :src="item.img_url" alt="" />
-		        </div>
-		    </div>		    		    
-		</div>
+
 		<div class="topicon mui-row" id="icon">
-			<a class="topherf" :data-id="item.id" v-for="item in items">
+			<a class="topherf" :data-id="item.id" v-for="item in items" @tap="openPages($event)">
 				<img :src="item.img_url"/>
 				<p>{{item.title}}</p>
 			</a>			       	
 		</div>
 		
-		<h1 class="h_title"><span class="iconfont icon-xinwen"></span>推荐文章</h1>
+		<h1 class="h_title"><span class="iconfont icon-remen"></span>推荐文章</h1>
 		<div class="home-news" id="news">			
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell mui-media" v-for="item in news">
@@ -63,7 +57,7 @@
 			</ul>
 		</div>
 									
-		<h1 class="h_title"><span class="iconfont icon-xinwen"></span>寺院景致<span @tap="openNewWebview" class="read-more font-normal">更多<i class="iconfont icon-gengduo"></i></span></h1>	
+		<h1 class="h_title"><span class="iconfont icon-fengjing" style="color: #0484F6;"></span>寺院景致<span @tap="openNewWebview" class="read-more font-normal">更多<i class="iconfont icon-gengduo"></i></span></h1>	
 		
 		<div class="swiper-container swiper-container2 myblock" id="scenery">
 		    <div class="swiper-wrapper">
@@ -100,15 +94,45 @@
 	<script type="text/javascript">
 		var isLoadIcon = false;
 		var isLoadArticleList = false;
-		var webview_detail = null;		
+		var webview_detail = null;
 			mui.init({
 //				swipeBack: true
 			});
 			mui.plusReady(function() {
-				
+				plus.navigator.setStatusBarStyle('light');
 				var self = plus.webview.currentWebview(),
 					leftPos = Math.ceil((window.innerWidth - 60) / 2); // 设置凸起大图标为水平居中	
-
+				var drawTitle = new plus.nativeObj.View('title', {
+					width: '100%',
+					height: '64px',
+					backgroundColor:'#ff4500',
+					position:'dock',
+					dock:'top',
+				}, [{
+					tag: 'font',
+					id: 'titleInfo',
+					text: '首页', 
+					position: {
+						left: '88px',
+						right:'88px',
+						top:'20px',
+						height: '44px'
+					},
+					textStyles: {
+						color: '#ffffff',
+					}
+				},{
+					tag: 'img',
+					id: 'logo',
+					position: {
+						left: '15px',
+						top:'30px',
+						height: '24px',
+						width:'60px'
+					},
+					src: "_www/images/logo.png"
+				}]);
+				self.append(drawTitle);
 				/**	
 				 * drawNativeIcon 绘制带边框的半圆，
 				 * 实现原理：
@@ -160,13 +184,13 @@
 						height: '50px'
 					},
 					rectStyles: {
-						color: '#d74b28',
+						color: '#FF4500',
 						radius: '50%'
 					}
 				}, {
 					tag: 'font',
 					id: 'icon',
-					text: '\ue605', //此为字体图标Unicode码'\e600'转换为'\ue600'
+					text: '\ue643', //此为字体图标Unicode码'\e600'转换为'\ue600'
 					position: {
 						top: '0px',
 						left: '5px',
@@ -185,16 +209,14 @@
 
 				//自定义监听图标点击事件
 				var active_color = '#fff';
-				drawNativeIcon.addEventListener('click', function(e) {
-					var titleNView = titleNView1;
-					titleNView.titleText='佛化生活';
-					titleNView.backgroundColor='#ff5d5e';
-					titleNView.titleColor='#ffffff';					
+				drawNativeIcon.addEventListener('click', function(e) {	
+					titleNView1.titleText = '佛前感悟';
 					mui.openWindow({
-						url:"../master/master.html",
-						id:"../master/master.html",
+						url:"../question/question.html",
+						id:"../question/question.html",
 						styles:{
-							titleNView:titleNView
+							titleNView:titleNView1,
+							"bounce": "vertical",
 						}
 					})
 					// 重绘字体颜色
@@ -310,13 +332,46 @@
 						id : 'imgview',
 						styles: {
 							"bounce": "vertical",
-							"bounceBackground": "#efeff4",
 							"titleNView": titleNView1
 						}
 					})
 				},
 				openPages : function (event) {
-					
+					var el = event.currentTarget;
+					var pagesid = parseInt(el.getAttribute('data-id'));
+					var title = el.querySelector("p").innerHTML.trim();
+					titleNView1.titleText = title;
+					switch(pagesid){
+						case 53:
+						mui.openWindow({
+							url : '../master/master.html',
+							id : '../master/master.html',
+							styles: {
+								"titleNView": titleNView1
+							}
+						});
+						  break;
+						case 74:
+							mui.openWindow({
+								url : '../video/video.html',
+								id : '../video/video.html',
+								styles: {
+									"bounce": "vertical",
+									"titleNView": titleNView1
+								}
+							});
+						  break;
+						default:
+							mui.openWindow({
+								url : '../about/about.html',
+								id : 'about',
+								styles: {
+									"bounce": "vertical",
+									"bounceBackground": "#efeff4",
+									"titleNView": titleNView1
+								}
+							});
+					}
 				}
 			},
 			mounted : function (){
@@ -352,13 +407,14 @@
 	function judgelogin(){
 		//判断是否已经登录成功
 		if (!localStorage.getItem('user')) {
+			titleNView.titleText = '登录';
 			mui.preload({
 				url:'../login/login.html',
 				id:'../login/login.html',
 				styles:{
 					top:'0px',
 					bottom:'0px',
-					popGesture: 'none',
+					popGesture: 'hide',
 					titleNView:titleNView
 				}
 			});
@@ -391,6 +447,28 @@
 		homes.banner=JSON.parse(data.banner);
 		homes.scenery=JSON.parse(data.fengjing);
 		isLoadIcon  = false;
+		var images = [];
+		homes.banner.forEach(function(item) {
+	        images.push({
+	        	src: item.img_url,
+	        	width: '100%',
+	        	height:'100%'
+	        });
+	    });
+	    mui.plusReady(function(){
+	    	 var imgSlider = new plus.nativeObj.ImageSlider('banner',{
+		    	autoplay:true,
+		    	loop:true,
+		    	position:"static",
+		    	top:0,
+		    	width:'100%',
+		    	height:'25%',
+		    	images:images,
+		    	interval:3000,
+		    })
+	    	plus.webview.currentWebview().append(imgSlider);
+	    });
+	    	    
 	}
 //获取文章列表成功的回调函数
 	function articleListSuccess(data){
@@ -408,12 +486,6 @@
 		setTimeout(function () {
 			homes.loading = true;
 			isLoadArticleList = false;
-			var mySwiper1 = new Swiper ('.swiper-container1', {
-			    loop: true,
-			    autoplay: 2000,
-			    observer:true,
-				observeParents:true,
-			});
 			var mySwiper2 = new Swiper ('.swiper-container2', {
 				freeMode : true,
 				slidesPerView :2.5,

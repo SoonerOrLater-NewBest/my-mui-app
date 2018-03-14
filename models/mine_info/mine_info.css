@@ -1,0 +1,41 @@
+.mui-table-view-cell input{
+	margin: 0;
+	width: 50%;
+	position: absolute;
+	right: 0;top: 2px;
+	outline: none;
+	border: none;
+	text-align: right;
+}
+.mui-table-view{margin-top: 0.26rem;}
+.mui-table-view .mui-media-object {
+    max-width: 25px;
+    height: 25px;}
+.mui-navigate-right:after{font-weight: bolder;}
+a.mui-navigate-right .mui-pull-right {
+    margin-right: 25px;
+    
+}
+a{
+	font-weight:bold;
+}
+span.mui-pull-right{
+	font-weight:normal;
+	color: #999;
+	
+}
+#head {
+	line-height: 40px;
+}
+.head-img {
+	width: 40px;
+	height: 40px;
+}
+#head-img {
+	position: absolute;
+	border-radius: 100px;
+	bottom: 10px;
+	right: 40px;
+	width: 40px;
+	height: 40px;
+}

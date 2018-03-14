@@ -32,12 +32,3 @@ document.addEventListener('get_detail', function(event) {
 				}
 			});
 		});
-		mui.back = function() {
-				plus.webview.currentWebview().hide("auto", 300);
-				//动画结束后，恢复默认值
-				setTimeout(function() {
-					window.scrollTo(0, 0);
-					$('.about-banner').empty();
-					$('.about').empty();		
-				}, 300);
-			}

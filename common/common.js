@@ -17,20 +17,12 @@
     win.addEventListener(resizeEvt, recalc, false);
     doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);
-//设置首页原生头部
-var titleNView_index = { //原生导航配置
-	backgroundColor: '#f7f7f7', //导航栏背景色
-	titleText: 'asdasd', //导航栏标题
-	titleColor: '#000000', //文字颜色
-	type: 'defalut', //透明渐变样式
-	autoBackButton: false, //自动绘制返回箭头
-	progress:{color:'#0000ff'}
-};
+
 //子页面原生头样式
 var titleNView = { //原生导航配置
-	backgroundColor: '#f7f7f7', //导航栏背景色
-	titleText: '登录', //导航栏标题
-	titleColor: '#000000', //文字颜色
+	backgroundColor: '#ff4500 ', //导航栏背景色
+	titleText: '', //导航栏标题
+	titleColor: '#ffffff', //文字颜色
 	type: 'transparent', //透明渐变样式
 	autoBackButton: true, //自动绘制返回箭头
 //	splitLine: {
@@ -39,16 +31,14 @@ var titleNView = { //原生导航配置
 	progress:{color:'#0000ff'}
 }
 var titleNView1 = {
-	backgroundColor: '#f7f7f7',
-	titleText: '佛化生活', 
-	titleColor: '#000000', 
+	backgroundColor: '#ff4500',
+	titleText: '', 
+	titleColor: '#ffffff', 
 	type: 'default',
 	autoBackButton: true, 
-//	splitLine: {
-//		color: '#cccccc'
-//	},
 	progress:{color:'#0000ff'}
 }
+
 
 /**
  * 打开新闻详情
@@ -192,7 +182,16 @@ function getDateDiff (dateStr) {
     }else if (d_days >= 30) {
         return Y + '-' + M + '-' + D +' '+ H + ':' + m;
     }
-}   
+} 
+function generateUUID() {
+	var d = new Date().getTime();
+	var uuid = 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	  var r = (d + Math.random()*16)%16 | 0;
+	  d = Math.floor(d/16);
+	  return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+	});
+	return uuid;
+};
 //字符串转换为时间戳
 function getDateTimeStamp (dateStr) {
     return Date.parse(dateStr.replace(/-/gi,"/"));

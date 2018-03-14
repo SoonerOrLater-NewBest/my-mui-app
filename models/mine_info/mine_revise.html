@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../common/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../common/common.css" />
+		<link rel="stylesheet" type="text/css" href="mine_info.css" />
+		<style>
+			.mui-input-row .mui-input-clear~.mui-icon-clear,
+			.mui-input-row .mui-input-password~.mui-icon-eye,
+			.mui-input-row .mui-input-speech~.mui-icon-speech {
+				top: 25px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="mui-content">
+			<div class="mui-input-row">
+				<input type="text" id="content" class="mui-input-clear" style="margin: 15px auto;border-left: none;border-right: none;border-radius: 0;">
+			</div>
+
+		</div>
+		<script src="../../common/mui.min.js"></script>
+		<script src="../../common/common.js"></script>
+		<script src="../../common/ajax.js"></script>
+		<script>
+			mui.plusReady(function() {
+				_self = plus.webview.currentWebview();
+				var tView = _self.getTitleNView();
+
+				tView.drawText("修改", {
+					top: "2px",
+					right: "15px",
+					width: "40px",
+					height: "40px",
+				}, {
+					color: "#ccc",
+					size: '16px',
+					align: 'center',
+				}, "fabiao");
+
+				var self = plus.webview.currentWebview();
+
+				type = self.type;
+				var info = self.info;
+
+				document.getElementById("content").value = info;
+
+	
+
+
+				tView.addEventListener('click', function(e) {
+					var clientX = e.clientX;
+					if(clientX > parseInt(window.innerWidth - 55) && clientX <= parseInt(window.innerWidth)) {
+						//判断是否已经登录成功
+						if(!localStorage.getItem('id')) {
+							mui.toast("请先登录！");
+							return;
+						}
+
+						var contentlist = document.getElementById("content").value;
+
+					
+						if(contentlist == '') {
+							mui.toast('请填写内容！');
+							return;
+						}
+
+						var nick_name = localStorage.getItem('nick_name');
+						var avatar = localStorage.getItem('avatar');
+						var id = localStorage.getItem('id')
+
+						ajax_post_useredit({
+							content: contentlist,
+							type: type,
+							id: id
+						});
+					}
+				});
+
+			})
+
+			function EditUserinfoSuccess(data)
+
+			{
+				if(data.status == "y")
+
+				{
+
+				var datas= JSON.parse(data.list);
+
+                //nick_name
+				localStorage.setItem('nick_name', datas["0"].user_name);
+				//avatar
+				localStorage.setItem('avatar', datas["0"].avatar);
+				//mobile
+				localStorage.setItem('mobile', datas["0"].mobile);
+				//address
+				localStorage.setItem('address', datas["0"].address);
+                        
+				var minewebview = plus.webview.getWebviewById('../mine/mine.html');
+				var mineInfowebview = plus.webview.getWebviewById('../mine_info/mine_info.html');				
+				mui.fire(minewebview, 'loginSuccess', {});
+				mui.fire(mineInfowebview, 'loginSuccess', {});
+											
+                mui.toast('修改信息成功');
+				mui.back();       
+                        
+                        
+				} else {
+
+					mui.toast('修改失败，请稍后再试！');
+				}
+
+			}
+		</script>
+
+	</body>
+
+</html>
