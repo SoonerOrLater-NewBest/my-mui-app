@@ -28,7 +28,7 @@
 	 	</div>
 
 		<div class="topicon mui-row" id="icon">
-			<a class="topherf" :data-id="item.id" v-for="item in items" @tap="openPages($event)">
+			<a class="topherf" :data-id="item.id" :bieming="item.call_index" v-for="item in items" @tap="openPages($event)">
 				<img :src="item.img_url"/>
 				<p>{{item.title}}</p>
 			</a>			       	
@@ -339,6 +339,7 @@
 				openPages : function (event) {
 					var el = event.currentTarget;
 					var pagesid = parseInt(el.getAttribute('data-id'));
+					var bieming = el.getAttribute('bieming');
 					var title = el.querySelector("p").innerHTML.trim();
 					titleNView1.titleText = title;
 					switch(pagesid){
@@ -378,8 +379,10 @@
 								styles: {
 									"bounce": "vertical",
 									"titleNView": titleNView1
+								},
+								extras:{
+									bieming : bieming
 								}								
-
 							});
 					}
 				}

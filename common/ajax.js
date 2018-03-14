@@ -352,7 +352,26 @@ document.body.appendChild(new_element);
 			}
 		});
 	}
+	//获取单页面
+	w.ajax_single_page = function(options) {
+		var data = getdata(options,'action=getarticle');
+		mui.ajax(httpUrl+"action=getarticle",{
+			data:data,
+			dataType:'json',//服务器返回json格式数据
+			type:'get',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){				
+				logData(data);
+				setTimeout(function(){
+					singlePageSuccess(data);
+				},500);
+			},
+			error:function(xhr,type,errorThrown){
 				
+			alert("修改请求失败");
+			}
+		});
+	}			
 	//获取分类第一级
 	w.ajax_get_first_category = function(options) {
 		startLoad();
