@@ -13,6 +13,7 @@
     font-size: 1.8em;
     position: relative;
 }
+.mui-table-view.mui-grid-view .mui-table-view-cell{width: 25%;}
 .touming{padding: 6px;background: url(../../images/transparent.png);border-radius: 50%;overflow: hidden;}
 .list-title{
 	line-height: 28px;
