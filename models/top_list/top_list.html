@@ -7,7 +7,6 @@
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="../../common/mui.min.css" />
 	<link rel="stylesheet" type="text/css" href="../../common/common.css" />
-	<link rel="stylesheet" type="text/css" href="question.css" />
 
 	<script>
 		(function (doc, win) {
@@ -16,10 +15,10 @@
 			recalc = function () {
 				var clientWidth = docEl.clientWidth;
 				if (!clientWidth) return;
-				if (clientWidth >= 640) {
+				if (clientWidth >= 750) {
 					docEl.style.fontSize = '100px';
 				} else {
-					docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+					docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
 				}
 			};
 			if (!doc.addEventListener) return;
@@ -29,118 +28,154 @@
 	</script>
 </head>
 <style>
-	.musiclist{
-		border-top:1px solid #eeeeee;
-
-	}
-	.musiclist a{
-		display: block;
-		border-bottom:1px solid #eeeeee;
+	.rankinglist{
+		width:100%;
+		height:100vh;
+		overflow: auto;
+		padding-top:.8rem;
 		position: relative;
-		padding:.18rem 1.2rem .15rem .3rem;
 	}
-	.musiclist a span{
+	.rankinglist .rankingtit{
+		padding:0 .15rem;
+		position: absolute;
+		width:100%;
+		top:0;
+		left:0;
+		border-bottom:1px solid #f8f8f8;
+	}
+	.rankinglist .rankingtit span{
 		display: block;
+		width:70%;
+		float: left;
+		font-size:.31rem;
+		color:#484848;
+		line-height: .8rem;
+	}
+	.clearfix{
+		clear: both;
+	}
+	.clearfix:after{
+		content:'';
+		display: block;
+		clear: both;
+	}
+	.rankwen{
+		padding-right:10%;
+	}
+	.rankinglist ul{
+		padding:0;
+		margin:0;    
+	    position: absolute;
+		width: 100%;
+	    height: calc(100% - .8rem);
+	    overflow: auto;
+	}
+	.rankinglist li{
+		border-bottom:1px solid #f8f8f8;
+		padding:.15rem;
+		list-style: none;
+	}
+	.rankinglist li .rankph{
+		width:70%;
+		float: left;
+	}
+	.rankinglist .rankph i{
+		display: block;
+		width:.38rem;
+		height:.5rem;
 		font-size:.28rem;
 		color:#000;
+		line-height: .48rem;
+		float: left;
+		background: no-repeat center center;
+		background-size:100% 100%;
+		text-align: center;
+		font-style:normal;
+		font-family: 'Gautami';
+		margin:.2rem .14rem 0 0;
+	}
+	.rankinglist .rankph img{
+		display: block;
+		width:.85rem;
+		height:.85rem;
+		border-radius:50%;
+		float: left;
+		margin-right:.24rem;
+	}
+	.rankinglist ul li:first-child .rankph i{
+		background-image: url(data:image/jpg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABJAAD/4QMqaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjUtYzAxNCA3OS4xNTE0ODEsIDIwMTMvMDMvMTMtMTI6MDk6MTUgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MDcwQjIyNzcyNzUyMTFFODgwMjFEMEE1RDcyOUU5QTMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MDcwQjIyNzgyNzUyMTFFODgwMjFEMEE1RDcyOUU5QTMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDowNzBCMjI3NTI3NTIxMUU4ODAyMUQwQTVENzI5RTlBMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDowNzBCMjI3NjI3NTIxMUU4ODAyMUQwQTVENzI5RTlBMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAQCAgIDAgQDAwQFAwMDBQYEBAQEBgcFBQYFBQcJBwgHBwgHCQkKCwsLCgkMDAwMDAwPDw8PDxEREREREREREREBBAQEBwYHDQkJDRMODQ4TFBEREREUEREREREREREREREREREREREREREREREREREREREREREREREREREREREREf/AABEIACcAHgMBEQACEQEDEQH/xACXAAACAgMBAAAAAAAAAAAAAAAGBwIIAAMEBQEAAwADAQAAAAAAAAAAAAAABQYHAAIEAxAAAQMBBgQCBwkAAAAAAAAAAQIDBAUAERITBgchMUFRcSJhMkJiQxQIgZFScsIjgxVFEQACAQIDBQUGBgMAAAAAAAABAgMAESEEBTFRcRIGQWGBkaHhIjJSYnLBQqITIxTRMxX/2gAMAwEAAhEDEQA/ALt621qumr+QgZZqCmy8668f2YzPLMX3J9lPWyh1N1L/AEf4orGUi5J+FF+ZvwHbRbTtO/e9978t7ADax3D8TSwq2vIz76i+5Lq6h8Z59cdF/uNtXADxtGM91K0zXd3kO8sVHgq9lPGX0dlGHKncAG8ya7dMbhPtyUogSXoD5PliTHDIhun8JUrzIJ72IaP1XPC4EUjKfkc8yN3XOK8a5c/ow5SXUMPmUcrDw2GmLH14y9pV+qNx1qmQylh6D8RMhaggJPukqBxdrVyLqiOTT3zSqSyWVk7Q5IUDhc7d2NJ7aYVnEZYcrYhvp2+fdvpXbhViQ80+7ecdVmvlw9cqKrLbR4cL7rRbqjPPNJIx2ySNf7UPKo4U8aLllVgPkUW4tiTQjZMplrOtsrKNWdSzo+lnZiFEOVGB8u6epdjPoQlfjhXdZ4y+qSR5GRgf9kYB+5JEAPkaVWyKNmgh2K9xwZSbeYrZuLpmS27LhoSS7T5Dk1lI5uRJRxEp74Vc7dHVukvDNJGBirF170fHDgdtaaLnl91jscBT3Mv+RQNaf021Nhh555LLSS464QlCUi8km26IzsFUXJrV3CAkmwFHsLSZk6bmRsaUt0yKiLmH1FTpDyFlIPoICfE2oWU0YyZCbHCNFS/YZGkU28MB40nyahyZhXt8bXt9CqR7a9r6lKs9RdFsV2IkCfBmNIbc65bl4Ug+g3crUnrvLK2UWUYOjDlbtF9o4HdQnpSIT5kwt8LKbjhspRx93NvqgjNq0ByJLPFxcVRQhR74biLRmWGOQ3eLHeht6U9/8zNxYRuCv1Y+tQkbyafirTG05BLL0laWlTHlFbqUrUAcJIGHn0FvbLRBWCxpyXw5r8zeG6s/5E0g5p3uBjyjAe2rGp0tRRpA0gMgQls3qSCcRXwXjJ54sQvv72vw0XKjInKhf4yNnre+++N99So52X+x+7f3r+y3C1B/1RUt6obapiNOsR1vTo4zZbzcZlPrcVOOlKQPtsO6xhMuS5QQLsMWIUeZoz0jMIs5zEE2U/CCx8hQxtDtjsXQQ3Jq9fouoK44nggzYy2GiRxDaMfmN3tEWEaHo+l5azSzRySH6lsOAvjxotreranmbrHFJHH9rXPE2woY3W2q2zTVG6zovUFHUnPQt+k/2Ea8ecXmPe5x/J91hGs6LkhIJcrNHtxTnX9OPpRbR9YzhQxZqGTZg/I36sPWrHf5v8X6bVX8nhUv/P41/9k=);
+		color:#fff;
+	}
+	.rankinglist ul li:nth-child(2) .rankph i{
+		background-image: url(data:image/jpg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABJAAD/4QMqaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjUtYzAxNCA3OS4xNTE0ODEsIDIwMTMvMDMvMTMtMTI6MDk6MTUgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MDI5RENDQUYyNzUyMTFFOEI1OUVDRTQ4NzlCQ0ZDNjYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MDI5RENDQjAyNzUyMTFFOEI1OUVDRTQ4NzlCQ0ZDNjYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDowMjlEQ0NBRDI3NTIxMUU4QjU5RUNFNDg3OUJDRkM2NiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDowMjlEQ0NBRTI3NTIxMUU4QjU5RUNFNDg3OUJDRkM2NiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAQCAgIDAgQDAwQFAwMDBQYEBAQEBgcFBQYFBQcJBwgHBwgHCQkKCwsLCgkMDAwMDAwPDw8PDxEREREREREREREBBAQEBwYHDQkJDRMODQ4TFBEREREUEREREREREREREREREREREREREREREREREREREREREREREREREREREREREf/AABEIACcAHgMBEQACEQEDEQH/xAB8AAEAAwEBAAAAAAAAAAAAAAAHAQYIAwUBAAIDAQAAAAAAAAAAAAAAAAMEAAIFARAAAgECBAQCBwkAAAAAAAAAAQIDBAUAEQYHITFREkETYXEiMmIjCJGhcsIzg2RFFhEAAgMAAgMBAAAAAAAAAAAAAAERAgMSBDEiE0H/2gAMAwEAAhEDEQA/ANv611qtnVaWlVJ7lMhkCyHtihiXnLKfBR9+C55u7KXvAT33eJHqmEtZX3RlPE0kgoqcHogAJI9eH69VIWex6Gjt36l6pYqOsm84+7QXRhKkvwxzAAhj6cU06qgtXUS4td22XS0t5jjkY0xEctIB85Z2YIIyPxMOPTjhH5vlAxyUSD27+oqmWOd1Yh7vWTI58RTUh8tIwehPHGl1aQhXawd4bAEqWVgy5owyII55jxGIQTKPWdwp9B1VxRspblQhJD/Kpp44hJ6+1sJ2zX0QdW9Tnu/peqRamFELSWmqlqe0Di1JVnvDj0K3A4nVvKJrUN+1iufMYcAExRSSSLHGpd3IVVXiSTyAxCChQ6HqqnQ1Zbly77bRqjk+6a2pnjk8sHqAoHrOE7aL6IYVPUsf1PX7/N6Mp9S08SyVtHVxU+Z4d0E2fejdRw8cJ9eeUBtfEgzDuLszeF8+qE9kqW9qRIeMfceeSsMh9uNBXshZ1TIfd7bmyzRx6cp5K65TOkK1lR7XZ3sFLKCAAeOOWtZnUkjS6aRs6aMe1KrLBLEJXcH5jTDKTzC3XuAOMvm+UjfFRBRPrIo5araEU8bRo8twplDTyJBGMy3FnkKqo9JOC9Z+xXXwULZjZjYGzxJcNY6o0/e7pIvs0K3KlNJD3DkfmZuw68sF01u/CZSlKryyrbwbQbcWy8w3nQ2pLPcre9TE0tqS5UslTFnIP0QJM3X4eeCZ6WaiyZS1V+M1r/U/sfkxn/o0f//Z);
+		color:#fff;
+	}
+	.rankinglist ul li:nth-child(3) .rankph i{
+		background-image: url(data:image/jpg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABJAAD/4QMqaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjUtYzAxNCA3OS4xNTE0ODEsIDIwMTMvMDMvMTMtMTI6MDk6MTUgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RkVBNEU1NEIyNzUxMTFFODkzMTBFNUMyMTBFMkFFQTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RkVBNEU1NEMyNzUxMTFFODkzMTBFNUMyMTBFMkFFQTYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGRUE0RTU0OTI3NTExMUU4OTMxMEU1QzIxMEUyQUVBNiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGRUE0RTU0QTI3NTExMUU4OTMxMEU1QzIxMEUyQUVBNiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAQCAgIDAgQDAwQFAwMDBQYEBAQEBgcFBQYFBQcJBwgHBwgHCQkKCwsLCgkMDAwMDAwPDw8PDxEREREREREREREBBAQEBwYHDQkJDRMODQ4TFBEREREUEREREREREREREREREREREREREREREREREREREREREREREREREREREREREf/AABEIACcAHgMBEQACEQEDEQH/xACGAAACAgMAAAAAAAAAAAAAAAAGBwIIAAMFAQACAwEBAAAAAAAAAAAAAAADBQABBAIGEAABAwIDBgMECwAAAAAAAAABAgMEEQUABgchURIiExUxQQiBYjMU8GFxkcHRMkKCI2MRAAEEAgEEAgMAAAAAAAAAAAEAEQIDEgQhMUFxE2EjkTJC/9oADAMBAAIRAxEAPwC7We88KtAEKEELuLqC6pbp/pjsjYXXPwHngF12HlGqqzKU171JbelKLjsy7qB5nHH1R2a/5tt0oMKbN3njlMY68QujlDUyYiUluBKejPk8sKe6ZEV33EqVzIJ8sEo3XLLizWBCZrOf4LuUXb02ytTkYhl2GPipkqWGw2f5KG3dtw09oxyS/wBRyxSp1Su0l5cxziPFcpzzat4YhUQlH2V24U70z+SmOtFooGwsWlYCQag0I2gjxGIomLb8zTGMqT5STz3C2NvL3deO+hkLH1kKGGsbT6SfhZZQ+wKequVZSZ8yK0kl1t5dzhgD4jD4HVSneUqGOt2knp5Vas3CW5BBIpQjxBwoWtbYMGVMlojRkFx50hKUpH02YuMTIsFCUzLXlmM7k25qcWEQo0Zm0sPn9K31voUtQO4LKRXDmNP1EfDLHKz7Auh6rr5MsemAvcHhTcLdNjlhwjaAtRSoV3EYPvzMK3HV0DTi82SMg+obJdwQF32zn50jndi1SVq8zROzCf31y/YcpmapDoor9QVudnxrXlu2i3tT32o70hZJdLbiwkjiO0VG7FjYiC0QqNUmclW17BZ+ydq+XR2/p9LoU5eH8/OuPRYhm7JJkXdAfqry85e9KHLcmXDtnXmxuKVcpDcSM2kL2lbjhA9nicZN+GVbOBz3WjUljN+qHdCNMfTxlUo6V/smaczPIPG+ZsV/hFOYMNBaqCniaVwHUoor/oSl5CJsW2z7EBCOrGjujEvNUa/ZIzNYYk9ExpyXZu5RAhxQcBV0B1OVXufdjPsa1RllCQd+jhHpvsEWlE+WVmP2+zDtKl//2Q==);
+		color:#fff;
+	}
+	
+	.rankinglist .rankwen b{
+		display: block;
+		font-size:.3rem;
+		line-height: 1.6;
+		height: .544rem;
+		overflow: hidden;
+		color:#000;
+	} 
+	.rankinglist .rankwen p{
+		display: block;
+		font-size:.24rem;
 		line-height: 1.5;
-	}
-	.musiclist a p{
-		font-size:.2rem;
-		color:#808080;
-		line-height: 1.7;
-		margin:0;
-	}
-	.musiclist a .share{
-		width:1rem;
-		height:100%;
-		position: absolute;
-		right:0;
-		top:0;
-	}
-	.musiclist a .share i{
+		color:#a9a9a9;
+		height: .36rem;
+		overflow: hidden;
+		margin-bottom:0;
+	} 
+	.rankinglist li .jfen{
 		display: block;
-		width:3px;
-		height:3px;
-		background:#aeaeae;
-		position: absolute;
-		margin:auto;
-		top:0;
-		left:0;
-		bottom:0;
-		right:0;
-		border-radius:50%;
-	}
-	.musiclist a .share i:before{
-		content:'';
-		display: block;
-		width:3px;
-		height:3px;
-		border-radius:50%;
-		background:#aeaeae;
-		position: absolute;
-		top:-6px;
-		left:0;
-	}
-	.musiclist a .share i:after{
-		content:'';
-		display: block;
-		width:3px;
-		height:3px;
-		border-radius:50%;
-		background:#aeaeae;
-		position: absolute;
-		bottom:-6px;
-		left:0;
-	}
-	.musiclist a:active{
-		background: #e8e8e8;
-	}
-	.musiclist a.active span{
-		color:#FF4500;
-	}
-	.musiclist a.active p{
-		color:#FF4500;
-	}
-	.musiclist a.active:after{
-		content:'';
-		width:2px;
-		height:70%;
-		background: #FF4500;
-		position: absolute;
-		margin:auto;
-		top:0;
-		bottom:0;
-		left:0;
+		font-size:.4rem;
+		color:#000;
+		float: left;
+		padding:0 1%;
+		width:30%;
+		line-height: 2;
+		
 	}
 </style>
 <body style="background: #fff;">
-	<div class="musiclist">
-		<a href="#" class="active">
-			<span>不要说话</span>
-			<p>陈奕迅·不想放手</p>
-			<div class="share"><i></i></div>
-		</a>
-		<a href="#">
-			<span>不要说话</span>
-			<p>陈奕迅·不想放手</p>
-			<div class="share"><i></i></div>
-		</a>
-		<a href="#">
-			<span>不要说话</span>
-			<p>陈奕迅·不想放手</p>
-			<div class="share"><i></i></div>
-		</a>
-		<a href="#">
-			<span>不要说话</span>
-			<p>陈奕迅·不想放手</p>
-			<div class="share"><i></i></div>
-		</a>
+	<div class="rankinglist"  id="home">
+		<div class="rankingtit clearfix"><span>排行</span><span style="width:30%;">积分</span></div>
+		<ul>
+			<li class="clearfix" v-for="item in playlist">
+				<div class="rankph" >
+					
+					<i>{{item.xuhao}}</i>
+					
+					<div v-if="item.avatar==''">
+						<img src="../../images/touxiang.jpg">
+						    </div>
+						     <div v-else>
+								<img :src="item.avatar">
+						    </div>
+						
+					
+				
+					<div class="rankwen">
+						<b>{{item.user_name}}</b>
+						<p>{{item.area}}</p>
+					</div>
+				</div> 
+				<span class="jfen">{{item.point}}</span>
+			</li>
+
+		</ul>
 	</div>
 
 </body>
 
 </html>
+
 
 <script src="../../common/jquery-2.1.0.js"></script>
 <script src="../../common/mui.min.js"></script>
@@ -151,5 +186,43 @@
 
 
 <script type="text/javascript">
+	var homes = new Vue({
+		el: '#home',
+		data: {
+			playlist: [],
 
+		},
+		methods: {
+	
+
+			openDetail: function (event) {
+				var el = event.currentTarget;
+				var guid = el.getAttribute('new-xuhao');
+			    el.classList.add("active");
+			
+				var  newid=guid-1;
+				switchTrack(newid);
+				
+
+			}
+		}
+
+	});
+
+			initControl()	
+			//初始化
+			function initControl() {
+
+				top_list({
+					user_id: 10
+				});
+
+			}
+				//获取文章排名列表成功的回调函数
+				function Top_ListSuccess(data){
+
+				homes.playlist=JSON.parse(data.list);
+			
+			
+			}
 </script>

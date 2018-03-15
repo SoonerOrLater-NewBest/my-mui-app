@@ -371,7 +371,28 @@ document.body.appendChild(new_element);
 			alert("修改请求失败");
 			}
 		});
-	}			
+	}	
+	
+		//获取排名列表
+		w.top_list = function(options) {
+			var data = getdata(options,'action=top_list');
+			mui.ajax(httpUrl+"action=top_list",{
+				data:data,
+				dataType:'json',//服务器返回json格式数据
+				type:'get',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				success:function(data){				
+					logData(data);
+					setTimeout(function(){
+						Top_ListSuccess(data);
+					},500);
+				},
+				error:function(xhr,type,errorThrown){
+					
+				alert("获取请求失败");
+				}
+			});
+		}	
 	//获取分类第一级
 	w.ajax_get_first_category = function(options) {
 		startLoad();

@@ -120,7 +120,7 @@
 
 		<div id="home">
 		<div class="musiclist"   >
-			<a   v-for="item in playlist" :new-xuhao="item.xuhao"@tap="openDetail($event)" >
+			<a  v-for="item in playlist" :new-xuhao="item.xuhao"@tap="openDetail($event)" >
 				<span>{{item.title}}</span>
 				<p>{{item.artist}}</p>
 				<audio  :src="item.mp3"></audio>
