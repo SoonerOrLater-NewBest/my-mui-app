@@ -73,13 +73,14 @@ mui.plusReady(function(){
 		if(clientX > parseInt(window.innerWidth - 55) && clientX <= parseInt(window.innerWidth)) {
 			//判断是否已经登录成功
 			if (!localStorage.getItem('id')) {
-				mui.toast("请先登录！");
+				Ntoast("error","请先登录！")
 				return;
 			}
 			
 			var contentlist=document.getElementById("content").value;
 			if(contentlist == ''){
-				mui.toast('请填写内容！');
+			
+				Ntoast("error","请填写内容！")
 				return;
 			}
 			
