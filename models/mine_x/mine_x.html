@@ -134,8 +134,7 @@
                 '<img src="https://webapi.amap.com/images/amap.jpg">'+
                 '高德是中国领先的数字地图内容、导航和位置服务解决方案提供商。<br/>'+
                 '<a target="_blank" href = "https://mobile.amap.com/">点击下载高德地图</a></div>'
-//			
-'<ul class="info_ul">'
+//			'<ul class="info_ul">'
 //			+'<li class="info_li">'
 //			+'<span class="info_span">id：</span>' + point.id + '</li>'
 //			+'<li class="info_li">'
@@ -145,16 +144,65 @@
 			var infoWindow = new BMap.InfoWindow(sContent);// 创建信息窗口对象
 		   	thisMaker.openInfoWindow(infoWindow);//图片加载完毕重绘infowindow
 		   }
+		
+		  function androidMarket(pname) {
+        plus.runtime.openURL("market://details?id=" + pname);
+    }
+
+    function iosAppstore(url) {
+        plus.runtime.openURL("itms-apps://" + url);
+    }
 	// 设置地图的中心点
 	function setCenter() {
+
+var tmp = GPS.gcj_encrypt(parseFloat(currentLat),parseFloat(currentLon));
+        //plus.runtime.openURL('baidumap://map/direction?destination='+analysis_cps_y+','+analysis_cps_x+'&mode=driving&coord_type=bd09&src=webapp.marker.yourCompanyName.yourAppName');
+        var url = null,
+            id = null,
+            f = null;
+        switch (plus.os.name) {
+            case "Android":
+                // 规范参考官方网站：http://developer.baidu.com/map/index.php?title=uri/api/android
+                url = 'baidumap://map/marker?location=' + tmp.lat + ',' + tmp.lon + '&title=' + mpMc + '&content=' + mp_dz + '&src=wenvip';
+                f = androidMarket;
+                id = "com.baidu.BaiduMap";
+                break;
+            case "iOS":
+                // 规范参考官方网站：http://developer.baidu.com/map/index.php?title=uri/api/ios
+                url = 'baidumap://map/navi?location=' + tmp.lat  + ',' + tmp.lon + '&src=push&type=BLK&src=webapp.line.yourCompanyName.yourAppName';
+                f = iosAppstore;
+                id = "itunes.apple.com/cn/app/bai-du-de-tu-yu-yin-dao-hang/id452186370?mt=8";
+                break;
+            default:
+                return;
+                break;
+        }
+        plus.runtime.openURL(url, function(e) {
+            plus.nativeUI.confirm("检查到您未安装\"百度地图\"，是否到商城搜索下载？", function(i) {
+                if (i.index == 0) {
+                    f(id);
+                }
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+
 		
-		var tmp = GPS.gcj_encrypt(parseFloat(currentLat),parseFloat(currentLon));
+		// var tmp = GPS.gcj_encrypt(parseFloat(currentLat),parseFloat(currentLon));
 	
-		// 设置目标位置坐标点和其实位置坐标点
-		var dst = new plus.maps.Point(120.038474, 31.701447); // 国宁寺 
-		var src = new plus.maps.Point(tmp.lon,tmp.lat); // 自己位置
-		// 调用系统地图显示 
-		plus.maps.openSysMap(dst, "测试", src);
+		// // 设置目标位置坐标点和其实位置坐标点
+		// var dst = new plus.maps.Point(120.038474, 31.701447); // 国宁寺 
+		// var src = new plus.maps.Point(tmp.lon,tmp.lat); // 自己位置
+		// // 调用系统地图显示 
+		// plus.maps.openSysMap(dst, "测试", src);
 
 
 	
