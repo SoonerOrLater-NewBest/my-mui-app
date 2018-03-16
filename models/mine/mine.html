@@ -188,16 +188,26 @@ mui.plusReady(function(){
 					}			
 						var id = this.getAttribute('id');
 						var title_name = this.getAttribute('title');
-						var mine_pages_url="../"+id+"/"+id+".html";		
+						var mine_pages_url=id+"/"+id+".html";		
 						titleNView1.titleText = title_name;
-						mui.openWindow({
-							url:mine_pages_url,
-							id:mine_pages_url,
-							styles:{
-								titleNView:titleNView1,
-								'popGesture':'none'
-							}
-						})
+						if(id==="mine_info"){
+							mui.openWindow({
+								url:mine_pages_url,
+								id:mine_pages_url,
+								styles:{
+									titleNView:titleNView1,
+									'popGesture':'none'
+								}
+							})
+						}else{
+							mui.openWindow({
+								url:mine_pages_url,
+								id:mine_pages_url,
+								styles:{
+									titleNView:titleNView1,
+								}
+							})
+						}
 				})
 			}
 			
