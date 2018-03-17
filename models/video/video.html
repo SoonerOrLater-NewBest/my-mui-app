@@ -10,11 +10,11 @@
 	<link rel="stylesheet" type="text/css" href="video.css"/>
 </head>
 
-<body>	
+<body style="background: #fff;">	
 	<div id="loader-wrapper">
 		<div id="loader"></div>
 	</div>	
-<div class="mui-content" id="video">
+<div id="video">
 	<div class="videowrap" v-for="item in items" :key="item.id">
 		<img src="default.jpg" alt="" @tap="play(item.id,item.video_src)"/>
 		<video width="10px" height="10px" :id="item.id">

@@ -1,22 +1,4 @@
-#video{font-size: 0}
-.videowrap{
-	width: 47%;position: relative;
-	background-color: #fff;
-	display: inline-block;
-	vertical-align: top;
-	margin: 15px 1% 15px 2%;
-}
-.videowrap p{
-	padding:0 0.2rem;margin: 0;
-	line-height: 1.5;
-}
-.videowrap .title{	
-	font-size: 0.28rem;	
-	color: #333;
-}
-.videowrap img{width: 100%;display: block;}
-.videowrap video{position: absolute;top: 0;z-index: -1;}
-.videowrap .zhaiyao{
-	font-size: 0.26rem;
-	color: #808080;
-}
+
+#chaojing{font-size: 0;padding: 4% 2%;}
+#chaojing .item{display: inline-block;width: 33.333333%;padding: 0 2%;margin-bottom: 4%;}
+#chaojing .item img{width: 100%;display: block;}

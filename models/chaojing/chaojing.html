@@ -14,20 +14,21 @@
 	<div id="loader-wrapper">
 		<div id="loader"></div>
 	</div>	
-<div class="mui-content" id="video">
-	<div class="videowrap" v-for="item in items" :key="item.id">
-		<img src="default.jpg" alt="" @tap="play(item.id,item.video_src)"/>
-		<video width="10px" height="10px" :id="item.id">
-			<source :src="item.video_src" type="video/mp4"></source>
-			<source :src="item.video_src" type="video/ogg"></source>
-			<source :src="item.video_src" type="video/webm"></source>
-			当前浏览器不支持 video直接播放，点击这里下载视频： <a :href="item.video_src">下载视频</a>
-		</video>
-		<p class="title mui-ellipsis">{{item.title}}</p>
-		<p class="zhaiyao mui-ellipsis">{{item.zhaiyao}}</p>
+	<div id="chaojing">
+		<div class="item">
+			<img src="jingshu.png" alt="" />
+		</div>
+		<div class="item">
+			<img src="jingshu.png" alt="" />
+		</div>
+		<div class="item">
+			<img src="jingshu.png" alt="" />
+		</div>
+		<div class="item">
+			<img src="jingshu.png" alt="" />
+		</div>
+		
 	</div>
-	
-</div>
 
 <script src="../../common/mui.min.js"></script>
 <script src="../../common/jquery-2.1.0.js"></script>
@@ -36,8 +37,8 @@
 
 <script type="text/javascript">
 	mui.init();
-	var video = new Vue({
-		el: '#video',
+	var chaojing = new Vue({
+		el: '#chaojing',
 			data: {
 				items: [],
 			},
@@ -45,12 +46,7 @@
 				
 			},
 			created : function (){
-				this.$nextTick(function () {
-					ajax_getArticleList({
-						channel_id:68,
-						channel_name:"simiao",
-					});
-			    })
+				
 			},
 			mounted : function(){
 				$(window).load(function() { 
@@ -63,10 +59,6 @@
 	})
 	
 
-	function articleListSuccess(data){
-		video.items=JSON.parse(data.list);		
-
-	}
 </script>		
 	
 </body>

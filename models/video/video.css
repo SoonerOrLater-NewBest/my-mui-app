@@ -1,22 +1,24 @@
-#video{font-size: 0}
+#video{font-size: 0;padding: 0 1%;}
 .videowrap{
-	width: 47%;position: relative;
+	width: 48%;position: relative;
 	background-color: #fff;
 	display: inline-block;
 	vertical-align: top;
-	margin: 15px 1% 15px 2%;
+	margin: 15px 1%;
 }
 .videowrap p{
 	padding:0 0.2rem;margin: 0;
-	line-height: 1.5;
+	line-height: 1.4;
 }
 .videowrap .title{	
 	font-size: 0.28rem;	
 	color: #333;
+	padding-top: 6px;
 }
 .videowrap img{width: 100%;display: block;}
 .videowrap video{position: absolute;top: 0;z-index: -1;}
 .videowrap .zhaiyao{
-	font-size: 0.26rem;
-	color: #808080;
+	font-size: 0.24rem;
+	color: #999;
+	padding-bottom: 6px;
 }
