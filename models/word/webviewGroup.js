@@ -15,7 +15,6 @@ var webviewGroup = function(id, options) {
 };
 
 var proto = webviewGroup.prototype;
-var web_top = plus.navigator.getStatusbarHeight()+44+38;
 proto._init = function() {
 	this._initParent();
 	this._initNativeView();
@@ -29,6 +28,7 @@ proto._initParent = function() {
 	}
 };
 proto._initNativeView = function() {	
+	var web_top = plus.navigator.getStatusbarHeight()+44+38;
 	this.nativeView = new plus.nativeObj.View('__MUI_TAB_NATIVE', {
 		'top': web_top,//这个需要根据顶部导航及顶部选项卡高度自动调整
 		'height': (window.screen.height - web_top)+"px",

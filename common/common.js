@@ -200,7 +200,25 @@ function generateUUID() {
 function getDateTimeStamp (dateStr) {
     return Date.parse(dateStr.replace(/-/gi,"/"));
 }
-
+//淡出
+function fadeOut(el,time){  
+    if(el.style.opacity === ""){  
+        el.style.opacity = 1;  
+    }  
+    if(el.style.display === "" || el.style.display === 'none'){  
+        el.style.display = 'block';  
+    }  
+  
+    var t = setInterval(function(){  
+        if(el.style.opacity > 0){  
+            el.style.opacity = parseFloat(el.style.opacity)-0.01;  
+        }  
+        else{  
+            clearInterval(t);  
+            el.style.display = 'none'  
+        }  
+    },time/100);  
+}  
 //重新加载JS刷新页面
 var reloadJs = function(id){
     var jsObj = document.getElementById(id);

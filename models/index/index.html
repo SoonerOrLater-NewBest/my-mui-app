@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<title>首页</title>
 	<link href="../../common/mui.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="../../css/swiper-3.4.2.min.css" />
 	<link href="../../common/common.css" rel="stylesheet" />
 	<link href="home.css" rel="stylesheet" />	
 
@@ -59,9 +58,9 @@
 									
 		<h1 class="h_title"><span class="iconfont icon-fengjing font-normal" style="color: #0484F6;"></span>寺院景致<span @tap="openNewWebview" class="read-more font-normal">更多<i class="iconfont icon-gengduo"></i></span></h1>	
 		
-		<div class="swiper-container swiper-container2 myblock" id="scenery">
-		    <div class="swiper-wrapper">
-		        <div class="swiper-slide" v-for="item in scenery" :style="{backgroundImage:'url('+item.img_url+')',backgroundSize:'cover'}">
+		<div class="mui-scroll-wrapper myblock mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="scenery">
+		    <div class="mui-scroll">
+		        <div class="scroll-slide" v-for="item in scenery" :style="{backgroundImage:'url('+item.img_url+')',backgroundSize:'cover'}">
 		        </div>
 		    </div>		    		    
 		</div>
@@ -86,7 +85,6 @@
 	</div>
 	
 	<script src="../../common/mui.min.js"></script>
-	<script src="../../js/swiper-3.4.2.min.js"></script>	
 	<script src="../../common/common.js"></script>
 	<script src="util.js"></script>		
 	<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
@@ -352,6 +350,26 @@
 							}
 						});
 						  break;
+						case 55:
+						mui.openWindow({
+							url : '../chaojing/chaojing.html',
+							id : '../chaojing/chaojing.html',
+							styles: {
+								"bounce": "vertical",
+								"titleNView": titleNView1
+							}
+						});
+						  break;
+						case 72:
+							mui.openWindow({
+								url : 'imageviewer-native.html',
+								id : 'imgview',
+								styles: {
+									"bounce": "vertical",
+									"titleNView": titleNView1
+								}
+							});
+						  break;
 						case 74:
 							mui.openWindow({
 								url : '../video/video.html',
@@ -495,19 +513,7 @@
 				homes.news[i].tags = homes.news[i].tags.split('|');
 			}
 		};
-		console.log(homes.news);
-		setTimeout(function () {
-			homes.loading = true;
-			isLoadArticleList = false;
-			var mySwiper2 = new Swiper ('.swiper-container2', {
-				freeMode : true,
-				slidesPerView :2.5,
-				spaceBetween : 20,
-				observer:true, //修改swiper自己或子元素时，自动初始化swiper
-   				observeParents:true,//修改swiper的父元素时，自动初始化swiper
-			});
-		},300);
-
+		homes.loading = true;
 	}
 	</script>
 </body>

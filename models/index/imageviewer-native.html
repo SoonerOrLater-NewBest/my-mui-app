@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../common/common.css">    
     <!--App自定义的css-->
     <style type="text/css">
+    body{overflow-y: hidden;}
     ul,li{list-style: none;margin: 0;padding: 0;}
     p{margin: 0;}
     .twoRankedBox{margin: 0.2rem;padding-bottom: 0.2rem;}
@@ -46,6 +47,9 @@
   </head>
 
   <body>
+  	<div id="loader-wrapper">
+			<div id="loader"></div>
+		</div>	
     <div class="mui-content">
       <div class="twoRankedBox mui-clearfix">
         	<ul class="BoxLeft"> 
@@ -84,7 +88,10 @@
 				        $('.BoxRight').append(chtml); 
 				    }
 				}
-				
+        $('#loader').fadeOut(); 
+        $('#loader-wrapper').delay(350).fadeOut('slow'); 
+        $('body').delay(350).css({'overflow-y':'visible'});
+			
 				mui.plusReady(function() {					      
 			      var images = [].slice.call(document.querySelectorAll('.twoRankedBox img'));
 			      var urls = [];

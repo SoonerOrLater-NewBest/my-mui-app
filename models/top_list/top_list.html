@@ -8,24 +8,6 @@
 	<link rel="stylesheet" type="text/css" href="../../common/mui.min.css" />
 	<link rel="stylesheet" type="text/css" href="../../common/common.css" />
 
-	<script>
-		(function (doc, win) {
-			var docEl = doc.documentElement,
-				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
-			recalc = function () {
-				var clientWidth = docEl.clientWidth;
-				if (!clientWidth) return;
-				if (clientWidth >= 750) {
-					docEl.style.fontSize = '100px';
-				} else {
-					docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
-				}
-			};
-			if (!doc.addEventListener) return;
-			win.addEventListener(resizeEvt, recalc, false);
-			doc.addEventListener('DOMContentLoaded', recalc, false);
-		})(document, window);
-	</script>
 </head>
 <style>
 	.rankinglist {
@@ -49,9 +31,10 @@
 		display: block;
 		width: 70%;
 		float: left;
-		font-size: .31rem;
+		font-size: .32rem;
 		color: #484848;
 		line-height: .8rem;
+		text-align: center;
 	}
 
 	.clearfix {
@@ -148,8 +131,9 @@
 	}
 
 	.rankinglist li .jfen {
+		text-align: center;
 		display: block;
-		font-size: .4rem;
+		font-size: .32rem;
 		color: #000;
 		float: left;
 		padding: 0 1%;
@@ -160,6 +144,9 @@
 </style>
 
 <body style="background: #fff;">
+	<div id="loader-wrapper">
+		<div id="loader"></div>
+	</div>
 	<div class="rankinglist" id="home">
 		<div class="rankingtit clearfix">
 			<span>排行</span>
@@ -198,8 +185,8 @@
 
 <script src="../../common/jquery-2.1.0.js"></script>
 <script src="../../common/mui.min.js"></script>
-<script src="../../common/common.js"></script>
 <script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../common/common.js"></script>
 <script src="../../common/ajax.js"></script>
 
 
@@ -210,6 +197,13 @@
 		data: {
 			playlist: [],
 
+		},
+		mounted : function(){
+			$(window).load(function() { 
+                $('#loader').fadeOut(); 
+                $('#loader-wrapper').delay(350).fadeOut('slow'); 
+                $('body').delay(350).css({'overflow-y':'visible'});
+            })
 		}
 
 	});

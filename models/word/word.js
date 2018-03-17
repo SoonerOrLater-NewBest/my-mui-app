@@ -15,11 +15,13 @@ mui.plusReady(function() {
 			id: "word_child3.html",
 			url: "word_child3.html",
 			extras: {}
-		}, {				
-			id: "word_child4.html",
-			url: "word_child4.html",
-			extras: {}
-		}, {
+		}, 
+//		{
+//			id: "word_child4.html",
+//			url: "word_child4.html",
+//			extras: {}
+//		}, 
+		{
 			id: "word_child5.html",
 			url: "word_child5.html",
 			extras: {}

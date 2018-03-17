@@ -5,10 +5,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<title>来寺路线</title>
-
+	<link rel="stylesheet" type="text/css" href="../../../common/common.css"/>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YFjQXG1TLUUfWmKOqUPy8l09"></script>
 	<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
-
+	
 	<style type="text/css">
 	body, html,#map {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
 	.dianwo{animation: tiao 1s linear infinite alternate;border-radius: 6px;}
@@ -22,12 +22,16 @@
 </head>
 
 <body>	
-	<div id="map">地图加载中...</div>
+	<div id="map">
+		<div id="loader-wrapper">
+			<div id="loader"></div>
+		</div>
+	</div>
 </body>
 
 </html>
 <script src="../../../common/mui.min.js"></script>
-
+<script src="../../../common/jquery-2.1.0.js"></script>
 <script src="gps.js"></script>
 <script type="text/javascript">
 	var em = null, map = null;
@@ -51,6 +55,11 @@
 	document.addEventListener("DOMContentLoaded", function () {
 		em = document.getElementById("map");
 		plusReady();
+		$(window).load(function() { 
+            $('#loader').fadeOut(); 
+            $('#loader-wrapper').delay(350).fadeOut('slow'); 
+            $('body').delay(350).css({'overflow-y':'visible'});
+        }) 
 	}, false);
 
 
