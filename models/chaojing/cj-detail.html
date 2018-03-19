@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../common/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../common/common.css"/>		
+	<style>
+		#detail{
+			padding: 0.22rem 0.3rem;background-color: #fff;min-height: 100vh;
+		}
+	</style>
+	</head>
+	<body>
+		<div id="loader-wrapper">
+			<div id="loader"></div>
+		</div>	
+		<div id="detail">
+			<div class="">
+				{{content}}
+			</div>
+		</div>
+	<script src="../../common/mui.min.js"></script>	
+	<script src="../../common/jquery-2.1.0.js"></script>	
+	<script src="../../js/vue.min.js"></script>
+	<script src="../../common/common.js"></script>	
+	
+	<script>
+		mui.init();
+		var detail = {};
+		mui.plusReady(function(){
+			var self = plus.webview.currentWebview();
+			var content = self.content;	
+			mui.back = function(){
+			    self.close();
+			};
+			list = new Vue({
+				el: '#detail',
+				data: {
+					content: content,
+				},
+				mounted : function (){
+					$('#loader').fadeOut(); 
+            		$('#loader-wrapper').delay(350).fadeOut('slow'); 
+            		$('body').delay(350).css({'overflow-y':'visible'});
+				}
+			})
+		})
+
+		
+		
+	</script>
+	</body>
+</html>
