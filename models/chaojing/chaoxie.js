@@ -58,7 +58,7 @@ var autoRun = null;
 				}
 
     			left += charWidth;
-    			if (left > getObj('divText').style.Width - charWidth) {
+    			if (left > ($('#divText').width() - charWidth)) {
     				top += 40;
     				left = 0;
     				addSpan(spanObj);
