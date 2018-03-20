@@ -7,11 +7,12 @@
 	<link rel="stylesheet" type="text/css" href="../../common/mui.min.css"/>
 	<link rel="stylesheet" type="text/css" href="../../common/common.css"/>		
 <style>
+	
 	#detail{
 		padding: 0.22rem 0.3rem;background-color: #fff;min-height: 100vh;
 	}
 	#txtInput{
-		word-break:break-all; word-wrap:break-word; width:100%; word-spacing:normal; letter-spacing:0px; margin:0px; border:none; padding:0px; position:absolute; top:0px; left:0px; padding-top:18px; height:100%; overflow-y:hidden; background-color:#ffc8a3; color:white;  line-height:40px; font-family:Consolas; font-size:16px;
+	word-break:break-all; word-wrap:break-word; width:100%; word-spacing:normal; letter-spacing:0px; margin:0px; border:none; padding:0px; position:absolute; top:0px; left:0px; padding-top:18px; height:100%; overflow-y:hidden; background-color:#ffc8a3; color:white;  line-height:40px; font-family:Consolas; font-size:16px;
 	}
 	#divText{
 		z-index:2; word-spacing:0px; letter-spacing:0px; word-break:break-all; word-wrap:break-word; position:absolute; padding:0px; margin:0px; left:0px; width:100%; color:#333; line-height:40px; font-family:Consolas; font-size:16px;
@@ -33,7 +34,7 @@
 			用时：<span id="spanTime">0</span>
 		</div>
 		<div id="divMain" style="position:relative; height:70vh; width:100%; overflow-y:scroll; background-color:#ffc8a3; border:solid 5px #ff4500;">
-			<textarea id="txtInput" disabled onkeyup="changeText();">
+			<textarea id="txtInput" disabled>
 			</textarea>
 			<div id="divText" onclick="getObj('txtInput').focus();">
 				<!--{{content}}-->
@@ -61,6 +62,12 @@
 				content: content,
 			},
 			mounted : function (){
+				var bind_name="input"; 
+				//判断是否为IE内核 IE内核的事件名称要改为propertychange 
+				if(navigator.userAgent.indexOf("MSIE")!=-1) bind_name="propertychange";
+				$('#txtInput').on(bind_name,function(){
+					changeText();
+				})
 				selectText(this.content);
 				$('#loader').fadeOut(); 
         		$('#loader-wrapper').delay(350).fadeOut('slow'); 
