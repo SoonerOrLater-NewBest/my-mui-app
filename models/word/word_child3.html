@@ -3,14 +3,44 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title></title>
+		<title>佛曲赏析</title>
 		<link rel="stylesheet" type="text/css" href="../../common/mui.min.css"/>
-		<link rel="stylesheet" type="text/css" href="../../common/fonts/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../../common/common.css"/>
 		<link rel="stylesheet" type="text/css" href="word.css"/>
-		<script src="../../common/mui.min.js"></script>
-	</head>
-	<body>
-		<audio src="../../source/ztfmz.mp3"></audio>
 		
+	</head>
+	<body style="background: #fff;">
+		<div id="audio">					
+			<div style="" class="btn-audio rotateClass">
+				<audio src="../../source/ztfmz.mp3" id="mp3Btn"></audio>
+			</div>
+		</div>
+	<script src="../../common/mui.min.js"></script>	
+	<script src="../../common/jquery-2.1.0.js"></script>	
+	
+	<script>
+		$(document).ready(function(){ 
+        //播放完毕
+        $('#mp3Btn').on('ended', function() {
+            console.log("音频已播放完成");
+            $('.btn-audio').removeClass('rotateClass');
+        });
+        //播放器控制
+        var audio = document.getElementById('mp3Btn');
+        audio.volume = .3;
+        $('.btn-audio').click(function() {
+
+            event.stopPropagation();//防止冒泡
+            if(audio.paused){ //如果当前是暂停状态
+                $('.btn-audio').addClass('rotateClass');
+                audio.play(); //播放
+                return;
+            }else{//当前是播放状态
+                $('.btn-audio').removeClass('rotateClass');
+                audio.pause(); //暂停''
+            }
+        });
+    });
+	</script>	
 	</body>
 </html>

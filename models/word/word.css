@@ -48,3 +48,51 @@ h1,h2,h3{font-weight: normal;font-size: 100%;}
 }
 .content-info{padding: 2% 0;}
 .content p{font-size: 0.28rem;color: #333;}
+/*音乐*/
+#audio{
+	position: relative;
+	font-size: 0;padding: 0 1%;
+}
+.btn-audio{
+	width: 31.333333333333%;position: relative;
+	padding-bottom: 31.33333333333%;
+	background: url(img/audio.jpg) no-repeat center center/cover;
+	display: inline-block;
+	vertical-align: top;
+	margin: 10px 1%;
+}
+.rotateClass{
+
+ -webkit-transform:translate3d(0,0,0);
+    -moz-transform:translate3d(0,0,0);
+    transform:translate3d(0,0,0);
+    /* 设置动画，animation:动画名称 动画播放时长单位秒或微秒 动画播放的速度曲线linear为匀速 动画播放次数infinite为循环播放; */
+    -webkit-animation:play 3s linear infinite;
+    -moz-animation:play 3s linear infinite;
+    animation:play 3s linear infinite;
+}
+@-webkit-keyframes play{
+    0%  {
+
+        -webkit-transform:rotateX(0deg);
+    }
+    100% {
+        -webkit-transform:rotate(360deg);
+
+    }
+}
+@-moz-keyframes play{
+    0%  {
+        -moz-transform:rotate(0deg);
+    }
+    100% {
+        -moz-transform:rotate(360deg);
+    }
+}
+@keyframes play{
+    0%  {
+         transform:rotate(0deg);
+    }
+    100% {
+         transform:rotate(360deg);
+    }
