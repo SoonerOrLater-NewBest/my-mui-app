@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../common/mui.min.js"></script>
+	
 		<title>大签坤</title>
 		<style type="text/css">
 			html {
@@ -514,6 +515,7 @@
 			<p class="prompt" style="font-size: 40px;text-align: center;">请用竖屏展示</p>
 		</div>
 	</body>
+	<script src="../../common/jquery-2.1.0.js"></script>
 	<script type="text/javascript">
 		var container_1_dom=document.getElementById("container_1");
 		var container_2_dom=document.getElementById("container_2");
@@ -547,51 +549,46 @@
 			audio.volume=1;//设置音量大小0-1
 			//audio.play();//播放音乐
 		})
-		loadXMLDoc();
+		
+		
 		function loadXMLDoc()
 		{
-			var xmlhttp;
-			if (window.XMLHttpRequest)
-			{
-				//  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-				xmlhttp=new XMLHttpRequest();
-			}
-			else
-			{
-				// IE6, IE5 浏览器执行代码
-				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			xmlhttp.onreadystatechange=function()
-			{
-				if (xmlhttp.readyState==4 && xmlhttp.status==200)
-				{
-					var arr=xmlhttp.responseText;
-	
-					jsObject = JSON.parse(arr);
-					qian=jsObject.jieqian[0].qian;
-					qiantype=jsObject.jieqian[0].qiantype;
-					qianname=jsObject.jieqian[0].qianname;
-					qiancontent=jsObject.jieqian[0].qiancontent;
-					qianshi=jsObject.jieqian[0].qianshi;
-					qianjie=jsObject.jieqian[0].qianjie;
+				$.ajax({
+					url: "jieqian.json",
+					type:"POST",
+					dataType: 'JSON',
+					data: {
+					},
+					success: function(data){
+							jsObject = data;
+							qian=jsObject.jieqian[0].qian;
+							qiantype=jsObject.jieqian[0].qiantype;
+							qianname=jsObject.jieqian[0].qianname;
+							qiancontent=jsObject.jieqian[0].qiancontent;
+							qianshi=jsObject.jieqian[0].qianshi;
+							qianjie=jsObject.jieqian[0].qianjie;
+							
+							qiana=qian.length;
+							qianb=qiantype.length+qiana;
+							qianc=qianname.length+qianb;
+							qiand=qiancontent.length+qianc;
+							qiane=qianshi.length+qiand;
+							qianf=qianjie.length+qiane;
+							
+							document.getElementById("diji").innerHTML = qian;
 					
-					qiana=qian.length;
-					qianb=qiantype.length+qiana;
-					qianc=qianname.length+qianb;
-					qiand=qiancontent.length+qianc;
-					qiane=qianshi.length+qiand;
-					qianf=qianjie.length+qiane;
-					document.getElementById("diji").innerHTML = qian;
-//					writeObj(qian);
-//					console.log(qian);
-					
-					
-				}
-			}
-			xmlhttp.open("GET","jieqian.json",true);
-			xmlhttp.send();
+					},
+					error: function(){
+						
+					}
+				})
+
+
+			
 		
 		}	
+
+
 		var zia=1,zib=1,zic=1,zid=1,zie=1,zif=1;
 					function typea(){
 						
@@ -669,8 +666,10 @@
 		Array.prototype.forEach.call(jieqianDom,function(e){
 			//console.log(e)
 			//e.onclick=fade;
+		
 			e.addEventListener("touchstart", fade, false);
-			slowshow();
+		
+			
 		})
 		
 		//againDom.onclick=again;
@@ -680,13 +679,14 @@
 			showDom.style.transform="scale(0)";
 			showDom.style.webkitTransform="scale(0)";
 			window.addEventListener('devicemotion', shakeEventHandler, false);//监听的是加速度变化
-			
+		
 		}
 	
 		function fade(){
 			//console.log("hshs");
 			explainDom.className="bounceInLeft";
 			Array.prototype.forEach.call(jieqianDom,function(e){
+				slowshow();
 				e.style.display="none";
 			})
 		}
@@ -732,6 +732,7 @@
 							showDom.style.webkitTransform="scale(1)";
 							explainDom.className="";
 							Array.prototype.forEach.call(jieqianDom,function(e){
+							
 								e.style.display="inline-block";
 							})
 							window.removeEventListener('devicemotion', shakeEventHandler, false);
@@ -747,7 +748,7 @@
 //					qDom.setAttribute("src",exArr[i][1]);
 					showDom.style.transform="scale(1)";
 					showDom.style.webkitTransform="scale(1)";
-					
+			
 					loadXMLDoc();
 			
 //					console.log(qian);
