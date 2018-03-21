@@ -374,7 +374,17 @@
 		"pages": {
 			"models/index/index.html": {
 				"resources": [
-					"models/news/listview.html"
+					"models/news/listview.html",
+					"fonts/iconfont.css",
+					"common/mui.min.js",
+					"common/common.js",
+					"common/ajax.js",
+					"models/index/util.js",
+					"js/vue.min.js",
+					"common/common.css",
+					"common/md5.js",
+					"common/mui.min.css",
+					"models/index/home.css"
 				],
 				"refer": [
 					"models/news/detail.html",
@@ -383,7 +393,9 @@
 					"models/mine/mine.html",
 					"models/index/imageviewer-native.html",
 					"models/question/question.html",
-					"models/word/word.html"
+					"models/word/word.html",
+					"models/chouqian/chouqian.html",
+					"models/chaojing/chaojing.html"
 				],
 				"priority": 0
 			},
@@ -393,6 +405,131 @@
 					"models/question/question_tw.html",
 					"models/question/question_xq.html"
 				],
+				"priority": 0
+			},
+			"models/chouqian/chouqian.html": {
+				"resources": [
+					"models/chouqian/img/6.png",
+					"models/chouqian/img/ex_6.png",
+					"models/chouqian/img/q_6.png",
+					"models/chouqian/music/Gala-zmczx.mp3",
+					"models/chouqian/img/ex_1.png",
+					"models/chouqian/img/3.png",
+					"models/chouqian/img/aq_1.png",
+					"models/chouqian/img/jt.png",
+					"models/chouqian/img/aq.png",
+					"models/master/master-bg.jpg",
+					"models/chouqian/img/11_07.png",
+					"models/chouqian/img/jk.png",
+					"models/chouqian/img/11_09.png",
+					"models/chouqian/img/sy.png",
+					"models/chouqian/img/s_0.png",
+					"models/chouqian/img/7.png",
+					"models/chouqian/img/aq_2.png",
+					"models/chouqian/img/9.png",
+					"models/chouqian/img/2.png",
+					"models/chouqian/img/cy.png",
+					"models/chouqian/img/5.png",
+					"models/chouqian/img/jt_1.png",
+					"models/chouqian/img/q_2.png",
+					"models/chouqian/img/ex_2.png",
+					"models/chouqian/img/q_7.png",
+					"models/chouqian/img/ex_7.png",
+					"models/chouqian/img/00.png",
+					"models/chouqian/img/q_10.png",
+					"models/chouqian/img/ex_10.png",
+					"models/chouqian/img/ex_8.png",
+					"models/chouqian/img/q_8.png",
+					"models/chouqian/img/1timg.png",
+					"models/chouqian/img/titpic.jpg",
+					"models/chouqian/img/qiqiubg.jpg",
+					"models/chouqian/华文行楷.ttf",
+					"models/chouqian/hw.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"models/chaojing/chaojing.html": {
+				"resources": [
+					"models/chaojing/jingshu.png",
+					"models/chaojing/chaojing.css",
+					"source/mock.json",
+					"common/common.css",
+					"common/mui.min.css"
+				],
+				"refer": [
+					"models/chaojing/cj-list.html"
+				],
+				"priority": 0
+			},
+			"models/chaojing/cj-list.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"common/common.css",
+					"common/mui.min.css"
+				],
+				"refer": [
+					"models/chaojing/cj-detail.html"
+				],
+				"priority": 0
+			},
+			"models/chaojing/cj-detail.html": {
+				"resources": [
+					"models/chaojing/chaoxie.js",
+					"common/common.css",
+					"common/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"models/word/word_child1.html": {
+				"resources": [
+					"common/jquery-2.1.0.js",
+					"models/word/word.css",
+					"common/common.css",
+					"common/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"models/mine/mine.html": {
+				"resources": [
+					"models/mine/code.png",
+					"fonts/mui.ttf",
+					"images/transparent.png",
+					"models/mine/mine.css",
+					"common/common.css",
+					"common/md5.js",
+					"common/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"models/word/word.html": {
+				"resources": [
+					"models/word/webviewGroup.js",
+					"models/word/word.css",
+					"models/word/word_child1.html",
+					"models/word/word.js",
+					"common/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"models/news/detail.html": {
+				"resources": [
+					"models/news/list-to-detail.css",
+					"common/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"models/news/listview.html": {
+				"resources": [
+					"common/common.css",
+					"common/mui.min.css"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
@@ -414,39 +551,28 @@
 				"images/line.jpg",
 				"models/player/player.js",
 				"js/hui-water-fall.js",
-				"fonts/mui.ttf",
 				"models/mine/card.png",
 				"models/question/question.js",
 				"js/mui.lazyload.js",
-				"models/mine/mine.css",
 				"models/mine/face.png",
 				"models/question/question.css",
 				"js/hui-popover-msg.js",
 				"js/hui-form.js",
 				"models/master/master.css",
-				"common/jquery-2.1.0.js",
-				"models/index/home.css",
 				"js/hui-image-cuter.js",
 				"images/gd.jpg",
 				"js/hui-touch-pwd.js",
-				"models/word/word_child1.html",
-				"js/vue.min.js",
 				"js/cities.js",
 				"css/swiper-3.4.2.min.css",
-				"models/mine/code.png",
 				"images/jump.gif",
 				"models/word/word_child2.html",
 				"fonts/SourceHanSansCN-Normal.otf",
 				"images/banner2.jpg",
-				"models/word/word.css",
-				"models/index/util.js",
 				"js/hui-image-preview.js",
 				"models/about/about.css",
 				"models/player/img/audio_sprite.png",
 				"models/mine/photo.png",
-				"fonts/iconfont.css",
 				"js/hui-picker.js",
-				"common/ajax.js",
 				"models/setting/setting.js",
 				"models/login/register.html",
 				"models/setting/setting.html",
@@ -457,28 +583,21 @@
 				"js/hui-star.js",
 				"models/mine/common.css",
 				"fonts/iconfont.woff",
-				"models/word/webviewGroup.js",
 				"js/hui-select-beautify.js",
 				"models/word/word_child4.html",
 				"models/login/login.css",
 				"js/mui.zoom.js",
 				"images/news.jpg",
-				"models/news/list-to-detail.css",
-				"common/common.css",
 				"models/word/word_detail.html",
 				"js/hui-tab.js",
 				"models/player/payer.html",
-				"common/common.js",
-				"common/mui.min.css",
 				"models/player/jquery.marquee.min.js",
 				"models/about/about.html",
 				"images/master_bg.jpg",
 				"models/mine/revise.html",
 				"common/h.min.js",
 				"models/mine/collection.png",
-				"models/word/word.js",
 				"models/mine/mine.js",
-				"common/md5.js",
 				"models/about/about.js",
 				"js/mui.lazyload.img.js",
 				"css/hui.css",
@@ -489,7 +608,6 @@
 				"models/mine/yuyin.png",
 				"models/mine/wallet.png",
 				"models/mine/audio.html",
-				"common/mui.min.js",
 				"models/word/word_child3.html",
 				"fonts/iconfont.eot",
 				"images/fahui.jpg",
