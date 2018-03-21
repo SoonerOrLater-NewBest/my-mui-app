@@ -247,7 +247,7 @@ _proto.createWebview = function(from) {
 			options.styles.left = '0';
 			plus.nativeUI.showWaiting();
 		}
-		this.webview = plus.webview.create(this.url, this.id, options.styles, options.extras);
+		this.webview = plus.webview.create(this.url, this.id,options.styles, options.extras);
 		//append进去，避免返回时闪屏
 		plus.webview.currentWebview().append(this.webview);
 	}

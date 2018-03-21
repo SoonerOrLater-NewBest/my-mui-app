@@ -47,6 +47,9 @@
   </head>
 
   <body>
+  	<div id="loader-wrapper">
+			<div id="loader"></div>
+		</div>	
     <div class="mui-content">
       <div class="twoRankedBox mui-clearfix">
         	<ul class="BoxLeft"> 
@@ -104,6 +107,10 @@
 			    mui('.twoRankedBox').on('tap', '.icon-shoucang', function() {
 			        $(this).toggleClass('shoucang');
 			      });
+			    
+			    $('#loader').fadeOut(); 
+	  			$('#loader-wrapper').delay(350).fadeOut('slow'); 
+	  			$('body').delay(350).css({'overflow-y':'visible'});
 			    
 
     }
