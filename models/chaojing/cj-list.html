@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../common/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../common/common.css"/>		
+	
+	</head>
+	<body>
+		<div id="loader-wrapper">
+			<div id="loader"></div>
+		</div>	
+		<div id="list">
+			<ul class="mui-table-view">
+		        <li class="mui-table-view-cell" v-for="(item,index) in duanluo" @tap="openDetai(index)">
+		            <a class="mui-navigate-right">
+		                {{item.title}}
+		            </a>
+		        </li>
+		       
+		    </ul>
+		</div>
+	<script src="../../common/mui.min.js"></script>	
+	<script src="../../common/jquery-2.1.0.js"></script>	
+	<script src="../../js/vue.min.js"></script>
+	<script src="../../common/common.js"></script>	
+	
+	<script>
+		mui.init();
+		var list = {};
+		mui.plusReady(function(){
+			var self = plus.webview.currentWebview();
+			var duanluo = self.duanluo;	
+			mui.back = function(){
+			    self.close();
+			};
+			list = new Vue({
+				el: '#list',
+				data: {
+					duanluo: duanluo,
+				},
+				methods:{
+					openDetai : function(index){
+						titleNView1.titleText = list.duanluo[index].title;
+						mui.openWindow({
+							url : "cj-detail.html",
+							id : "cj-detail.html",
+							styles: {
+								"titleNView": titleNView1,
+								"bounce": "vertical"
+							},
+							extras:{
+								content:list.duanluo[index].content
+							}
+						})
+					}
+				},
+				mounted : function (){
+					$('#loader').fadeOut(); 
+            		$('#loader-wrapper').delay(350).fadeOut('slow'); 
+            		$('body').delay(350).css({'overflow-y':'visible'});
+				}
+			})
+		})
+
+		
+		
+	</script>
+	</body>
+</html>

@@ -189,7 +189,9 @@ document.body.appendChild(new_element);
 				},500);
 			},
 			error:function(xhr,type,errorThrown){
-				
+				setTimeout(() => {
+					pasueLink();
+				}, 300);
 			}
 		});
 	}
@@ -208,7 +210,9 @@ document.body.appendChild(new_element);
 				},500);
 			},
 			error:function(xhr,type,errorThrown){
-				
+				setTimeout(() => {
+					pasueLink();
+				}, 300);
 			}
 		});
 	}
@@ -555,7 +559,6 @@ document.body.appendChild(new_element);
 				
 			},
 			error:function(xhr,type,errorThrown){
-				alert("777")
 			 console.log(xhr);
 			 console.log(type);
 			 console.log(errorThrown);

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../common/mui.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../../common/common.css"/>		
+<style>
+	
+	#detail{
+		padding: 0.22rem 0.3rem;background-color: #fff;min-height: 100vh;
+	}
+	#txtInput{
+	word-break:break-all; word-wrap:break-word; width:100%; word-spacing:normal; letter-spacing:0px; margin:0px; border:none; padding:0px; position:absolute; top:0px; left:0px; padding-top:18px; height:100%; overflow-y:hidden; background-color:#ffc8a3; color:white;  line-height:40px; font-family:Consolas; font-size:16px;
+	}
+	#divText{
+		z-index:2; word-spacing:0px; letter-spacing:0px; word-break:break-all; word-wrap:break-word; position:absolute; padding:0px; margin:0px; left:0px; width:100%; color:#333; line-height:40px; font-family:Consolas; font-size:16px;
+	}
+</style>
+</head>
+<body>
+	<div id="loader-wrapper">
+		<div id="loader"></div>
+	</div>	
+	<div id="detail">
+		<div style="margin:5px 0px;">
+			<input id="btnStart" onclick="btnStartClick();" type="button" value="开 始" />
+			总字数：<span id="spanAllNum">0</span>
+			键入字数：<span id="spanNum">0</span>
+			错误数：<span id="spanError">0</span>
+			正确率：<span id="spanRate">0</span>
+			速度：<span id="spanSpeed">0</span>
+			用时：<span id="spanTime">0</span>
+		</div>
+		<div id="divMain" style="position:relative; height:70vh; width:100%; overflow-y:scroll; background-color:#ffc8a3; border:solid 5px #ff4500;">
+			<textarea id="txtInput" disabled>
+			</textarea>
+			<div id="divText" onclick="getObj('txtInput').focus();">
+				<!--{{content}}-->
+			</div>
+		</div>
+	</div>
+<script src="../../common/mui.min.js"></script>	
+<script src="../../common/jquery-2.1.0.js"></script>
+<script src="../../js/vue.min.js"></script>
+<script src="../../common/common.js"></script>
+<script src="chaoxie.js"></script>
+
+<script>
+	mui.init();
+	var detail = {};
+	mui.plusReady(function(){
+		var self = plus.webview.currentWebview();
+		var content = self.content;	
+		mui.back = function(){
+		    self.close();
+		};
+		detail = new Vue({
+			el: '#detail',
+			data: {
+				content: content,
+			},
+			mounted : function (){
+				var bind_name="input"; 
+				//判断是否为IE内核 IE内核的事件名称要改为propertychange 
+				if(navigator.userAgent.indexOf("MSIE")!=-1) bind_name="propertychange";
+				$('#txtInput').on(bind_name,function(){
+					changeText();
+				})
+				selectText(this.content);
+				$('#loader').fadeOut(); 
+        		$('#loader-wrapper').delay(350).fadeOut('slow'); 
+        		$('body').delay(350).css({'overflow-y':'visible'});
+			}
+		})
+	});
+	
+	
+		
+</script>
+</body>
+</html>

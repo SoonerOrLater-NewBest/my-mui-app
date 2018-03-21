@@ -24,7 +24,7 @@
 						<p class = "mui-ellipsis">{{item.user_name}}<span class="renzheng"><i class="iconfont" :class="classObject"></i>认证</span></p>
 						<p class = "mui-ellipsis biaoqian"><span>积分</span><b>{{item.point}}</b></p>
 					</div>
-					<div class = "code" >
+					<div class = "code" @tap="scanning($event)">
 					<img src = "code.png" / ></div>
 	            </a>
 	        </li>
@@ -39,7 +39,7 @@
             	</a>
             </li>
 
-            <li class="mui-table-view-cell mui-media">
+            <!--<li class="mui-table-view-cell mui-media">
 
             	<a id="mine_xxx" title="我的视频">
                     <span class="mui-icon icon-shipin1 iconfont" style="color: #5d65ff;"><span class="mui-badge">5</span></span>
@@ -58,7 +58,7 @@
 
             <li class="mui-table-view-cell mui-media">
 
-            	<a id="mine_chouqian" title="我的排行">
+            	<a id="mine_" title="我的排行">
                     <span class="mui-icon icon-tubiao- iconfont" style="color: #5dff70;"></span>
                     <div class="mui-media-body">我的排行</div>
             	</a>
@@ -66,11 +66,11 @@
 
             <li class="mui-table-view-cell mui-media">
 
-            	<a id="mine_code" title="我的捐赠">
+            	<a id="mine_" title="我的捐赠">
                     <span class="mui-icon icon-juanxianpaixing iconfont" style="color: #ff5d5e;"></span>
                     <div class="mui-media-body">我的捐赠</div>
             	</a>
-            </li>
+            </li>-->
 
             <li class="mui-table-view-cell mui-media">
 
@@ -84,22 +84,12 @@
 
             	<a id="mine_map" title="来寺参观">
                     <span class="mui-icon iconfont icon-youxuanluxian" style="color: #5D77FF;"></span>
-                    <div class="mui-media-body">来寺参观</div>
+                    <div class="mui-media-body">来寺礼佛</div>
             	</a>
             </li>
            
         </ul> 
 
-	    	    
-	    	    
-	    <!--<ul class="mui-table-view mine_pages">
-	        <li class="mui-table-view-cell">
-	            <a class="mui-navigate-right" id="setting" title="设置">
-	            	<img class="mui-media-object mui-pull-left" src="setting.png">
-	              	<span class="list-title">设置</span>
-	            </a>
-	        </li>	
-	    </ul>-->
 	    </div>
 	<script src="../../common/mui.min.js"></script>
 	<script src="../../js/vue.min.js"></script>
@@ -178,7 +168,20 @@ mui.plusReady(function(){
 				}
 			},
 			methods:{
-				
+				scanning : function(event){
+					titleNView1.titleText = "扫一扫";
+					event.stopPropagation();
+					mui.openWindow({
+						url:'mine_code/mine_code.html',
+						id:'mine_code/mine_code.html',
+						show:{
+							"aniShow": "zoom-fade-out"
+						},
+						styles:{
+							titleNView:titleNView1,
+						}
+					})
+				}
 			},
 			mounted : function (){
 				mui('body').on('tap', 'a', function(e) {

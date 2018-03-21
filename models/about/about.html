@@ -14,10 +14,14 @@
 	</head>
 	
 	<body>
+		<div id="loader-wrapper">
+			<div id="loader"></div>
+		</div>	
 		<div id="about" v-html="content" class="bianjiqi">
 			
 		</div>
 	<script src="../../common/mui.min.js"></script>	
+	<script src="../../common/jquery-2.1.0.js"></script>	
 	<script src="../../js/vue.min.js"></script>
 	<script src="../../common/ajax.js"></script>
 	<script src="../../common/common.js"></script>	
@@ -45,6 +49,9 @@
 		
 		function singlePageSuccess(data){
 			about.content=JSON.parse(data.list).content;
+            $('#loader').fadeOut(); 
+            $('#loader-wrapper').delay(350).fadeOut('slow'); 
+            $('body').delay(350).css({'overflow-y':'visible'});
 		}
 		
 		

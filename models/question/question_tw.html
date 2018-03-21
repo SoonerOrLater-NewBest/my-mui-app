@@ -38,8 +38,11 @@
 	     $(document).ready(function(){
 
             var lenInput = $('.textarea-item').val().length;
+			var bind_name="input"; 
+				//判断是否为IE内核 IE内核的事件名称要改为propertychange 
+			if(navigator.userAgent.indexOf("MSIE")!=-1) bind_name="propertychange";
 
-            $(".textarea-item").keyup(function(){
+            $(".textarea-item").on(bind_name,function(){
                 lenInput = $(this).val().length;
                 if(lenInput>0 && lenInput<=300){
                     $('.textareaInput').html(lenInput);

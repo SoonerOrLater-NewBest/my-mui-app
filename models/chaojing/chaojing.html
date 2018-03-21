@@ -15,21 +15,12 @@
 		<div id="loader"></div>
 	</div>	
 	<div id="chaojing">
-		<div class="item">
+		<div class="item" v-for="(item,index) in items" @tap="openList(index)">
 			<img src="jingshu.png" alt="" />
-		</div>
-		<div class="item">
-			<img src="jingshu.png" alt="" />
-		</div>
-		<div class="item">
-			<img src="jingshu.png" alt="" />
-		</div>
-		<div class="item">
-			<img src="jingshu.png" alt="" />
-		</div>
-		
+			<span>{{item.name}}</span>
+		</div>				
 	</div>
-
+	
 <script src="../../common/mui.min.js"></script>
 <script src="../../common/jquery-2.1.0.js"></script>
 <script src="../../js/vue.min.js"></script>
@@ -39,22 +30,44 @@
 	mui.init();
 	var chaojing = new Vue({
 		el: '#chaojing',
-			data: {
-				items: [],
-			},
-			methods:{
-				
-			},
-			created : function (){
-				
-			},
-			mounted : function(){
-				$(window).load(function() { 
-	                $('#loader').fadeOut(); 
-	                $('#loader-wrapper').delay(350).fadeOut('slow'); 
-	                $('body').delay(350).css({'overflow-y':'visible'});
-	            })
+		data: {
+			items: [],
+		},
+		methods:{
+			openList : function(index){
+				titleNView1.titleText = chaojing.items[index].name;
+				mui.openWindow({
+					url : "cj-list.html",
+					id : "cj-list.html",
+					styles: {
+						"titleNView": titleNView1,
+						"bounce": "vertical"
+					},
+					extras:{
+						duanluo:chaojing.items[index].duanluo
+					}
+				})
 			}
+		},
+		created : function (){
+			$.ajax({  
+	            type:'get',  
+	            url:'../../source/mock.json',  
+	            dataType:'json',  
+	            success:function(data){  
+	                console.log(data); 
+	                chaojing.items = data.jingshu;
+	                localStorage.setItem("jingshu",JSON.stringify(data.jingshu));
+	            }  
+	        })  
+		},
+		mounted : function(){
+			$(window).load(function() { 
+                $('#loader').fadeOut(); 
+                $('#loader-wrapper').delay(350).fadeOut('slow'); 
+                $('body').delay(350).css({'overflow-y':'visible'});
+            })
+		}
 
 	})
 	

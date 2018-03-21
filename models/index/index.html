@@ -65,14 +65,7 @@
 		    </div>		    		    
 		</div>
 		
-		<h1 class="h_title">高僧解惑</h1>
-		<div class="home-puzzled myblock">
-			
-			<ul class="mui-table-view home-jiehuo">			
-	 
-			  
-			</ul>
-		</div>
+		
 		<footer class="tem_footer">
 		<section class="tem_inner">
 			<div class="tem_footer_text">
@@ -212,6 +205,9 @@
 					mui.openWindow({
 						url:"../question/question.html",
 						id:"../question/question.html",
+						show: {
+							"aniShow": "slide-in-bottom"
+						},
 						styles:{
 							titleNView:titleNView1,
 							"bounce": "vertical",
@@ -370,6 +366,16 @@
 								}
 							});
 						  break;
+						case 73:
+							mui.openWindow({
+								url : '../chouqian/chouqian.html',
+								id : '../chouqian/chouqian.html',
+								styles: {
+									"bounce": "vertical",
+									"titleNView": titleNView1
+								}
+							});
+						  break;
 						case 74:
 							mui.openWindow({
 								url : '../video/video.html',
@@ -456,14 +462,12 @@
 //		startLoad();
 		if (!isLoadIcon) {
 			//开始请求
-			isLoadIcon  = true;
 			ajax_get_indexIcon({
 				channel_id:0,
 				channel_name:"simiao"
 			});	
 		};
 		if (!isLoadArticleList) {
-			isLoadArticleList = true;
 			ajax_getArticleList({
 				channel_id:62,
 				channel_name:"simiao",
@@ -499,7 +503,7 @@
 		    })
 	    	plus.webview.currentWebview().append(imgSlider);
 	    });
-	    	    
+	    isLoadIcon  = true;	    	    
 	}
 //获取文章列表成功的回调函数
 	function articleListSuccess(data){
@@ -514,6 +518,7 @@
 			}
 		};
 		homes.loading = true;
+		isLoadArticleList = true;		
 	}
 	</script>
 </body>
