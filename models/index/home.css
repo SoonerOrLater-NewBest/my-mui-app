@@ -61,18 +61,69 @@
 .home-news ul{box-shadow: 0 0px 2px #ccc;}
 /* 高僧解惑 */
 #jiehuo{
-	font-size: 0.28rem;
+	font-size: 0.26rem;
 	display: flex;
 	overflow: hidden;
 	flex-wrap:wrap;
 	justify-content:space-around;
-	letter-spacing: 1px;
+	letter-spacing: 2px;
+	line-height: 1.5;
+	padding: 0.22rem 0.3rem;
 }
 .jh-item{
 	writing-mode: vertical-rl;
-	height: 150px;
+	height: 5.6rem;
+	box-shadow: 0 2px 6px #808080;
+	border-radius: 10px;
+	overflow: hidden;
+	background: url(../../images/zhu.png) no-repeat;
+	background-size: cover;
 }
-.jh-da{font-size: 0.28rem;}
+.jh-wen{
+	position: relative;
+	width: 1.18rem;overflow: hidden;
+	color: #ffffff;
+	background: rgba(255, 60, 0, 0.6);
+	padding: 1rem 0.2rem 1rem 0;
+	font-weight: bold;
+	font-size: 0.28rem;
+}
+.jh-da-wrap{
+	width: 2.06rem;overflow: hidden;
+	padding: 0.22rem 0.2rem 0.22rem;
+	background: rgba(255,241,230,0.6);	
+}
+.jh-da{
+	width: 1.66rem;overflow: hidden;
+	color: #000;
+}
+.huo{
+	position: absolute;top: 0.2rem;right: 0.3rem;
+	font-size: 0.36rem;display: block;
+	width: 0.6rem;height: 0.6rem;
+	line-height: 0.6rem;
+	text-align: center;
+	color:#ff4500;
+}
+.huo:after{
+	display: block;
+	content: '';
+	width: 100%;
+	height: 100%;
+	border-top: 1px solid #fff;
+	border-radius: 50%;
+	position: absolute;
+	left: 0;top: 0;
+	animation: xuanzhuan 2s linear infinite;
+}
+@keyframes xuanzhuan{
+	from{
+		transform: rotateZ(0deg);
+	}
+	to{
+		transform: rotateZ(360deg);
+	}
+}
 /*底部*/
 .tem_footer{position:relative;padding:4% 0 2% 0;background:#303030;color:#fff; text-align:center;font-size:12px;}
 .tem_inner{padding:0 0.3rem;}
