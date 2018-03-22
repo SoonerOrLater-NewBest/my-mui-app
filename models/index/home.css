@@ -59,6 +59,20 @@
 }
 .new-title{font-weight: bold;}
 .home-news ul{box-shadow: 0 0px 2px #ccc;}
+/* 高僧解惑 */
+#jiehuo{
+	font-size: 0.28rem;
+	display: flex;
+	overflow: hidden;
+	flex-wrap:wrap;
+	justify-content:space-around;
+	letter-spacing: 1px;
+}
+.jh-item{
+	writing-mode: vertical-rl;
+	height: 150px;
+}
+.jh-da{font-size: 0.28rem;}
 /*底部*/
 .tem_footer{position:relative;padding:4% 0 2% 0;background:#303030;color:#fff; text-align:center;font-size:12px;}
 .tem_inner{padding:0 0.3rem;}
