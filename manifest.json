@@ -277,7 +277,13 @@
 				"password": "",/*iOS应用打包个人证书导入密码*/
 				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
 				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
-				"frameworks": []
+				"frameworks": [],
+				"plistcmds":[
+				    "Set :NSCameraUsageDescription 拍照上传头像",
+				    "Set :NSMicrophoneUsageDescription 录制音频文件",
+				    "Set :NSPhotoLibraryUsageDescription 选择/保存图片",
+				    "Set :NSLocationWhenInUseUsageDescription 获取位置信息"
+				]
 			},
 			"google": {
 				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
