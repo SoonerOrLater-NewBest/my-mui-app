@@ -20,10 +20,10 @@
 		</div>
 		<form class="mui-input-group" name="myform">
 			<div class="mui-input-row">
-				<input type="text" class="mui-input-clear" name="nickname" placeholder="昵称" value="">
+				<input type="text" class="mui-input-clear" name="username" placeholder="昵称" value="">
 			</div>
 			<div class="mui-input-row">
-				<input type="text" class="mui-input-clear" name="username" placeholder="手机号" value="">
+				<input type="text" class="mui-input-clear" name="tel" placeholder="手机号" value="">
 			</div>
 			<div class="mui-input-row">
 				<input type="password" class="mui-input-password" name="password" placeholder="密码" value="">
@@ -47,10 +47,10 @@ document.getElementById('register').addEventListener('tap', function() {
 	var username = myform.username.value;
 	var tel = myform.tel.value;
 	var password = myform.password.value;
-	var password2 = myform.password2.value;
-	var nickname = myform.nickname.value;
-	var verify = myform.verify.value;
-	if(!username || !password || !password2 || !nickname) {
+//	var password2 = myform.password2.value;
+//	var nickname = myform.nickname.value;
+//	var verify = myform.verify.value;
+	if(!username || !password  || !tel) {
 		mui.toast('用户名昵称或密码不能为空');
 		return false;
 	}
@@ -59,22 +59,23 @@ document.getElementById('register').addEventListener('tap', function() {
 		mui.toast("不是完整的11位手机号或者正确的手机号前七位");
 		return false;
 	}
-	if(password != password2) {
-		mui.toast('两次输入密码不一致！');
-		return false;
-	}
-	var verify_code = localStorage.getItem('verify_code');
-	if(verify_code.toLowerCase() === verify.toLowerCase()) {
+//	if(password != password2) {
+//		mui.toast('两次输入密码不一致！');
+//		return false;
+//	}
+//	alert("11");
+//	var verify_code = localStorage.getItem('verify_code');
+//	if(verify_code.toLowerCase() === verify.toLowerCase()) {
 		$.ajax({
 			type: "post",
 			async: false,
 			data: {
-				"aid": username,
-				"pwd": password,
-				"tel": tel,
-				"nickname": nickname
+				"txtPassword": password,
+				"txtMobile": tel,
+				"txtUserName": username,
+//				"nickname": nickname
 			},
-			url: api_url + "Api/register",
+			url: "http://gns.yaohua1314.cn/appapi/main.ashx?action=user_register",
 			dataType: "json",
 			success: function(data) {
 				var status = data.status;
@@ -95,9 +96,9 @@ document.getElementById('register').addEventListener('tap', function() {
 				}
 			}
 		});
-	} else {
-		mui.toast('验证码错误！')
-	};
+//	} else {
+//		mui.toast('验证码错误！')
+//	};
 })
 </script>
 </body>
