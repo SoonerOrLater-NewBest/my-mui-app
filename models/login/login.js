@@ -6,7 +6,7 @@
 		mui.plusReady(function() {
 			loginWebview = plus.webview.currentWebview();
 			// 获取登录认证通道
-			plus.oauth.getServices(function(services) {
+/*			plus.oauth.getServices(function(services) {
 				var content = document.getElementById('dcontent');
 
 				var txt = "登录认证通道信息：";
@@ -36,9 +36,9 @@
 			}, function(e) {
 				outLine("获取登录认证失败：" + e.message);
 			});
+*/
 
 		});
-
 
 
 
@@ -58,17 +58,7 @@
 				txtUserName: username,
 				txtPassword: psd
 			});
-			loginWebview.addEventListener('hide', function() {
-				var meritswebview = plus.webview.getWebviewById('../pay/pay1.html');
-				var minewebview = plus.webview.getWebviewById('../mine/mine.html');
-				var indexwebview = plus.webview.getLaunchWebview();
-
-				mui.fire(indexwebview, 'loginSuccess', {});
-				mui.fire(minewebview, 'loginSuccess', {});
-				mui.fire(meritswebview, 'loginSuccess', {});
-
-				loginWebview.close();
-			}, false);
+			
 
 		});
 
@@ -96,24 +86,34 @@
 			//将用户信息和account分开存放是有好处的
 			if('y' === data.status) {
 				
-				
+				var data = JSON.parse(data.list);
 				localStorage.setItem('id', data.id);
 				//openid
 				localStorage.setItem('openid', data.openid);
 				//nick_name
-				localStorage.setItem('nick_name', data.user_name);
+				localStorage.setItem('nick_name', data.nick_name);
 				//avatar
 				localStorage.setItem('avatar', data.avatar);
 				//mobile
 				localStorage.setItem('mobile', data.mobile);
 				//address
 				localStorage.setItem('address', data.address);
-                mui.toast('账号登录成功');
+				loginWebview.addEventListener('hide', function() {
+					var minewebview = plus.webview.getWebviewById('../mine/mine.html');
+					var indexwebview = plus.webview.getLaunchWebview();
+	
+					mui.fire(indexwebview, 'loginSuccess', {});
+					mui.fire(minewebview, 'loginSuccess', {});
+	
+					loginWebview.close();
+				}, false);
+				
+	            mui.toast('账号登录成功');
 				mui.back();
 
 			}
 		}
-
+/*
 		//微信快捷登录成功回调
 		function loginSuccessQuick(data) {
 			//将用户信息和account分开存放是有好处的
@@ -150,7 +150,6 @@
 				
 			}
 		}
-
 
 
 
@@ -218,3 +217,4 @@
 				plus.nativeUI.alert("获取用户信息失败！", e.code, "登录");
 			});
 		}
+*/
