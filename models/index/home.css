@@ -1,5 +1,7 @@
 
 .mui-scroll-wrapper{
+	height: 29vw!important;	
+	height: -webkit-calc(23vw + 0.44rem)!important;
 	height: calc(23vw + 0.44rem)!important;
 }
 .mui-segmented-control.mui-scroll-wrapper .mui-scroll {
@@ -71,6 +73,7 @@
 	padding: 0.22rem 0.3rem;
 }
 .jh-item{
+	-webkit-writing-mode: vertical-rl;
 	writing-mode: vertical-rl;
 	height: 5.6rem;
 	box-shadow: 0 2px 6px #808080;
@@ -114,13 +117,26 @@
 	border-radius: 50%;
 	position: absolute;
 	left: 0;top: 0;
+	-webkit-animation: xuanzhuan 2s linear infinite;
 	animation: xuanzhuan 2s linear infinite;
 }
-@keyframes xuanzhuan{
+@-webkit-keyframes xuanzhuan{
 	from{
+		-webkit-transform: rotateZ(0deg);
 		transform: rotateZ(0deg);
 	}
 	to{
+		-webkit-transform: rotateZ(360deg);
+		transform: rotateZ(360deg);
+	}
+}
+@keyframes xuanzhuan{
+	from{
+		-webkit-transform: rotateZ(0deg);
+		transform: rotateZ(0deg);
+	}
+	to{
+		-webkit-transform: rotateZ(360deg);
 		transform: rotateZ(360deg);
 	}
 }

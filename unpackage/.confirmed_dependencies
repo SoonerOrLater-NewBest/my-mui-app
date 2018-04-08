@@ -129,7 +129,8 @@
       "common/mui.min.css"
     ],
     "refer": [
-      "models/word/word_child1.html"
+      "models/word/word_child1.html",
+      "models/word/word_child2.html"
     ]
   },
   "models/news/detail.html": {
@@ -142,6 +143,9 @@
     "resources": [
       "common/common.css",
       "common/mui.min.css"
+    ],
+    "refer": [
+      "models/news/detail.html"
     ]
   }
 }

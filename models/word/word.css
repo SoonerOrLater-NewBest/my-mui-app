@@ -1,3 +1,7 @@
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
 .mui-segmented-control.mui-scroll-wrapper .mui-scroll{
 	width: 100%;background-color: #f7f7f7;
 }

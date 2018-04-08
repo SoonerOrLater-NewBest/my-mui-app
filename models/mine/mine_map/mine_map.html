@@ -11,10 +11,14 @@
 	
 	<style type="text/css">
 	body, html,#map {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
-	.dianwo{animation: tiao 1s linear infinite alternate;border-radius: 6px;}
+	.dianwo{-webkit-animation: tiao 1s linear infinite alternate;animation: tiao 1s linear infinite alternate;border-radius: 6px;}
+	@-webkit-keyframes tiao{
+		from{-webkit-transform: translateY(-10px);transform: translateY(-10px);}
+		to{-webkit-transform: translateY(10px);transform: translateY(10px);}
+	}
 	@keyframes tiao{
-		from{transform: translateY(-10px);}
-		to{transform: translateY(10px);}
+		from{-webkit-transform: translateY(-10px);transform: translateY(-10px);}
+		to{-webkit-transform: translateY(10px);transform: translateY(10px);}
 	}
 	</style>
 

@@ -4,10 +4,10 @@
 		"iPhone",
 		"iPad"
 	],
-	"id": "H5E8097F3",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"id": "H5785541B",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "国宁禅寺",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "43.0",/*应用版本名称*/
+		"name": "3.0",/*应用版本名称*/
 		"code": ""
 	},
 	"description": "",/*应用描述信息*/
@@ -525,7 +525,9 @@
 					"models/word/word.js",
 					"common/mui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"models/word/word_child2.html"
+				],
 				"priority": 0
 			},
 			"models/news/detail.html": {
@@ -541,7 +543,9 @@
 					"common/common.css",
 					"common/mui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"models/news/detail.html"
+				],
 				"priority": 0
 			}
 		},
@@ -577,7 +581,6 @@
 				"js/cities.js",
 				"css/swiper-3.4.2.min.css",
 				"images/jump.gif",
-				"models/word/word_child2.html",
 				"fonts/SourceHanSansCN-Normal.otf",
 				"images/banner2.jpg",
 				"js/hui-image-preview.js",

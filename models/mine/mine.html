@@ -10,6 +10,9 @@
 		
 	</head>
 	<body>
+		<div id="loader-wrapper">
+			<div id="loader"></div>
+		</div>	
 		<div id="mine">
 					
 	    <ul class="mui-table-view" style="background-color: #ff4500;padding-bottom: 0.18rem;" v-for="item in mineInfo">
@@ -91,6 +94,7 @@
         </ul> 
 
 	    </div>
+	<script src="../../common/jquery-2.1.0.js"></script>	    
 	<script src="../../common/mui.min.js"></script>
 	<script src="../../js/vue.min.js"></script>
 	<script src="../../common/ajax.js"></script>	
@@ -99,7 +103,7 @@
 mui.plusReady(function(){
 	var _self = plus.webview.currentWebview();
 	var tView = plus.nativeObj.View.getViewById('title');
-	_self.addEventListener('show',function(){	
+//	_self.addEventListener('show',function(){	
 		tView.draw([{
 			tag: 'font',
 			id: 'setting',
@@ -117,27 +121,27 @@ mui.plusReady(function(){
 				size: '17px'
 			}
 		}]);
-	})
-	_self.addEventListener('hide',function(){
-		var tView = plus.nativeObj.View.getViewById('title');
-		tView.draw([{
-			tag: 'font',
-			id: 'setting',
-			text: '', //此为字体图标Unicode码'\e600'转换为'\ue600'
-			position: {
-				top: '22px',
-				right: '15px',
-				width: '40px',
-				height: '40px'
-			},
-			textStyles: {
-				fontSrc: '_www/fonts/iconfont.ttf',
-				align: 'center',
-				color: '#fff',
-				size: '17px'
-			}
-		}]);
-	})
+//	})
+//	_self.addEventListener('hide',function(){
+//		var tView = plus.nativeObj.View.getViewById('title');
+//		tView.draw([{
+//			tag: 'font',
+//			id: 'setting',
+//			text: '', //此为字体图标Unicode码'\e600'转换为'\ue600'
+//			position: {
+//				top: '22px',
+//				right: '15px',
+//				width: '40px',
+//				height: '40px'
+//			},
+//			textStyles: {
+//				fontSrc: '_www/fonts/iconfont.ttf',
+//				align: 'center',
+//				color: '#fff',
+//				size: '17px'
+//			}
+//		}]);
+//	})
 	tView.addEventListener('click', function(e) {
 		var clientX = e.clientX;
 		if(clientX > parseInt(window.innerWidth - 55) && clientX <= parseInt(window.innerWidth)) {
@@ -186,12 +190,36 @@ mui.plusReady(function(){
 			mounted : function (){
 				mui('body').on('tap', 'a', function(e) {
 					if (!localStorage.getItem('id')) {
-						plus.webview.getWebviewById('../login/login.html').show("slide-in-bottom");
+						//plus.webview.getWebviewById('../login/login.html').show("slide-in-bottom");
+						titleNView.titleText = '登录';
+						mui.openWindow({
+						    url:'../login/login.html',
+						    id:'../login/login.html',
+						    styles:{
+								top:'0px',
+								bottom:'0px',
+								popGesture: 'hide',
+								titleNView:titleNView
+							},
+						    extras:{
+
+						    },
+						    createNew:false,//是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+						    show:{
+						      autoShow:true,//页面loaded事件发生后自动显示，默认为true
+						      aniShow:"slide-in-bottom",//页面显示动画，默认为”slide-in-right“；
+						    },
+						    waiting:{
+						      autoShow:false,//自动显示等待框，默认为true
+						      title:'正在加载...',//等待对话框上显示的提示内容
+						    }
+						})
 						return;
 					}			
 						var id = this.getAttribute('id');
 						var title_name = this.getAttribute('title');
-						var mine_pages_url=id+"/"+id+".html";		
+						var mine_pages_url=id+"/"+id+".html";
+						
 						titleNView1.titleText = title_name;
 						if(id==="mine_info"){
 							mui.openWindow({
@@ -211,7 +239,10 @@ mui.plusReady(function(){
 								}
 							})
 						}
-				})
+				});
+                $('#loader').fadeOut(); 
+                $('#loader-wrapper').delay(350).fadeOut('slow'); 
+                $('body').delay(350).css({'overflow-y':'visible'});
 			}
 			
 		})
@@ -232,7 +263,7 @@ mui.plusReady(function(){
 				mine.mineInfo = [{
 					openid: "",
 					user_name: "未登陆",
-					avatar: "../../images/touxiang.jpeg",
+					avatar: "../../images/touxiang.jpg",
 					mobile: "",
 					address: "",
 					point: 0
