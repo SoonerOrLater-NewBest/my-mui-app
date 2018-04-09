@@ -54,7 +54,8 @@
 				data: getDefaultData(),
 				methods: {
 					resetData: function() {//重置数据
-						Object.assign(this.$data, getDefaultData());
+//						Object.assign(this.$data, getDefaultData());低版本手机不兼容此api
+						mui.extend(this.$data, getDefaultData());
 					}
 				}
 			});

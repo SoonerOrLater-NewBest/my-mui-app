@@ -110,6 +110,7 @@
 //				swipeBack: true
 			});
 			mui.plusReady(function() {
+				judgelogin();
 				plus.navigator.setStatusBarStyle('light');
 				var self = plus.webview.currentWebview(),
 					leftPos = Math.ceil((window.innerWidth - 60) / 2); // 设置凸起大图标为水平居中	
@@ -432,7 +433,7 @@
 				}
 			},
 			mounted : function (){
-				//judgelogin();	
+					
 				pasueLink();				
 			}
 			

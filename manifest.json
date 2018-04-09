@@ -407,7 +407,8 @@
 					"models/question/question.html",
 					"models/word/word.html",
 					"models/chouqian/chouqian.html",
-					"models/chaojing/chaojing.html"
+					"models/chaojing/chaojing.html",
+					"models/login/login.html"
 				],
 				"priority": 0
 			},
@@ -526,7 +527,8 @@
 					"common/mui.min.css"
 				],
 				"refer": [
-					"models/word/word_child2.html"
+					"models/word/word_child2.html",
+					"models/word/word_child3.html"
 				],
 				"priority": 0
 			},
@@ -552,7 +554,6 @@
 		"idle": {
 			"resources": [
 				"models/mine/touxiang.jpg",
-				"models/login/login.html",
 				"models/setting/setting.css",
 				"models/mine/setting.png",
 				"models/player/img/2.png",
@@ -623,7 +624,6 @@
 				"models/mine/yuyin.png",
 				"models/mine/wallet.png",
 				"models/mine/audio.html",
-				"models/word/word_child3.html",
 				"fonts/iconfont.eot",
 				"images/fahui.jpg",
 				"js/swiper-3.4.2.min.js"
