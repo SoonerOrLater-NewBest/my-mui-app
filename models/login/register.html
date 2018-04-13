@@ -47,9 +47,6 @@ document.getElementById('register').addEventListener('tap', function() {
 	var username = myform.username.value;
 	var tel = myform.tel.value;
 	var password = myform.password.value;
-//	var password2 = myform.password2.value;
-//	var nickname = myform.nickname.value;
-//	var verify = myform.verify.value;
 	if(!username || !password  || !tel) {
 		mui.toast('用户名昵称或密码不能为空');
 		return false;
@@ -59,33 +56,20 @@ document.getElementById('register').addEventListener('tap', function() {
 		mui.toast("不是完整的11位手机号或者正确的手机号前七位");
 		return false;
 	}
-//	if(password != password2) {
-//		mui.toast('两次输入密码不一致！');
-//		return false;
-//	}
-//	alert("11");
-//	var verify_code = localStorage.getItem('verify_code');
-//	if(verify_code.toLowerCase() === verify.toLowerCase()) {
+
 		$.ajax({
 			type: "post",
 			async: false,
 			data: {
+				"txtUserName": username,
 				"txtPassword": password,
 				"txtMobile": tel,
-				"txtUserName": username,
-//				"nickname": nickname
 			},
-			url: "http://gns.yaohua1314.cn/appapi/main.ashx?action=user_register",
+			url: "http://192.168.1.114:16976/appapi/main.ashx?action=user_register",
 			dataType: "json",
 			success: function(data) {
 				var status = data.status;
-				if(status == 4001) {
-					mui.toast(data.msg);
-					return false;
-				} else if(status == 3001) {
-					mui.toast(data.msg);
-					return false;
-				} else if(status == 3002) {
+				if(data.status == 0) {
 					mui.toast(data.msg);
 					return false;
 				} else {
@@ -96,9 +80,6 @@ document.getElementById('register').addEventListener('tap', function() {
 				}
 			}
 		});
-//	} else {
-//		mui.toast('验证码错误！')
-//	};
 })
 </script>
 </body>

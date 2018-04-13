@@ -87,6 +87,7 @@
 			if('y' === data.status) {
 				
 				var data = JSON.parse(data.list);
+
 				localStorage.setItem('id', data.id);
 				//openid
 				localStorage.setItem('openid', data.openid);
@@ -111,6 +112,13 @@
 	            mui.toast('账号登录成功');
 				mui.back();
 
+			}
+			else if('n' === data.status)
+			
+			{
+				  mui.toast(data.msg);
+		      	return false;
+		 		
 			}
 		}
 /*
