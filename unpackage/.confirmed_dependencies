@@ -1,153 +1,153 @@
 {
-	"models/index/index.html": {
-		"refer": [
-			"models/news/detail.html",
-			"models/master/master.html",
-			"models/news/outlink.html",
-			"models/mine/mine.html",
-			"models/news/listview.html",
-			"models/index/imageviewer-native.html",
-			"models/question/question.html",
-			"models/word/word.html",
-			"models/chouqian/chouqian.html",
-			"models/chaojing/chaojing.html",
-			"models/login/login.html"
-		],
-		"resources": [
-			"models/news/listview.html",
-			"fonts/iconfont.css",
-			"common/mui.min.js",
-			"common/common.js",
-			"common/ajax.js",
-			"models/index/util.js",
-			"js/vue.min.js",
-			"common/common.css",
-			"common/md5.js",
-			"common/mui.min.css",
-			"models/index/home.css"
-		]
-	},
-	"models/question/question.html": {
-		"refer": [
-			"models/question/question_tw.html",
-			"models/question/question_xq.html"
-		]
-	},
-	"models/chouqian/chouqian.html": {
-		"resources": [
-			"models/chouqian/img/6.png",
-			"models/chouqian/img/ex_6.png",
-			"models/chouqian/img/q_6.png",
-			"models/chouqian/music/Gala-zmczx.mp3",
-			"models/chouqian/img/ex_1.png",
-			"models/chouqian/img/3.png",
-			"models/chouqian/img/aq_1.png",
-			"models/chouqian/img/jt.png",
-			"models/chouqian/img/aq.png",
-			"models/master/master-bg.jpg",
-			"models/chouqian/img/11_07.png",
-			"models/chouqian/img/jk.png",
-			"models/chouqian/img/11_09.png",
-			"models/chouqian/img/sy.png",
-			"models/chouqian/img/s_0.png",
-			"models/chouqian/img/7.png",
-			"models/chouqian/img/aq_2.png",
-			"models/chouqian/img/9.png",
-			"models/chouqian/img/2.png",
-			"models/chouqian/img/cy.png",
-			"models/chouqian/img/5.png",
-			"models/chouqian/img/jt_1.png",
-			"models/chouqian/img/q_2.png",
-			"models/chouqian/img/ex_2.png",
-			"models/chouqian/img/q_7.png",
-			"models/chouqian/img/ex_7.png",
-			"models/chouqian/img/00.png",
-			"models/chouqian/img/q_10.png",
-			"models/chouqian/img/ex_10.png",
-			"models/chouqian/img/ex_8.png",
-			"models/chouqian/img/q_8.png",
-			"models/chouqian/img/1timg.png",
-			"models/chouqian/img/titpic.jpg",
-			"models/chouqian/img/qiqiubg.jpg",
-			"models/chouqian/Nï¿½Lw.ttf",
-			"models/chouqian/hw.ttf"
-		]
-	},
-	"models/chaojing/chaojing.html": {
-		"resources": [
-			"models/chaojing/jingshu.png",
-			"models/chaojing/chaojing.css",
-			"source/mock.json",
-			"common/common.css",
-			"common/mui.min.css"
-		],
-		"refer": [
-			"models/chaojing/cj-list.html"
-		]
-	},
-	"models/chaojing/cj-list.html": {
-		"resources": [
-			"fonts/mui.ttf",
-			"common/common.css",
-			"common/mui.min.css"
-		],
-		"refer": [
-			"models/chaojing/cj-detail.html"
-		]
-	},
-	"models/chaojing/cj-detail.html": {
-		"resources": [
-			"models/chaojing/chaoxie.js",
-			"common/common.css",
-			"common/mui.min.css"
-		]
-	},
-	"models/word/word_child1.html": {
-		"resources": [
-			"common/jquery-2.1.0.js",
-			"models/word/word.css",
-			"common/common.css",
-			"common/mui.min.css"
-		]
-	},
-	"models/mine/mine.html": {
-		"resources": [
-			"models/mine/code.png",
-			"fonts/mui.ttf",
-			"images/transparent.png",
-			"models/mine/mine.css",
-			"common/common.css",
-			"common/md5.js",
-			"common/mui.min.css"
-		]
-	},
-	"models/word/word.html": {
-		"resources": [
-			"models/word/webviewGroup.js",
-			"models/word/word.css",
-			"models/word/word_child1.html",
-			"models/word/word.js",
-			"common/mui.min.css"
-		],
-		"refer": [
-			"models/word/word_child1.html",
-			"models/word/word_child2.html",
-			"models/word/word_child3.html"
-		]
-	},
-	"models/news/detail.html": {
-		"resources": [
-			"models/news/list-to-detail.css",
-			"common/mui.min.css"
-		]
-	},
-	"models/news/listview.html": {
-		"resources": [
-			"common/common.css",
-			"common/mui.min.css"
-		],
-		"refer": [
-			"models/news/detail.html"
-		]
-	}
+  "models/index/index.html": {
+    "refer": [
+      "models/news/detail.html",
+      "models/master/master.html",
+      "models/news/outlink.html",
+      "models/mine/mine.html",
+      "models/news/listview.html",
+      "models/index/imageviewer-native.html",
+      "models/question/question.html",
+      "models/word/word.html",
+      "models/chouqian/chouqian.html",
+      "models/chaojing/chaojing.html",
+      "models/login/login.html"
+    ],
+    "resources": [
+      "models/news/listview.html",
+      "fonts/iconfont.css",
+      "common/mui.min.js",
+      "common/common.js",
+      "common/ajax.js",
+      "models/index/util.js",
+      "js/vue.min.js",
+      "common/common.css",
+      "common/md5.js",
+      "common/mui.min.css",
+      "models/index/home.css"
+    ]
+  },
+  "models/question/question.html": {
+    "refer": [
+      "models/question/question_tw.html",
+      "models/question/question_xq.html"
+    ]
+  },
+  "models/chouqian/chouqian.html": {
+    "resources": [
+      "models/chouqian/img/6.png",
+      "models/chouqian/img/ex_6.png",
+      "models/chouqian/img/q_6.png",
+      "models/chouqian/music/Gala-zmczx.mp3",
+      "models/chouqian/img/ex_1.png",
+      "models/chouqian/img/3.png",
+      "models/chouqian/img/aq_1.png",
+      "models/chouqian/img/jt.png",
+      "models/chouqian/img/aq.png",
+      "models/master/master-bg.jpg",
+      "models/chouqian/img/11_07.png",
+      "models/chouqian/img/jk.png",
+      "models/chouqian/img/11_09.png",
+      "models/chouqian/img/sy.png",
+      "models/chouqian/img/s_0.png",
+      "models/chouqian/img/7.png",
+      "models/chouqian/img/aq_2.png",
+      "models/chouqian/img/9.png",
+      "models/chouqian/img/2.png",
+      "models/chouqian/img/cy.png",
+      "models/chouqian/img/5.png",
+      "models/chouqian/img/jt_1.png",
+      "models/chouqian/img/q_2.png",
+      "models/chouqian/img/ex_2.png",
+      "models/chouqian/img/q_7.png",
+      "models/chouqian/img/ex_7.png",
+      "models/chouqian/img/00.png",
+      "models/chouqian/img/q_10.png",
+      "models/chouqian/img/ex_10.png",
+      "models/chouqian/img/ex_8.png",
+      "models/chouqian/img/q_8.png",
+      "models/chouqian/img/1timg.png",
+      "models/chouqian/img/titpic.jpg",
+      "models/chouqian/img/qiqiubg.jpg",
+      "models/chouqian/NýLw.ttf",
+      "models/chouqian/hw.ttf"
+    ]
+  },
+  "models/chaojing/chaojing.html": {
+    "resources": [
+      "models/chaojing/jingshu.png",
+      "models/chaojing/chaojing.css",
+      "source/mock.json",
+      "common/common.css",
+      "common/mui.min.css"
+    ],
+    "refer": [
+      "models/chaojing/cj-list.html"
+    ]
+  },
+  "models/chaojing/cj-list.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "common/common.css",
+      "common/mui.min.css"
+    ],
+    "refer": [
+      "models/chaojing/cj-detail.html"
+    ]
+  },
+  "models/chaojing/cj-detail.html": {
+    "resources": [
+      "models/chaojing/chaoxie.js",
+      "common/common.css",
+      "common/mui.min.css"
+    ]
+  },
+  "models/word/word_child1.html": {
+    "resources": [
+      "common/jquery-2.1.0.js",
+      "models/word/word.css",
+      "common/common.css",
+      "common/mui.min.css"
+    ]
+  },
+  "models/mine/mine.html": {
+    "resources": [
+      "models/mine/code.png",
+      "fonts/mui.ttf",
+      "images/transparent.png",
+      "models/mine/mine.css",
+      "common/common.css",
+      "common/md5.js",
+      "common/mui.min.css"
+    ]
+  },
+  "models/word/word.html": {
+    "resources": [
+      "models/word/webviewGroup.js",
+      "models/word/word.css",
+      "models/word/word_child1.html",
+      "models/word/word.js",
+      "common/mui.min.css"
+    ],
+    "refer": [
+      "models/word/word_child1.html",
+      "models/word/word_child2.html",
+      "models/word/word_child3.html"
+    ]
+  },
+  "models/news/detail.html": {
+    "resources": [
+      "models/news/list-to-detail.css",
+      "common/mui.min.css"
+    ]
+  },
+  "models/news/listview.html": {
+    "resources": [
+      "common/common.css",
+      "common/mui.min.css"
+    ],
+    "refer": [
+      "models/news/detail.html"
+    ]
+  }
 }

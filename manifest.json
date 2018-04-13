@@ -7,7 +7,7 @@
 	"id": "H5785541B",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "国宁禅寺",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "3.0",/*应用版本名称*/
+		"name": "44.0",/*应用版本名称*/
 		"code": ""
 	},
 	"description": "",/*应用描述信息*/
@@ -282,7 +282,7 @@
 				    "Set :NSCameraUsageDescription 拍照上传头像",
 				    "Set :NSMicrophoneUsageDescription 录制音频文件",
 				    "Set :NSPhotoLibraryUsageDescription 选择/保存图片",
-				    "Set :NSLocationWhenInUseUsageDescription 获取位置信息"
+				    "Set :NSLocationWhenInUseUsageDescription 获取当前位置信息以供导航"
 				]
 			},
 			"google": {
