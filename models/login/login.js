@@ -99,14 +99,14 @@
 				localStorage.setItem('mobile', data.mobile);
 				//address
 				localStorage.setItem('address', data.address);
-				loginWebview.addEventListener('close', function() {
+				loginWebview.addEventListener('hide', function() {
 					var minewebview = plus.webview.getWebviewById('../mine/mine.html');
 					var indexwebview = plus.webview.getLaunchWebview();
 	
 					mui.fire(indexwebview, 'loginSuccess', {});
 					mui.fire(minewebview, 'loginSuccess', {});
 	
-					//loginWebview.close();
+					loginWebview.close();
 				}, false);
 				
 	            mui.toast('账号登录成功');

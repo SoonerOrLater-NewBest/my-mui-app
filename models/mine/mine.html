@@ -279,8 +279,18 @@ mui.plusReady(function(){
 				localStorage.setItem('openid', mine.mineInfo["0"].openid);
 				//nick_name
 				localStorage.setItem('nick_name', mine.mineInfo["0"].user_name);
+				if(mine.mineInfo["0"].avatar==""||null)
+				
+				{
+					localStorage.setItem('avatar', "../../images/touxiang.jpg");
+					
+				}
+				else
+				{
 				//avatar
 				localStorage.setItem('avatar', mine.mineInfo["0"].avatar);
+				
+				}
 				//mobile
 				localStorage.setItem('mobile', mine.mineInfo["0"].mobile);
 				//address
