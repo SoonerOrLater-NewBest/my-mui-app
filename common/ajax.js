@@ -11,8 +11,8 @@ document.body.appendChild(new_element);
 
 
 //**************************************设置data安全性**********************************************
-//	var httpUrl = "http://gns.yaohua1314.cn/appapi/main.ashx?";
-    var httpUrl = "http://192.168.1.114:16976/appapi/main.ashx?";
+	var httpUrl = "http://gns.yaohua1314.cn/appapi/main.ashx?";
+//  var httpUrl = "http://192.168.1.114:16976/appapi/main.ashx?";
 	var app_key = "9e304d4e8df1b74cfa009913198428ab";
 	var v = "v1.0";
 	var sign_method = "md5";
