@@ -34,14 +34,25 @@
 
 		<div class="mui-content-padded register_btn">
 			<button type="button" id="register" class="mui-btn mui-btn-green mui-btn-block">注册</button>
-			<div class="remarks"><span>*</span>注册代表同意<span>《寺院平台用户协议》</span></div>
+			<div class="remarks"><span>*</span>注册代表同意<span id="yinsi">《寺院平台用户协议》</span></div>
 		</div>
 	</div>
 
 <script type="text/javascript">
 	mui.init();
 	//初始化验证码
-
+document.getElementById('yinsi').addEventListener('tap', function() {
+	titleNView1.titleText = '隐私政策声明';
+	mui.openWindow({
+			url: 'yinsi.html',
+			id: 'yinsi.html',
+			styles: {
+				top: '0px',
+				bottom: '0px',
+				titleNView: titleNView1
+			}
+		})
+})
 document.getElementById('register').addEventListener('tap', function() {
 	//验证字段
 	var username = myform.username.value;
