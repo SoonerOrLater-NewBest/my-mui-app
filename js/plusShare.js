@@ -28,8 +28,9 @@
             callback && callback(false);
             return;
         }
+        
         var _share = function() {
-            service.send(msg, function() {
+            service.send(msg, function() { 				
                 plus.nativeUI.toast("分享到\"" + service.description + "\"成功！");
                 callback && callback(true);
             }, function(e) {
@@ -37,9 +38,10 @@
                 callback && callback(false);
             })
         };
+
         if (service.authenticated) {
-            _share(service, msg, callback);
-        } else {
+            _share(service, msg, callback);           
+        } else {      	
             service.authorize(function() {
                 _share(service, msg, callback);
             }, function(e) {
@@ -71,8 +73,6 @@
                     title: "微信消息"
                 }, {
                     title: "微信朋友圈"
-                }, {
-                    title: "更多分享"
                 }]
             }, function(e) {
                 var index = e.index;
@@ -90,20 +90,33 @@
                         };
                         share('weixin', msg, callback);
                         break;
-                    case 3: //更多分享
-                        var url = msg.href ? ('( ' + msg.href + ' )') : '';
-                        msg.title = msg.title + url;
-                        msg.content = msg.content + url;
-                        openSystem(msg, callback);
-                        break;
+//                  case 3: 
+//                      var url = msg.href ? ('( ' + msg.href + ' )') : '';
+//                      msg.title = msg.title + url;
+//                      msg.content = msg.content + url;
+//                      openSystem(msg, callback);
+//                      break;
                 }
             })
         } else {
             //系统分享
-            var url = msg.href ? ('( ' + msg.href + ' )') : '';
-            msg.title = msg.title + url;
-            msg.content = msg.content + url;
-            openSystem(msg, callback);
+//          var url = msg.href ? ('( ' + msg.href + ' )') : '';
+//          msg.title = msg.title + url;
+//          msg.content = msg.content + url;
+//          openSystem(msg, callback);
+			if ( plus.os.name == "Android" ) {
+                plus.nativeUI.confirm( "检查到您未安装\"微信\"，是否到商城搜索下载？", function(i){
+                    if ( i.index == 0 ) {
+                        androidMarket( "com.tencent.mm" );
+                    }
+                } );
+            } else if ( plus.os.name == "iOS" ) {
+                plus.nativeUI.confirm( "检查到您未安装\"微信\"，是否到商城搜索下载？", function(i){
+                    if ( i.index == 0 ) {
+                        iosAppstore( "itunes.apple.com/cn/app/wechat/id414478124?mt=8" );
+                    }
+                } );
+            }
         }
     };
     plusReady(init);

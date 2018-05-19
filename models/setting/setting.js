@@ -17,5 +17,10 @@ mui.plusReady(function(){
 				localStorage.clear();
                 plus.runtime.restart();
 			}
-	})
+	});
+	mui('body').on('tap','#share',function(){		
+		var msg={title:'国宁寺app',content:'弘扬佛法，普度众生',href:'http://gns.yaohua1314.cn/share.html'};
+		msg.thumbs=['http://gns.yaohua1314.cn:80/upload/201805/18/201805181420488879.jpg'];		
+		plusShare(msg);
+	});
 })

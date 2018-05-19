@@ -56,7 +56,7 @@
 			</ul>
 		</div>
 									
-		<h1 class="h_title"><span class="iconfont icon-fengjing font-normal" style="color: #0484F6;"></span>寺院景致<span @tap="openNewWebview" class="read-more font-normal">更多<i class="iconfont icon-gengduo"></i></span></h1>	
+		<h1 class="h_title"><span class="iconfont icon-fengjing font-normal" style="color: #ff4500;"></span>寺院景致<span @tap="openNewWebview" class="read-more font-normal">更多<i class="iconfont icon-gengduo"></i></span></h1>	
 		
 		<div class="mui-scroll-wrapper myblock mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="scenery">
 		    <div class="mui-scroll">
@@ -64,7 +64,7 @@
 		        </div>
 		    </div>		    		    
 		</div>
-		<h1 class="h_title"><span class="iconfont icon-fengjing font-normal" style="color: #0484F6;"></span>高僧解惑</h1>
+		<h1 class="h_title"><span class="iconfont icon-jie font-normal" style="color: #ff4500;"></span>高僧解惑</h1>
 		<div id="jiehuo">
 			<div class="jh-item">
 				<div class="jh-wen"><span class=""></span>忉利天宫神通品第一忉利天宫神通品第一?
@@ -106,6 +106,8 @@
 		var isLoadIcon = false;
 		var isLoadArticleList = false;
 		var webview_detail = null;
+		var activePage;
+		var aniShow = {};
 			mui.init({
 //				swipeBack: true
 			});
@@ -257,16 +259,15 @@
 				});
 				// 中间凸起图标绘制及监听点击完毕
 				// 创建子webview窗口 并初始化
-				var aniShow = {};
 				util.initSubpage(aniShow);
 				
 				var nview = plus.nativeObj.View.getViewById('tabBar'),
-					activePage = plus.webview.currentWebview(),
+					
 					targetPage,
 					subpages = util.options.subpages,
 					pageW = window.innerWidth,
 					currIndex = 0;
-				
+				activePage = plus.webview.currentWebview();
 					
 				/**
 				 * 根据判断view控件点击位置判断切换的tab
@@ -299,8 +300,12 @@
 						//更新当前活跃的页面
 						activePage = targetPage;
 				});								
-			});
 			
+		//监听show事件请求数据
+		self.addEventListener('show',function(){
+			pasueLink();
+		},false);
+});				
 		
 		
 		var homes = new Vue({
@@ -456,11 +461,7 @@
 			
 		});
 		
-		//监听show事件请求数据
-		self.addEventListener('show',function(){
-			pasueLink();
-		},false);
-		
+	
 		mui.plusReady(function() {
 				//预加载详情页
 				webview_detail = mui.preload({

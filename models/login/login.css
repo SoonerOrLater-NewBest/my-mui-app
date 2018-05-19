@@ -74,11 +74,12 @@ input::-moz-placeholder {
 }
 .more-sign h6:after,.more-sign h6:before {content: "";border-top: 1px solid #b5b5b5;display: block;position: absolute;width: 70px;top: 5px;}
 .more-sign ul{
-	width: 100%;	
+	width: 100%;
+	margin: 0;
+	padding: 0;	
 } 
 .more-sign ul li {
-    display: inline-block;
-	width: 20%;	
+	list-style: none;
 }
        
 
@@ -89,6 +90,7 @@ input::-moz-placeholder {
     border-radius: 50%;
     line-height: 40px;
     display: block;
+    margin: 0 auto 20px;
     text-align:center; 
 }    
     
@@ -100,11 +102,11 @@ input::-moz-placeholder {
 
 .more-sign .qq {
     background-color: #498ad5;
-    /*display: none;*/
+    display: none;
 }
 .more-sign .sinaweibo {
     background-color: #e05244;
-    /*display: none;*/
+    display: none;
 }
 .more-sign .weixin  {
     background-color: #00bb29;

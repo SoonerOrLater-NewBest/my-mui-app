@@ -5,8 +5,14 @@
 
 		mui.plusReady(function() {
 			loginWebview = plus.webview.currentWebview();
+			if(plus.runtime.isApplicationExist({pname:'com.tencent.mm',action:'weixin://'})){
+				console.log("微信应用已安装");				
+			}else{				
+				console.log("微信应用未安装");
+				mui('.more-sign')[0].style.display = 'none';
+			}
 			// 获取登录认证通道
-/*			plus.oauth.getServices(function(services) {
+			plus.oauth.getServices(function(services) {
 				var content = document.getElementById('dcontent');
 
 				var txt = "登录认证通道信息：";
@@ -36,7 +42,7 @@
 			}, function(e) {
 				outLine("获取登录认证失败：" + e.message);
 			});
-*/
+
 
 		});
 
@@ -121,7 +127,7 @@
 		 		
 			}
 		}
-/*
+
 		//微信快捷登录成功回调
 		function loginSuccessQuick(data) {
 			//将用户信息和account分开存放是有好处的
@@ -225,4 +231,4 @@
 				plus.nativeUI.alert("获取用户信息失败！", e.code, "登录");
 			});
 		}
-*/
+
